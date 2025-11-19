@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zillionary Business Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f5f6;
+      --black:#0b0b0b;
+      --dark-grey:#333333;
+      --mid-grey:#6b6b6b;
+      --muted:#9b9b9b;
+      --card:#ffffff;
+      --accent:#1f2937;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,#fbfbfb 0%,#f1f1f3 100%);margin:0;color:var(--dark-grey);padding:28px}
+    .wrap{max-width:1250px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    h1{margin:0;font-size:22px;color:var(--black)}
+    .tag{color:var(--mid-grey);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,11,11,0.06); margin-bottom: 20px;}
+    .card h2 { margin-top: 0; font-size: 16px; margin-bottom: 4px; color: var(--black); }
+    
+    .input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{margin-top:10px}
+    label{font-size:13px;color:var(--mid-grey);display:block;margin-bottom:6px}
+    input[type=number], input[type=text], select{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;font-size:14px; background:#fff}
+    select{appearance:none; background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat:no-repeat; background-position:right .7em top 50%; background-size:.65em auto; padding-right:1.5em}
+    input:focus, select:focus { outline: none; border-color: var(--black); }
+
+    .btn{background:var(--black);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;border:1px solid #ddd;color:var(--dark-grey)}
+    
+    /* Highlight Box for Results */
+    .highlight-box { background: #f4f4f5; padding: 12px; border-radius: 10px; margin-top: 12px; border: 1px solid #eee; }
+    .highlight-val { font-size: 20px; font-weight: 700; color: var(--black); }
+    .highlight-label { font-size: 12px; color: var(--mid-grey); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px}
+    th, td{padding:10px;text-align:left}
+    thead th{background:var(--black);color:white;font-weight:600;font-size:13px}
+    tbody td{background:linear-gradient(180deg, #fff, #fafafa);border-bottom:1px solid #f0f0f0}
+    tbody tr:last-child td{border-bottom:none}
+    .small{font-size:13px;color:var(--mid-grey)}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
+    .stat{background:#fafafa;padding:12px;border-radius:10px}
+    .stat .val{font-size:18px;font-weight:700;color:var(--black)}
+    .muted{color:var(--mid-grey);font-size:13px}
+
+    .charts{margin-top:12px}
+    canvas{width:100% !important;height:260px !important}
+
+    footer{margin-top:16px;color:var(--muted);font-size:13px}
+    .row{display:flex;gap:10px;align-items:center}
+
+    /* List styles for decisions */
+    .decision-list { list-style: none; padding: 0; margin: 0; }
+    .decision-list li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 13px; line-height: 1.4; }
+    .decision-list li::before { content: "•"; position: absolute; left: 0; top: 0px; color: var(--black); font-weight: bold; font-size: 16px;}
+    .decision-list strong { color: var(--black); font-weight: 600; }
+
+    /* Print Styles */
+    @media print {
+      body { background: white; padding: 0; }
+      .btn, .no-print { display: none !important; }
+      .card { box-shadow: none; border: 1px solid #eee; margin-bottom: 20px; break-inside: avoid; page-break-inside: avoid; }
+      header { margin-bottom: 10px; }
+      h1 { font-size: 18px; }
+      .tag { font-size: 11px; }
+      .wrap { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Zillionary Business Center</h1>
+        <div class="tag">Business Intelligence for Leather Goods</div>
+      </div>
+      <div class="row">
+        <button class="btn" id="printBtn">Print Report</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- 1. INPUTS -->
+        <div class="card" id="inputsCard">
+          <h2>Inputs</h2>
+          <div class="input-row">
+            <div class="field"><label>Office + Utilities (৳/month)</label><input id="fixedOffice" type="number" value="9000"></div>
+            <div class="field"><label>Staff Salary (৳/month)</label><input id="fixedStaff" type="number" value="6000"></div>
+          </div>
+          <div class="input-row">
+            <div class="field"><label>Other Fixed Cost (৳/month)</label><input id="fixedOther" type="number" value="0"></div>
+            <div class="field"><label>Selling Price (৳)</label><input id="price" type="number" value="1190"></div>
+          </div>
+          <div class="input-row">
+            <div class="field"><label>Production Cost (৳)</label><input id="prodCost" type="number" value="550"></div>
+            <div class="field"><label>Target Ad CPA (৳)</label><input id="cpa" type="number" value="100"></div>
+          </div>
+          
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn" id="calcBtn">Recalculate All</button>
+            <button class="btn ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <!-- 2. GOAL SEEKER -->
+        <div class="card" style="border-left: 4px solid var(--black);">
+          <h2>Goal Seeker 🎯</h2>
+          <div class="small">How much do I need to sell to hit my profit target?</div>
+          <div class="input-row">
+            <div class="field"><label>Target Monthly Profit (৳)</label><input id="targetProfitInput" type="number" value="50000" style="font-weight:bold"></div>
+            <div class="field"></div>
+          </div>
+          
+          <div class="highlight-box">
+            <div class="row" style="justify-content: space-between;">
+              <div>
+                <div class="highlight-label">Required Sales (Units)</div>
+                <div class="highlight-val" id="reqUnits">—</div>
+              </div>
+              <div style="text-align:right">
+                <div class="highlight-label">Required Revenue</div>
+                <div class="highlight-val" id="reqRevenue">—</div>
+              </div>
+            </div>
+            <div class="small" style="margin-top:8px; color:var(--mid-grey)" id="reqDaily">— units/day</div>
+          </div>
+        </div>
+
+        <!-- 3. SCENARIOS -->
+        <div class="card" id="scenariosCard">
+          <h2>Scenario Analysis</h2>
+          <div class="small">Profitability at different scales</div>
+          <table id="scenarioTable">
+            <thead><tr><th>Units</th><th>Revenue</th><th>Total Cost</th><th>Profit</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- 4. CHARTS -->
+        <div class="card">
+          <h2>Growth Projection (12 Months)</h2>
+          <div class="input-row" style="margin-bottom:10px">
+             <div class="field" style="margin:0"><label>Start Units</label><input id="startUnits" type="number" value="20"></div>
+             <div class="field" style="margin:0"><label>Monthly Growth %</label><input id="growth" type="number" value="15"></div>
+          </div>
+          <canvas id="projChart"></canvas>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <!-- 1. SUMMARY -->
+        <div class="card">
+          <h2>Business Health</h2>
+          <div class="summary-grid">
+            <div class="stat"><div class="muted">Total Fixed Cost</div><div class="val" id="totalFixed">—</div></div>
+            <div class="stat"><div class="muted">Margin / Unit</div><div class="val" id="contrib">—</div></div>
+            <div class="stat"><div class="muted">Break-Even Qty</div><div class="val" id="beUnits">—</div></div>
+            <div class="stat"><div class="muted">Break-Even Sales</div><div class="val" id="beRevenue">—</div></div>
+          </div>
+        </div>
+
+        <!-- 2. MARKETING AUDIT -->
+        <div class="card">
+          <h2>Ads Efficiency Check</h2>
+          <div class="small">Input actual data from Facebook Ads Manager</div>
+          <div class="input-row">
+            <div class="field"><label>Amount Spent (৳)</label><input id="adSpent" type="number" placeholder="e.g. 2000"></div>
+            <div class="field"><label>Total Purchases</label><input id="adSales" type="number" placeholder="e.g. 15"></div>
+          </div>
+          
+          <div class="summary-grid" style="margin-top:12px">
+            <div class="stat">
+              <div class="muted">Actual CPA</div>
+              <div class="val" id="actualCPA">—</div>
+            </div>
+            <div class="stat">
+              <div class="muted">ROAS</div>
+              <div class="val" id="actualROAS">—</div>
+            </div>
+          </div>
+          <div class="small" style="margin-top:8px; font-style:italic; color:#e53e3e;" id="roasVerdict"></div>
+        </div>
+
+        <!-- 3. CORPORATE + PRODUCTION (UPDATED) -->
+        <div class="card">
+          <h2>Corporate & Production</h2>
+          
+          <div class="small" style="margin-bottom:10px; font-weight:600">1. Pricing Estimator</div>
+          <div class="input-row">
+            <div class="field"><label>Order Qty</label><input id="corpQty" type="number" value="100"></div>
+            <div class="field"><label>Discount %</label><input id="corpDisc" type="number" value="10"></div>
+          </div>
+          <div class="input-row">
+            <div class="field"><label>Customization (৳/unit)</label><input id="corpCustom" type="number" value="30"></div>
+            <div class="field" style="padding-top:28px; font-weight:bold; font-size:14px" id="corpTotalResult">Total: ৳ 0</div>
+          </div>
+
+          <hr style="margin:16px 0; border:0; border-top:1px solid #eee">
+
+          <div class="small" style="margin-bottom:10px; font-weight:600">2. Material & Time Estimator</div>
+          
+          <!-- Material Type Selector -->
+          <div class="field" style="margin-bottom:10px">
+            <label>Material Type</label>
+            <select id="matType">
+              <option value="sqft">Full-Grain Leather (sq.ft)</option>
+              <option value="yard">Vegan Leather (Yard)</option>
+              <option value="meter">Vegan Leather (Meter)</option>
+            </select>
+          </div>
+
+          <div class="input-row">
+            <div class="field"><label id="matQtyLabel">Consumption (sqft/unit)</label><input id="matQtyPerUnit" type="number" value="2.5"></div>
+            <div class="field"><label id="matPriceLabel">Price (৳/sqft)</label><input id="matPricePerUnit" type="number" value="180"></div>
+          </div>
+          
+          <div class="input-row" style="margin-top:10px; background:#f9fafb; padding:10px; border-radius:8px">
+             <div>
+               <div class="muted" style="font-size:11px">Total Material Needed</div>
+               <div class="val" style="font-size:15px" id="totalMatResult">—</div>
+             </div>
+             <div style="text-align:right">
+               <div class="muted" style="font-size:11px">Est. Material Cost</div>
+               <div class="val" style="font-size:15px" id="totalMatCostResult">৳ —</div>
+             </div>
+          </div>
+
+          <div class="input-row" style="margin-top:12px">
+            <div class="field"><label>Mins to make 1 unit</label><input id="minsPerUnit" type="number" value="90"></div>
+            <div class="field"><label>Work Hours / Day</label><input id="hoursPerDay" type="number" value="6"></div>
+          </div>
+          <div class="row" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #eee; border-radius:8px">
+               <div class="muted">Est. Delivery Time:</div>
+               <div class="val" style="font-size:16px" id="timeResult">— Days</div>
+          </div>
+        </div>
+
+        <!-- 4. STRATEGIC DECISION GUIDE (NEW) -->
+        <div class="card" style="border-top: 4px solid var(--accent);">
+          <h2>Strategic Decision Guide 🧠</h2>
+          <div class="small" style="margin-bottom:12px">5 key decisions you can make here:</div>
+          <ul class="decision-list">
+            <li><strong>Daily Target:</strong> Use 'Goal Seeker' to know exactly how many units to sell daily.</li>
+            <li><strong>Smart Pricing:</strong> Check 'Profit' after Discount before sending corporate quotes.</li>
+            <li><strong>Ad Budget:</strong> Monitor 'ROAS'. If it drops below 2.0, kill the ad.</li>
+            <li><strong>Sourcing:</strong> Use 'Material Estimator' to buy the exact amount of leather needed.</li>
+            <li><strong>Deadline:</strong> Use 'Time Estimator' to promise realistic delivery dates.</li>
+          </ul>
+        </div>
+
+        <footer></footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    // Utility
+    const fmt = n => (Number(n)||0).toLocaleString('en-US');
+
+    let projChart;
+
+    function updateMatLabels() {
+      const type = document.getElementById('matType').value;
+      const qtyLabel = document.getElementById('matQtyLabel');
+      const priceLabel = document.getElementById('matPriceLabel');
+
+      if(type === 'sqft') {
+        qtyLabel.innerText = 'Consumption (sqft/unit)';
+        priceLabel.innerText = 'Price (৳/sqft)';
+      } else if(type === 'yard') {
+        qtyLabel.innerText = 'Consumption (yard/unit)';
+        priceLabel.innerText = 'Price (৳/yard)';
+      } else if(type === 'meter') {
+        qtyLabel.innerText = 'Consumption (meter/unit)';
+        priceLabel.innerText = 'Price (৳/meter)';
+      }
+      calcAndRender(); // Recalculate when type changes
+    }
+
+    function calcAndRender(){
+      // --- 1. INPUTS ---
+      const fixedOffice = Number(document.getElementById('fixedOffice').value) || 0;
+      const fixedStaff = Number(document.getElementById('fixedStaff').value) || 0;
+      const fixedOther = Number(document.getElementById('fixedOther').value) || 0;
+      const price = Number(document.getElementById('price').value) || 0;
+      const prodCost = Number(document.getElementById('prodCost').value) || 0;
+      const cpa = Number(document.getElementById('cpa').value) || 0;
+      
+      const totalFixed = fixedOffice + fixedStaff + fixedOther;
+      const contribution = price - prodCost - cpa; 
+      const grossMargin = price - prodCost;
+
+      // --- 2. SUMMARY ---
+      document.getElementById('totalFixed').innerText = '৳ ' + fmt(totalFixed);
+      document.getElementById('contrib').innerText = '৳ ' + fmt(contribution);
+      
+      // Break Even
+      const beUnits = contribution > 0 ? Math.ceil(totalFixed / contribution) : 'Infinity';
+      const beRevenue = beUnits === 'Infinity' ? '—' : beUnits * price;
+      document.getElementById('beUnits').innerText = beUnits;
+      document.getElementById('beRevenue').innerText = beRevenue === '—' ? '—' : '৳ ' + fmt(beRevenue);
+
+      // --- 3. GOAL SEEKER ---
+      const targetProfit = Number(document.getElementById('targetProfitInput').value) || 0;
+      if(contribution > 0) {
+        const reqUnits = Math.ceil((totalFixed + targetProfit) / contribution);
+        const reqRev = reqUnits * price;
+        const daily = (reqUnits / 30).toFixed(1);
+        
+        document.getElementById('reqUnits').innerText = reqUnits;
+        document.getElementById('reqRevenue').innerText = '৳ ' + fmt(reqRev);
+        document.getElementById('reqDaily').innerText = `${daily} sales needed per day`;
+      } else {
+        document.getElementById('reqUnits').innerText = "Impossible";
+        document.getElementById('reqRevenue').innerText = "Check Pricing";
+        document.getElementById('reqDaily').innerText = "Loss per unit!";
+      }
+
+      // --- 4. SCENARIOS ---
+      const scenUnits = [20, 40, 60, 80, 100];
+      const tbody = document.querySelector('#scenarioTable tbody'); tbody.innerHTML = '';
+      scenUnits.forEach(units =>{
+        const revenue = units * price;
+        const totalVariable = units * (prodCost + cpa);
+        const totalCost = totalFixed + totalVariable;
+        const profit = revenue - totalCost;
+        
+        const tr = document.createElement('tr');
+        const color = profit > 0 ? '#10b981' : (profit < 0 ? '#ef4444' : '#333');
+        tr.innerHTML = `<td>${units}</td><td>৳ ${fmt(revenue)}</td><td>৳ ${fmt(totalCost)}</td><td style="color:${color}; font-weight:bold">৳ ${fmt(profit)}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      // --- 5. PROJECTION CHART ---
+      const startUnits = Number(document.getElementById('startUnits').value) || 10;
+      const growth = Number(document.getElementById('growth').value) || 0;
+      
+      const months = Array.from({length:12},(_,i)=>'M'+(i+1));
+      let u = startUnits;
+      const profitArr = [];
+      
+      for(let i=0; i<12; i++){
+        u = i===0 ? u : Math.round(u * (1 + growth/100));
+        const p = (u * contribution) - totalFixed;
+        profitArr.push(p);
+      }
+
+      if(projChart) projChart.destroy();
+      projChart = new Chart(document.getElementById('projChart'), {
+        type:'line', 
+        data:{
+          labels:months,
+          datasets:[{
+            label:'Net Profit',
+            data:profitArr,
+            tension:0.4,
+            borderColor: '#0b0b0b',
+            backgroundColor: 'rgba(0,0,0,0.05)',
+            fill: true,
+            pointRadius: 3
+          }]
+        }, 
+        options:{
+          responsive:true,
+          maintainAspectRatio:false,
+          plugins:{legend:{display:false}},
+          scales:{y:{grid:{display:false}}}
+        }
+      });
+
+      // --- 6. CORPORATE & MATERIAL & TIME ---
+      const corpQty = Number(document.getElementById('corpQty').value)||0;
+      const corpDisc = Number(document.getElementById('corpDisc').value)||0;
+      const corpCustom = Number(document.getElementById('corpCustom').value)||0;
+      
+      // Pricing
+      const netPricePerUnit = (price * (1 - corpDisc/100)) + corpCustom;
+      const totalCorpRev = Math.round(netPricePerUnit * corpQty);
+      document.getElementById('corpTotalResult').innerText = 'Total: ৳ ' + fmt(totalCorpRev);
+
+      // Material (UPDATED Logic)
+      const matType = document.getElementById('matType').value;
+      const matQtyPerUnit = Number(document.getElementById('matQtyPerUnit').value)||0;
+      const matPricePerUnit = Number(document.getElementById('matPricePerUnit').value)||0;
+      
+      if(corpQty > 0 && matQtyPerUnit > 0){
+          const totalMat = (corpQty * matQtyPerUnit).toFixed(1);
+          const totalMatCost = Math.round(totalMat * matPricePerUnit);
+          
+          let unitText = 'sqft';
+          if(matType === 'yard') unitText = 'yards';
+          if(matType === 'meter') unitText = 'meters';
+
+          document.getElementById('totalMatResult').innerText = totalMat + " " + unitText;
+          document.getElementById('totalMatCostResult').innerText = "৳ " + fmt(totalMatCost);
+      } else {
+          document.getElementById('totalMatResult').innerText = "—";
+          document.getElementById('totalMatCostResult').innerText = "৳ —";
+      }
+
+      // Time
+      const minsPerUnit = Number(document.getElementById('minsPerUnit').value)||0;
+      const hoursPerDay = Number(document.getElementById('hoursPerDay').value)||0;
+      
+      if(minsPerUnit > 0 && hoursPerDay > 0 && corpQty > 0){
+        const totalHours = (corpQty * minsPerUnit) / 60;
+        const days = Math.ceil(totalHours / hoursPerDay);
+        document.getElementById('timeResult').innerText = days + " Days";
+      } else {
+        document.getElementById('timeResult').innerText = "— Days";
+      }
+
+      // --- 7. MARKETING AUDIT ---
+      calcMarketing(); 
+    }
+
+    function calcMarketing(){
+        const spent = Number(document.getElementById('adSpent').value);
+        const sales = Number(document.getElementById('adSales').value);
+        const price = Number(document.getElementById('price').value) || 0;
+
+        if(spent && sales){
+            const actualCPA = Math.round(spent / sales);
+            const revenue = sales * price;
+            const roas = (revenue / spent).toFixed(2);
+            
+            document.getElementById('actualCPA').innerText = '৳ ' + actualCPA;
+            document.getElementById('actualROAS').innerText = roas + 'x';
+
+            const el = document.getElementById('roasVerdict');
+            if(roas > 3) { el.innerText = "Excellent! Scale up."; el.style.color="#10b981"; }
+            else if(roas > 2) { el.innerText = "Good. Keep optimizing."; el.style.color="#d97706"; }
+            else { el.innerText = "Warning: Low return."; el.style.color="#ef4444"; }
+        }
+    }
+
+    // --- EVENTS ---
+    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+    document.getElementById('resetBtn').addEventListener('click', ()=> location.reload());
+    document.getElementById('calcBtn').addEventListener('click', calcAndRender);
+    document.getElementById('matType').addEventListener('change', updateMatLabels);
+
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', calcAndRender);
+    });
+
+    window.addEventListener('load', ()=>{
+      updateMatLabels(); // Set initial labels based on default select
+      calcAndRender();
+    });
+  </script>
+</body>
+</html>

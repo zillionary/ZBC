@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Zillionary Business Center</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg-gradient-start: #fdfdff;
@@ -22,11 +23,23 @@
     *{box-sizing:border-box}
     body{font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);margin:0;color:var(--text-secondary);padding:28px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
     .wrap{max-width:1300px;margin:0 auto}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);}
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
     .header-left { display: flex; align-items: center; gap: 16px; }
-    .header-logo { width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .header-logo { width: 40px; height: 40px; background: #f3f4f6; color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
     h1{margin:0;font-size:24px;color:var(--text-primary); font-weight: 700;}
     .tag{color:var(--text-secondary);font-size:14px}
+
+    /* Apply new font to all headers */
+    h1, .card h2, .department-header, .modal-content h3 {
+      font-family: 'Roboto Slab', serif;
+    }
 
     .grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
     @media(max-width:980px){.grid{grid-template-columns:1fr}}
@@ -78,6 +91,50 @@
       -moz-appearance: textfield;
     }
 
+    /* Styles for Department Headers */
+    .department-header {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 40px 0 16px 0;
+      padding: 10px 16px;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    /* Department Colors */
+    .dept-sales {
+      background-color: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1e40af;
+    }
+    .dept-management {
+      background-color: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+    .dept-production {
+      background-color: #fff7ed;
+      border-color: #fed7aa;
+      color: #9a3412;
+    }
+    .dept-finance {
+      background-color: #f0f9ff; /* Light Sky Blue */
+      border-color: #bae6fd;
+      color: #0369a1;
+    }
+    .dept-marketing {
+      background-color: #faf5ff;
+      border-color: #e9d5ff;
+      color: #581c87;
+    }
+    /* Special color for right-side finance header */
+    .dept-finance-alt {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+
     input:disabled, select:disabled, button:disabled {
       cursor: not-allowed;
       background-color: #f9fafb !important;
@@ -115,6 +172,12 @@
     .btn.ghost{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary); font-weight: 500;}
     .btn.ghost:hover { background: #f9fafb; border-color: #d1d5db; }
     .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .btn.icon-btn {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     
     /* Highlight Box for Results */
     .highlight-box { background: #f9fafb; padding: 16px; border-radius: 10px; margin-top: 12px; border: 1px solid var(--border-color); }
@@ -181,6 +244,7 @@
     tbody tr:last-child td{border-bottom:none;}
     /* Styles for new tables */
     .portfolio-table input, .inventory-table input, .supplier-table input { padding: 6px; font-size: 13px; max-width: 100px; }
+    .sales-order-table input, .sales-order-table select, .return-tracker-table input, .return-tracker-table select { padding: 6px; font-size: 13px; }
     .production-phase-table input, .production-phase-table select { padding: 6px; font-size: 13px; }
     .campaign-table input { padding: 6px; font-size: 13px; max-width: 100px; }
     .competitor-table input { padding: 6px; font-size: 13px; }
@@ -210,6 +274,36 @@
     .table-progress-bar-inner.green { background-color: #22c55e; }
     .table-progress-bar-inner.yellow { background-color: #facc15; }
     .table-progress-bar-inner.red { background-color: #ef4444; }
+    /* Order Status Styles */
+    .order-status { font-weight: 600; padding: 4px 8px; border-radius: 99px; font-size: 11px; text-align: center; display: inline-block; min-width: 80px; }
+    .order-status.pending { background-color: #fef9c3; color: #854d0e; }
+    .order-status.shipped { background-color: #dbeafe; color: #1e40af; }
+    .order-status.delivered { background-color: #dcfce7; color: #166534; }
+    .order-status.returned { background-color: #fee2e2; color: #991b1b; }
+
+    /* New Pricing Strategy Table */
+    .pricing-strategy-table { margin-top: 16px; }
+    .pricing-strategy-table th, .pricing-strategy-table td { padding: 10px; font-size: 13px; text-align: center; }
+    .pricing-strategy-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); background-color: #f9fafb; }
+    .pricing-strategy-table .output-cell { font-weight: 700; font-size: 14px; }
+    /* New Investment Comparison Table */
+    .investment-table { margin-top: 16px; table-layout: fixed; }
+    .investment-table th, .investment-table td { padding: 10px; font-size: 13px; }
+    .investment-table th:nth-child(2), .investment-table th:nth-child(3) { text-align: center; }
+    .investment-table td:nth-child(2), .investment-table td:nth-child(3) { text-align: center; }
+    .investment-table td:first-child { font-weight: 600; color: var(--text-secondary); background-color: #f9fafb; }
+    .investment-table .output-cell { font-weight: 700; font-size: 14px; }
+    .investment-table .output-cell.gain-cell { text-align: right; }
+    .investment-table .best-investment td { background-color: #f0fdf4; color: #14532d; }
+    /* New Profit Margins Card Styles */
+    .margin-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
+    .margin-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .margin-item:first-child { padding-top: 4px; }
+    .margin-label { font-weight: 600; color: var(--text-primary); font-size: 15px; }
+    .margin-formula { font-size: 12px; color: var(--text-muted); font-family: monospace; margin-top: 4px; }
+    .margin-value { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+    .margin-value.positive { color: #10b981; }
+    .margin-value.negative { color: #ef4444; }
 
     /* Custom Date Input */
     .date-cell { position: relative; min-width: 120px; }
@@ -416,6 +510,29 @@
     .modal-actions .btn {
       padding: 12px;
     }
+
+    /* Print Selection Modal Styles */
+    #printSelectionCheckboxes {
+      max-height: 40vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 16px;
+    }
+    .print-selection-group { margin-bottom: 16px; }
+    .print-selection-group h4 {
+      margin: 0 0 8px 0; font-size: 14px; font-weight: 600;
+      color: var(--text-primary); border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+    .print-selection-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+    .print-selection-item label { margin-bottom: 0; font-weight: 400; color: var(--text-secondary); cursor: pointer; }
+    .print-selection-item input[type="checkbox"] { width: auto; cursor: pointer; }
+    @media print {
+      /* This class will be added via JS to hide unselected cards */
+      .no-print-selection { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -431,10 +548,19 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn" id="printBtn">Print Report</button>
-        <button class="btn ghost" id="saveBtn">Save Data</button>
-        <button class="btn ghost" id="loadBtn">Load Data</button>
-        <button class="btn ghost" id="toggleLockBtn">Lock 🔒</button>
+        <button class="btn" id="printBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Report
+        </button>
+        <button class="btn ghost icon-btn" id="saveBtn" title="Save Data">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        </button>
+        <button class="btn ghost icon-btn" id="loadBtn" title="Load Data">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button class="btn ghost icon-btn" id="toggleLockBtn" title="Toggle Lock">
+          <svg id="lockIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </button>
       </div>
     </header>
 
@@ -442,34 +568,38 @@
       <div class="grid">
         <!-- LEFT COLUMN -->
         <div>
-          <!-- 1. INPUTS -->
-          <div class="card" id="inputsCard">
-            <h2>Core Inputs</h2>
+          <!-- =================================================================== -->
+          <!-- CORE INPUTS -->
+          <!-- =================================================================== -->
+          <div class="card" id="inputsCard" data-printable-title="Core Inputs & Assumptions">
+            <h2 style="margin-bottom: 4px;">Core Inputs & Assumptions</h2>
+            <div class="small" style="margin-bottom: 12px;">These inputs will affect the entire dashboard's calculations.</div>
+            <div class="input-row">
+              <div class="field"><label>Selling Price (৳)</label><input id="price" type="number" value="1190"><div class="error-message"></div></div>
+              <div class="field"><label>Production Cost (৳)</label><input id="prodCost" type="number" value="550"><div class="error-message"></div></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Packaging Cost (৳)</label><input id="packagingCost" type="number" value="0"><div class="error-message"></div></div>
+              <div class="field"><label>Delivery Cost (৳)</label><input id="deliveryCost" type="number" value="0"><div class="error-message"></div></div>
+            </div>
             <div class="input-row">
               <div class="field"><label>Office + Utilities (৳/month)</label><input id="fixedOffice" type="number" value="9000"><div class="error-message"></div></div>
               <div class="field"><label>Staff Salary (৳/month)</label><input id="fixedStaff" type="number" value="6000"><div class="error-message"></div></div>
             </div>
             <div class="input-row">
               <div class="field"><label>Other Fixed Cost (৳/month)</label><input id="fixedOther" type="number" value="0"><div class="error-message"></div></div>
-              <div class="field"><label>Selling Price (৳)</label><input id="price" type="number" value="1190"><div class="error-message"></div></div>
-            </div>
-            <div class="input-row">
-              <div class="field"><label>Production Cost (৳)</label><input id="prodCost" type="number" value="550"><div class="error-message"></div></div>
-              <div class="field"><label>Delivery Cost (৳)</label><input id="deliveryCost" type="number" value="0"><div class="error-message"></div></div>
-            </div>
-            <div class="input-row">
-              <div class="field"><label>Packaging Cost (৳)</label><input id="packagingCost" type="number" value="0"><div class="error-message"></div></div>
               <div class="field"><label>Target Ad CPA (৳)</label><input id="cpa" type="number" value="100"><div class="error-message"></div></div>
             </div>
-            
-            <div style="margin-top:16px;display:flex;gap:8px">
-              <button class="btn" id="calcBtn">Recalculate All</button>
-              <button class="btn ghost" id="resetBtn">Reset</button>
+            <div class="input-row" style="margin-top: 16px; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <button id="resetCoreInputsBtn" class="btn ghost">Reset Inputs</button>
+                <button id="calculateAllBtn" class="btn">Calculate All</button>
             </div>
           </div>
-
-          <!-- 2. GOAL SEEKER -->
-          <div class="card">
+          <!-- =================================================================== -->
+          <!-- 01. SALES -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-sales">01. Sales</h2>
+          <div class="card" data-printable-title="Goal Seeker">
             <h2>Goal Seeker 🎯</h2>
             <div class="small">How much do I need to sell to hit my profit target?</div>
             <div class="input-row">
@@ -540,31 +670,62 @@
             </div>
           </div>
 
-          <!-- 3. SCENARIOS -->
-          <div class="card" id="scenariosCard">
-            <h2>Scenario Analysis</h2>
-            <div class="small" style="margin-bottom: 12px;">Profitability at different sales volumes. You can customize the unit steps below.</div>
-            <div class="input-row" style="max-width: 400px;">
-                <div class="field"><label>Scenario Unit Steps</label><input id="scenarioUnitsInput" type="text" value="20, 40, 60, 80, 100"></div>
+          <!-- PRICING STRATEGY COMPARISON -->
+          <div class="card" data-printable-title="Pricing Strategy Comparison">
+            <h2>Pricing Strategy Comparison</h2>
+            <div class="small">Compare how different price points affect your profitability.</div>
+            <div class="input-row" style="max-width: 250px; margin-top: 12px;">
+              <div class="field"><label>Target Sales Volume (Units)</label><input id="strategyTargetUnits" type="number" value="100"></div>
             </div>
-            <table id="scenarioTable">
-              <thead><tr><th>Units</th><th>Revenue</th><th>Total Cost</th><th>Profit</th><th>Profit/Unit</th><th>Margin %</th><th>ROI %</th><th>Status</th></tr></thead>
-              <tbody></tbody>
+            <table id="pricingStrategyTable" class="pricing-strategy-table">
+              <thead>
+                <tr><th>Metric</th><th>Current</th><th>Strategy A</th><th>Strategy B</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Selling Price (৳)</td><td class="output-cell" id="stratCurrentPrice">—</td><td><input type="number" id="stratAPrice" placeholder="e.g., 990"></td><td><input type="number" id="stratBPrice" placeholder="e.g., 1490"></td></tr>
+                <tr><td>Est. Ad CPA (৳)</td><td class="output-cell" id="stratCurrentCPA">—</td><td><input type="number" id="stratACPA" placeholder="e.g., 120"></td><td><input type="number" id="stratBCPA" placeholder="e.g., 80"></td></tr>
+                <tr style="border-top: 2px solid var(--border-color);">
+                  <td>Profit / Unit (৳)</td>
+                  <td class="output-cell" id="stratCurrentProfitPerUnit">—</td><td class="output-cell" id="stratAProfitPerUnit">—</td><td class="output-cell" id="stratBProfitPerUnit">—</td>
+                </tr>
+                <tr><td>Break-Even (Units)</td><td class="output-cell" id="stratCurrentBE">—</td><td class="output-cell" id="stratABE">—</td><td class="output-cell" id="stratBBE">—</td></tr>
+                <tr><td>Profit at Target Volume (৳)</td><td class="output-cell" id="stratCurrentProfitAtTarget">—</td><td class="output-cell" id="stratAProfitAtTarget">—</td><td class="output-cell" id="stratBProfitAtTarget">—</td></tr>
+              </tbody>
             </table>
           </div>
 
-          <!-- 4. CHARTS -->
-          <div class="card">
-            <h2>Growth Projection (12 Months)</h2>
-            <div class="input-row" style="margin-bottom:12px">
-               <div class="field" style="margin-top:0"><label>Start Units</label><input id="startUnits" type="number" value="20"><div class="error-message"></div></div>
-               <div class="field" style="margin-top:0"><label>Monthly Growth %</label><input id="growth" type="number" value="15"><div class="error-message"></div></div>
+          <!-- SALES ORDER TRACKER -->
+          <div class="card" data-printable-title="Sales Order Tracker">
+            <div class="card-header">
+              <h2>Sales Order Tracker 🚚</h2>
+              <button id="addSalesOrderBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add Order</button>
             </div>
-            <canvas id="projChart"></canvas>
+            <div class="small">Log and manage all your customer sales orders.</div>
+            <table id="salesOrderTable" class="sales-order-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th style="width: 25%;">Product</th>
+                  <th>Qty</th>
+                  <th>Total (৳)</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Rows will be added by JS -->
+              </tbody>
+            </table>
           </div>
 
+          <!-- =================================================================== -->
+          <!-- 02. MANAGEMENT & STRATEGY -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-management">02. Management & Strategy</h2>
+
           <!-- PRODUCT PORTFOLIO ANALYSIS -->
-          <div class="card">
+          <div class="card" data-printable-title="Product Portfolio Analysis">
             <div class="card-header">
               <h2>Product Portfolio Analysis</h2>
               <div class="row">
@@ -596,14 +757,66 @@
           </div>
 
           <!-- PROFIT CONTRIBUTION CHART -->
-          <div class="card" id="profitContribCard" style="display: none;">
+          <div class="card" id="profitContribCard" style="display: none;" data-printable-title="Product Profit Contribution">
             <h2>Product Profit Contribution</h2>
             <div class="small">Which products are driving the most profit?</div>
             <canvas id="profitContribChart"></canvas>
           </div>
 
+          <!-- SCENARIO ANALYSIS -->
+          <div class="card" id="scenariosCard" data-printable-title="Scenario Analysis">
+            <h2>Scenario Analysis</h2>
+            <div class="small" style="margin-bottom: 12px;">Profitability at different sales volumes. You can customize the unit steps below.</div>
+            <div class="input-row" style="max-width: 400px;">
+                <div class="field"><label>Scenario Unit Steps</label><input id="scenarioUnitsInput" type="text" value="20, 40, 60, 80, 100"></div>
+            </div>
+            <table id="scenarioTable">
+              <thead><tr><th>Units</th><th>Revenue</th><th>Total Cost</th><th>Profit</th><th>Profit/Unit</th><th>Margin %</th><th>ROI %</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <!-- GROWTH PROJECTION -->
+          <div class="card" data-printable-title="Growth Projection (12 Months)">
+            <h2>Growth Projection (12 Months)</h2>
+            <div class="input-row" style="margin-bottom:12px">
+               <div class="field" style="margin-top:0"><label>Start Units</label><input id="startUnits" type="number" value="20"><div class="error-message"></div></div>
+               <div class="field" style="margin-top:0"><label>Monthly Growth %</label><input id="growth" type="number" value="15"><div class="error-message"></div></div>
+            </div>
+            <canvas id="projChart"></canvas>
+          </div>
+
+          <!-- RETURN & REFUND TRACKER -->
+          <div class="card" data-printable-title="Return & Refund Tracker">
+            <div class="card-header">
+              <h2>Return & Refund Tracker ↩️</h2>
+              <button id="addReturnBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add Return</button>
+            </div>
+            <div class="small">Monitor product returns to identify quality issues and financial impact.</div>
+            <table id="returnTrackerTable" class="return-tracker-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th style="width: 25%;">Product</th>
+                  <th>Reason for Return</th>
+                  <th>Refund (৳)</th>
+                  <th>Action Taken</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Rows will be added by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- =================================================================== -->
+          <!-- 03. PRODUCTION & SUPPLY CHAIN -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-production">03. Production & Supply Chain</h2>
+
           <!-- PRODUCTION PHASE TRACKER -->
-          <div class="card">
+          <div class="card" data-printable-title="Production Phase Tracker">
             <div class="card-header">
               <h2>Production Phase 🏭</h2>
               <div class="row">
@@ -636,7 +849,7 @@
           </div>
 
           <!-- INVENTORY & STOCK ALERT -->
-          <div class="card">
+          <div class="card" data-printable-title="Inventory & Stock Alert">
             <div class="card-header">
               <h2>Inventory & Stock Alert 📦</h2>
               <div class="row">
@@ -667,9 +880,34 @@
             </div>
           </div>
 
+          <!-- SUPPLIER MANAGEMENT -->
+          <div class="card" data-printable-title="Supplier Management">
+            <div class="card-header">
+              <h2>Supplier Management</h2>
+              <div class="row">
+                <button id="exportSupplierBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addSupplierBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Keep track of your material suppliers.</div>
+            <table id="supplierTable" class="supplier-table">
+              <thead><tr><th>Supplier</th><th>Material</th><th>Price (৳)</th><th>Contact</th><th>Rating</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="supplierTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="supplierPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
 
-          <!-- MONTHLY CASH FLOW PLANNER -->
-          <div class="card">
+          <!-- =================================================================== -->
+          <!-- 04. FINANCE & ACCOUNTING -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-finance">04. Finance & Accounting</h2>
+          <div class="card" data-printable-title="Monthly Cash Flow Planner">
             <h2>Monthly Cash Flow Planner</h2>
             <div class="small">Plan your cash for the upcoming month.</div>
             <div class="input-row" style="margin-top:12px;">
@@ -701,7 +939,7 @@
           </div>
 
           <!-- SIMPLIFIED P&L STATEMENT -->
-          <div class="card">
+          <div class="card" data-printable-title="Simplified P&L Statement">
             <h2>Simplified P&L Statement</h2>
             <div class="small">A summary of your business's profitability.</div>
             <table style="margin-top:16px;" class="pnl-table">
@@ -715,12 +953,56 @@
             </table>
           </div>
 
+          <!-- INVESTMENT COMPARISON -->
+          <div class="card" data-printable-title="Investment Comparison">
+            <h2>Investment Comparison</h2>
+            <div class="small">Compare your business profit against other common investments in Bangladesh.</div>
+
+            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-top: 16px; background-color: #f9fafb;">
+                <h3 style="margin: 0 0 12px 0; font-size: 14px; font-family: Inter, sans-serif; color: var(--text-primary);">Your Business Metrics for Comparison</h3>
+                <div class="input-row">
+                    <div class="field" style="margin-top:0;"><label>Avg. Monthly Sales (Units)</label><input id="invMonthlySales" type="number" value="100"></div>
+                    <div class="field" style="margin-top:0;"><label>Selling Price (৳/unit)</label><input id="invSellingPrice" type="number" value="1190"></div>
+                </div>
+                <div class="input-row">
+                    <div class="field"><label>Variable Cost (৳/unit)</label><input id="invVarCost" type="number" value="650"></div>
+                    <div class="field"><label>Total Monthly Fixed Costs (৳)</label><input id="invFixedCost" type="number" value="15000"></div>
+                </div>
+            </div>
+
+            <div class="input-row" style="margin-top: 12px;">
+              <div class="field"><label>Total Capital Investment (৳)</label><input id="invInitial" type="number" value="500000"></div>
+              <div class="field"><label>Investment Period (Years)</label><input id="invYears" type="number" value="1"></div>
+            </div>
+            <table id="investmentTable" class="investment-table">
+              <thead>
+                <tr>
+                  <th>Investment Type</th>
+                  <th>Est. Monthly Return (%)</th>
+                  <th>Est. Annual Return (%)</th>
+                  <th style="text-align: right;">Total Gain (৳)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="invRowBusiness"><td>Zillionary Business</td><td id="invBusinessMonthlyReturn" class="output-cell">— %</td><td id="invBusinessReturn" class="output-cell">— %</td><td id="invBusinessGain" class="output-cell gain-cell">—</td></tr>
+                <tr id="invRowLand"><td>Land</td><td id="invLandMonthlyReturn" class="output-cell">— %</td><td>15%</td><td id="invLandGain" class="output-cell gain-cell">—</td></tr>
+                <tr id="invRowGold"><td>Gold</td><td id="invGoldMonthlyReturn" class="output-cell">— %</td><td>9%</td><td id="invGoldGain" class="output-cell gain-cell">—</td></tr>
+                <tr id="invRowFlat"><td>Flat/Apartment</td><td id="invFlatMonthlyReturn" class="output-cell">— %</td><td>10%</td><td id="invFlatGain" class="output-cell gain-cell">—</td></tr>
+                <tr id="invRowBank"><td>Bank Deposit</td><td id="invBankMonthlyReturn" class="output-cell">— %</td><td>7%</td><td id="invBankGain" class="output-cell gain-cell">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
 
         <!-- RIGHT COLUMN -->
         <div>
+          <!-- =================================================================== -->
+          <!-- 04. FINANCE & ACCOUNTING -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-finance">04. Finance & Accounting</h2>
           <!-- 1. SUMMARY -->
-          <div class="card">
+          <div class="card" data-printable-title="Business Health Summary">
             <h2>Business Health</h2>
             <div class="summary-grid">
               <div class="stat"><div class="muted">Total Fixed Cost</div><div class="val" id="totalFixed">—</div></div>
@@ -740,14 +1022,40 @@
           </div>
 
           <!-- COST STRUCTURE CHART -->
-          <div class="card">
+          <div class="card" data-printable-title="Cost Structure Chart">
             <h2>Cost Structure</h2>
             <div class="small">Breakdown of your monthly operational costs.</div>
             <canvas id="costStructureChart"></canvas>
           </div>
 
-          <!-- 2. MARKETING AUDIT -->
-          <div class="card">
+          <!-- PROFIT MARGINS -->
+          <div class="card" id="profitMarginsCard" data-printable-title="Profit Margins">
+            <h2>Profit Margins</h2>
+            <div class="small" style="margin-bottom:12px">Key profitability ratios from your P&L statement.</div>
+            
+            <div class="margin-item">
+              <div class="margin-info">
+                <div class="margin-label">Gross Profit Margin</div>
+                <div class="margin-formula">(Revenue - COGS) / Revenue</div>
+              </div>
+              <div class="margin-value" id="grossProfitMarginVal">— %</div>
+            </div>
+
+            <div class="margin-item">
+              <div class="margin-info">
+                <div class="margin-label">Net Profit Margin</div>
+                <div class="margin-formula">Net Profit / Revenue</div>
+              </div>
+              <div class="margin-value" id="netProfitMarginVal">— %</div>
+            </div>
+          </div>
+
+          <!-- =================================================================== -->
+          <!-- 05. MARKETING & ADVERTISING -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-marketing">05. Marketing & Advertising</h2>
+
+          <div class="card" data-printable-title="Ads Efficiency Check">
             <h2>Ads Efficiency Check</h2>
             <div class="small">Input actual data from Facebook Ads Manager</div>
             <canvas id="roasGaugeChart"></canvas>
@@ -785,22 +1093,12 @@
             </table>
           </div>
 
-          <!-- 3. CORPORATE PRICING -->
-          <div class="card">
-            <h2>Corporate Pricing 💼</h2>
-            <div class="small" style="margin-bottom:12px">Estimate pricing for bulk orders.</div>
-            <div class="input-row">
-              <div class="field"><label>Order Qty</label><input id="corpQty" type="number" value="100"></div>
-              <div class="field"><label>Discount %</label><input id="corpDisc" type="number" value="10"></div>
-            </div>
-            <div class="input-row">
-              <div class="field"><label>Customization (৳/unit)</label><input id="corpCustom" type="number" value="30"></div>
-              <div class="field" style="padding-top:28px; font-weight:bold; font-size:14px" id="corpTotalResult">Total: ৳ —</div>
-            </div>
-          </div>
+          <!-- =================================================================== -->
+          <!-- 03. PRODUCTION & SUPPLY CHAIN -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-production">03. Production & Supply Chain</h2>
 
-          <!-- 4. PRODUCTION ESTIMATOR -->
-          <div class="card">
+          <div class="card" data-printable-title="Production Estimator">
             <h2>Production Estimator 🛠️</h2>
             <div class="small" style="margin-bottom:12px">Estimate material needed for an order.</div>
             <div class="field" style="margin-bottom:10px">
@@ -821,8 +1119,7 @@
             </div>
           </div>
 
-          <!-- 5. TIME ESTIMATOR -->
-          <div class="card">
+          <div class="card" data-printable-title="Time Estimator">
             <h2>Time Estimator ⏱️</h2>
             <div class="small" style="margin-bottom:12px">Estimate time to complete an order.</div>
             <div class="input-row" style="margin-top:12px">
@@ -835,8 +1132,12 @@
             </div>
           </div>
 
-          <!-- 6. STRATEGIC DECISION GUIDE -->
-          <div class="card" style="border-top: 4px solid var(--accent);">
+          <!-- =================================================================== -->
+          <!-- 02. MANAGEMENT & STRATEGY -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-management">02. Management & Strategy</h2>
+
+          <div class="card" style="border-top: 4px solid var(--accent);" data-printable-title="Dynamic Decision Helper">
             <h2 class="has-tooltip">Dynamic Decision Helper 🧠
                 <div class="tooltip">
                     <p>এই হেল্পারটি আপনার ডেটা বিশ্লেষণ করে নিচের বিষয়গুলোর উপর ভিত্তি করে পরামর্শ দেয়:</p>
@@ -851,8 +1152,12 @@
             <ul id="decisionHelperList" class="decision-list"></ul>
           </div>
 
-          <!-- 7. STRATEGIC PRICING ASSISTANT -->
-          <div class="card" style="border-top: 4px solid #3b82f6;">
+          <!-- =================================================================== -->
+          <!-- 01. SALES -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-sales">01. Sales</h2>
+
+          <div class="card" style="border-top: 4px solid #3b82f6;" data-printable-title="Strategic Pricing Assistant">
             <h2 class="has-tooltip">Strategic Pricing Assistant 🎯
                 <div class="tooltip" style="width: 340px;">
                     <p>এই টুলটি আপনাকে নির্দিষ্ট ব্যবসায়িক লক্ষ্য অর্জনের জন্য কৌশলগত পরামর্শ দেবে।</p>
@@ -876,25 +1181,41 @@
             <div id="strategyOutput"><div class="strategy-grid"><div class="strategy-card full-width"><div class="label">Enter your goal to see strategic advice.</div></div></div></div>
           </div>
 
-          <!-- 8. PRICE & VOLUME SENSITIVITY -->
-          <div class="card" id="sensitivityAnalysisContainer" style="display: none;">
+          <div class="card" id="sensitivityAnalysisContainer" style="display: none;" data-printable-title="Price & Volume Sensitivity">
             <h2>Price & Volume Sensitivity</h2>
             <div class="small" style="margin-bottom:12px">How profit changes with price and sales volume adjustments. Based on "What-If" units.</div>
             <table id="sensitivityTable" class="sensitivity-table"></table>
           </div>
+
+          <div class="card" data-printable-title="Corporate Pricing">
+            <h2>Corporate Pricing 💼</h2>
+            <div class="small" style="margin-bottom:12px">Estimate pricing for bulk orders.</div>
+            <div class="input-row">
+              <div class="field"><label>Order Qty</label><input id="corpQty" type="number" value="100"></div>
+              <div class="field"><label>Discount %</label><input id="corpDisc" type="number" value="10"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Customization (৳/unit)</label><input id="corpCustom" type="number" value="30"></div>
+              <div class="field" style="padding-top:28px; font-weight:bold; font-size:14px" id="corpTotalResult">Total: ৳ —</div>
+            </div>
+          </div>
+
         </div>
 
         <!-- LEFT COLUMN - CONTINUED -->
         <div>
+          <!-- =================================================================== -->
+          <!-- 05. MARKETING & ADVERTISING -->
+          <!-- =================================================================== -->
           <!-- CAMPAIGN PERFORMANCE CHART -->
-          <div class="card" id="campaignChartCard" style="display: none;">
+          <div class="card" id="campaignChartCard" style="display: none;" data-printable-title="Campaign Performance Overview">
             <h2>Campaign Performance Overview</h2>
             <div class="small">Comparing key metrics across your campaigns.</div>
             <canvas id="campaignChart"></canvas>
           </div>
 
           <!-- MARKETING CAMPAIGN TRACKER -->
-          <div class="card">
+          <div class="card" data-printable-title="Marketing Campaign Tracker">
             <div class="card-header">
               <h2>Marketing Campaign Tracker 📊</h2>
               <div class="row">
@@ -917,7 +1238,7 @@
           </div>
 
           <!-- COMPETITOR PRICE TRACKER -->
-          <div class="card">
+          <div class="card" data-printable-title="Competitor Price Tracker">
             <div class="card-header">
               <h2>Competitor Price Tracker 🕵️</h2>
               <div class="row">
@@ -939,28 +1260,6 @@
             </div>
           </div>
 
-          <!-- SUPPLIER MANAGEMENT -->
-          <div class="card">
-            <div class="card-header">
-              <h2>Supplier Management</h2>
-              <div class="row">
-                <button id="exportSupplierBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </button>
-                <button id="addSupplierBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
-              </div>
-            </div>
-            <div class="small">Keep track of your material suppliers.</div>
-            <table id="supplierTable" class="supplier-table">
-              <thead><tr><th>Supplier</th><th>Material</th><th>Price (৳)</th><th>Contact</th><th>Rating</th><th></th></tr></thead>
-              <tbody></tbody>
-            </table>
-            <div id="supplierTablePagination" style="margin-top: 12px; text-align: right; display: none;">
-              <button id="prevSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
-              <span id="supplierPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
-              <button id="nextSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
-            </div>
-          </div>
         </div>
       </div>
     </main>
@@ -969,6 +1268,22 @@
     </footer>
   </div>
 
+  <!-- Print Selection Modal -->
+  <div id="printModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 500px;">
+      <h3>Select Sections to Print</h3>
+      <p>Choose which cards you want to include in your printed report.</p>
+      <div id="printSelectionCheckboxes">
+        <!-- Checkboxes will be dynamically generated here -->
+      </div>
+      <div class="modal-actions" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 16px;">
+        <button id="printSelectAll" class="btn ghost">Select All</button>
+        <button id="printDeselectAll" class="btn ghost">Deselect All</button>
+        <button id="confirmPrintBtn" class="btn">Print</button>
+      </div>
+      <button id="cancelPrintBtn" class="btn ghost" style="width: 100%; margin-top: 12px;">Cancel</button>
+    </div>
+  </div>
   <!-- Password Modal -->
   <div id="passwordModal" class="modal-overlay">
     <div class="modal-content">
@@ -1027,8 +1342,10 @@
       'corpCustom', 'matType', 'matQtyPerUnit', 'matPricePerUnit', 'minsPerUnit', 'hoursPerDay',
       // New fields for save/load
       'cashOpening', 'cashRevenue', 'cashVariableCosts', 'cashAdSpend', 'cashOtherIn', 'cashOtherOut',
-      'strategyGoalType', 'strategyTargetAmount'
+      'strategyGoalType', 'strategyTargetAmount',
+      'invMonthlySales', 'invSellingPrice', 'invVarCost', 'invFixedCost', 'invInitial', 'invYears'
       
+
       // Portfolio, Inventory, and Supplier data is handled separately
     ];
 
@@ -1045,12 +1362,16 @@
       data.inventory = getTableData('inventoryTable');
       data.production = getTableData('productionPhaseTable');
       data.competitors = getTableData('competitorTable', true); // Save all rows
+      data.salesOrders = getTableData('salesOrderTable');
+      data.returns = getTableData('returnTrackerTable');
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       
       const saveBtn = el('saveBtn');
-      saveBtn.innerText = 'Saved!';
-      setTimeout(() => { saveBtn.innerText = 'Save Data'; }, 1500);
+      const originalContent = saveBtn.innerHTML;
+      saveBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+      saveBtn.title = 'Saved!';
+      setTimeout(() => { saveBtn.innerHTML = originalContent; saveBtn.title = 'Save Data'; }, 2000);
     }
 
     function loadData() {
@@ -1065,6 +1386,8 @@
         el('campaignTable').querySelector('tbody').innerHTML = '';
         el('inventoryTable').querySelector('tbody').innerHTML = '';
         el('productionPhaseTable').querySelector('tbody').innerHTML = '';
+        el('salesOrderTable').querySelector('tbody').innerHTML = '';
+        el('returnTrackerTable').querySelector('tbody').innerHTML = '';
 
         fieldsToSave.forEach(id => {
           if (data[id] !== undefined) {
@@ -1092,6 +1415,12 @@
         }
         if (data.production) {
           data.production.forEach(row => addProductionPhaseRow(...row));
+        }
+        if (data.salesOrders) {
+          data.salesOrders.forEach(row => addSalesOrderRow(...row));
+        }
+        if (data.returns) {
+          data.returns.forEach(row => addReturnRow(...row));
         }
         calcAndRender();
       }
@@ -1570,6 +1899,26 @@
       el('pnlNetProfit').style.color = netProfit >= 0 ? '#10b981' : '#ef4444';
     }
 
+    function updateProfitMargins() {
+        const revenue = parseFloat(el('pnlRevenue').innerText.replace(/[^0-9.-]+/g,"")) || 0;
+        const grossProfit = parseFloat(el('pnlGrossProfit').innerText.replace(/[^0-9.-]+/g,"")) || 0;
+        const netProfit = parseFloat(el('pnlNetProfit').innerText.replace(/[^0-9.-]+/g,"")) || 0;
+
+        const grossMargin = revenue > 0 ? (grossProfit / revenue * 100).toFixed(1) : 0;
+        const netMargin = revenue > 0 ? (netProfit / revenue * 100).toFixed(1) : 0;
+
+        const grossMarginEl = el('grossProfitMarginVal');
+        const netMarginEl = el('netProfitMarginVal');
+
+        grossMarginEl.innerText = `${grossMargin} %`;
+        grossMarginEl.classList.toggle('positive', grossMargin >= 0);
+        grossMarginEl.classList.toggle('negative', grossMargin < 0);
+
+        netMarginEl.innerText = `${netMargin} %`;
+        netMarginEl.classList.toggle('positive', netMargin >= 0);
+        netMarginEl.classList.toggle('negative', netMargin < 0);
+    }
+
     function updateMarketingAudit(){
         const spent = val('adSpent');
         const sales = val('adSales');
@@ -1750,6 +2099,106 @@
         });
     }
 
+    function updatePricingStrategies() {
+      const targetUnits = val('strategyTargetUnits');
+      const { totalFixed, price, cpa } = coreInputs;
+      const otherVarCosts = val('prodCost') + val('deliveryCost') + val('packagingCost');
+
+      const calculateMetrics = (sellingPrice, adCPA) => {
+        if (sellingPrice <= 0) return { profitPerUnit: 0, be: 'N/A', profitAtTarget: 0 };
+        const contribution = sellingPrice - otherVarCosts - adCPA;
+        const be = contribution > 0 ? Math.ceil(totalFixed / contribution) : 'N/A';
+        const profitAtTarget = (contribution * targetUnits) - totalFixed;
+        return { profitPerUnit: contribution, be, profitAtTarget };
+      };
+
+      // Current Strategy
+      el('stratCurrentPrice').innerText = fmt(price);
+      el('stratCurrentCPA').innerText = fmt(cpa);
+      const currentMetrics = calculateMetrics(price, cpa);
+      el('stratCurrentProfitPerUnit').innerText = fmt(currentMetrics.profitPerUnit.toFixed(0));
+      el('stratCurrentBE').innerText = fmt(currentMetrics.be);
+      el('stratCurrentProfitAtTarget').innerText = fmt(currentMetrics.profitAtTarget.toFixed(0));
+
+      // Strategy A
+      const priceA = val('stratAPrice') || 0;
+      const cpaA = val('stratACPA') || cpa; // Fallback to current CPA
+      const metricsA = calculateMetrics(priceA, cpaA);
+      el('stratAProfitPerUnit').innerText = priceA > 0 ? fmt(metricsA.profitPerUnit.toFixed(0)) : '—';
+      el('stratABE').innerText = priceA > 0 ? fmt(metricsA.be) : '—';
+      el('stratAProfitAtTarget').innerText = priceA > 0 ? fmt(metricsA.profitAtTarget.toFixed(0)) : '—';
+
+      // Strategy B
+      const priceB = val('stratBPrice') || 0;
+      const cpaB = val('stratBCPA') || cpa; // Fallback to current CPA
+      const metricsB = calculateMetrics(priceB, cpaB);
+      el('stratBProfitPerUnit').innerText = priceB > 0 ? fmt(metricsB.profitPerUnit.toFixed(0)) : '—';
+      el('stratBBE').innerText = priceB > 0 ? fmt(metricsB.be) : '—';
+      el('stratBProfitAtTarget').innerText = priceB > 0 ? fmt(metricsB.profitAtTarget.toFixed(0)) : '—';
+
+      // Highlight best profit at target
+      const profits = [currentMetrics.profitAtTarget, metricsA.profitAtTarget, metricsB.profitAtTarget];
+      const profitCells = [el('stratCurrentProfitAtTarget'), el('stratAProfitAtTarget'), el('stratBProfitAtTarget')];
+      const maxProfit = Math.max(...profits);
+      profitCells.forEach((cell, i) => cell.style.color = profits[i] === maxProfit && maxProfit > 0 ? '#10b981' : 'var(--text-primary)');
+    }
+
+    function updateInvestmentComparison() {
+      const initialInvestment = val('invInitial');
+      const years = val('invYears');
+
+      // 1. Zillionary Business Calculation
+      // STANDALONE CALCULATION LOGIC
+      const invSales = val('invMonthlySales');
+      const invPrice = val('invSellingPrice');
+      const invVarCost = val('invVarCost');
+      const invFixedCost = val('invFixedCost');
+      
+      const monthlyProfit = (invPrice - invVarCost) * invSales - invFixedCost;
+      const annualProfit = monthlyProfit * 12;
+      const businessReturnRate = initialInvestment > 0 ? (annualProfit / initialInvestment) * 100 : 0;
+      const businessMonthlyReturnRate = businessReturnRate / 12;
+      const businessTotalGain = annualProfit * years;
+
+      el('invBusinessReturn').innerText = `${businessReturnRate.toFixed(1)} %`;
+      el('invBusinessMonthlyReturn').innerText = `${businessMonthlyReturnRate.toFixed(1)} %`;
+      el('invBusinessGain').innerText = `৳ ${fmt(businessTotalGain.toFixed(0))}`;
+
+      // 2. Other Investments (Compounded)
+      const investmentTypes = [
+        { id: 'Land', rate: 0.15, gainEl: 'invLandGain', monthlyReturnEl: 'invLandMonthlyReturn', rowEl: 'invRowLand' },
+        { id: 'Gold', rate: 0.09, gainEl: 'invGoldGain', monthlyReturnEl: 'invGoldMonthlyReturn', rowEl: 'invRowGold' },
+        { id: 'Flat', rate: 0.10, gainEl: 'invFlatGain', monthlyReturnEl: 'invFlatMonthlyReturn', rowEl: 'invRowFlat' },
+        { id: 'Bank', rate: 0.07, gainEl: 'invBankGain', monthlyReturnEl: 'invBankMonthlyReturn', rowEl: 'invRowBank' },
+      ];
+
+      let maxGain = businessTotalGain;
+      let bestInvestmentRow = el('invRowBusiness');
+
+      investmentTypes.forEach(inv => {
+        const totalValue = initialInvestment * Math.pow((1 + inv.rate), years);
+        const gain = totalValue - initialInvestment;
+        const monthlyRate = (inv.rate * 100) / 12;
+
+        el(inv.monthlyReturnEl).innerText = `${monthlyRate.toFixed(1)} %`;
+
+        if (initialInvestment <= 0 || years <= 0) {
+            el(inv.gainEl).innerText = '—';
+            return;
+        }
+        el(inv.gainEl).innerText = `৳ ${fmt(gain.toFixed(0))}`;
+        if (gain > maxGain) {
+          maxGain = gain;
+          bestInvestmentRow = el(inv.rowEl);
+        }
+      });
+
+      // Highlight the best investment
+      document.querySelectorAll('#investmentTable tbody tr').forEach(row => row.classList.remove('best-investment'));
+      if (maxGain > 0) {
+        bestInvestmentRow.classList.add('best-investment');
+      }
+    }
     // --- GENERIC PAGINATION LOGIC ---
     const paginationState = {
         competitor: { currentPage: 0, rowsPerPage: 5 },
@@ -2017,14 +2466,20 @@
     }
 
     function updateLockButton(locked) {
-        const lockBtn = el('toggleLockBtn');
-        if (locked) {
-            lockBtn.innerHTML = 'Unlock 🔓';
-            lockBtn.classList.add('ghost-danger');
-        } else {
-            lockBtn.innerHTML = 'Lock 🔒';
-            lockBtn.classList.remove('ghost-danger');
-        }
+      const lockBtn = el('toggleLockBtn');
+      const lockIcon = el('lockIcon');
+      const unlockIconSvg = `<svg id="lockIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`;
+      const lockIconSvg = `<svg id="lockIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+
+      if (locked) {
+          lockBtn.innerHTML = lockIconSvg;
+          lockBtn.title = "Unlock Dashboard";
+          lockBtn.style.color = '#b91c1c';
+      } else {
+          lockBtn.innerHTML = unlockIconSvg;
+          lockBtn.title = "Lock Dashboard";
+          lockBtn.style.color = 'var(--text-secondary)';
+      }
     }
 
 
@@ -2033,7 +2488,7 @@
         document.body.classList.toggle('dashboard-locked', locked);
 
         const elementsToLock = document.querySelectorAll(
-            'input, select, .add-row-btn, .remove-row-btn, #resetBtn, #calcBtn, .comp-link-edit-btn, .date-input, ' +
+            'input, select, .add-row-btn, .remove-row-btn, .comp-link-edit-btn, .date-input, ' +
             '#exportPortfolioBtn, #exportProductionBtn, #exportInventoryBtn, #exportCampaignBtn, #exportCompetitorBtn, #exportSupplierBtn'
         );
 
@@ -2130,15 +2585,20 @@
       updateProjectionChart();
       updateCorporate(); // This also calls calcAndRender, which is redundant. Let's keep it for now.
       updatePortfolio();
+      updatePricingStrategies();
       updateInventory();
       updateSuppliers();
       updateProductionPhases();
+      updateInvestmentComparison();
       updateCompetitorAnalysis();
       updateCampaignPerformance();
       updateMarketingAudit();
       updateCashFlow();
+      updateSalesOrders();
+      updateReturns();
       updatePnl();
       updateDecisionHelper();
+      updateProfitMargins(); // This was called before updatePnl, which is a dependency. Moved it after.
       updateCostStructureChart();
       updateRoasGauge();
       updateProfitContribChart();
@@ -2173,21 +2633,13 @@
     // --- EVENTS ---
     el('saveBtn').addEventListener('click', saveData);
     el('loadBtn').addEventListener('click', loadData);
-    el('printBtn').addEventListener('click', ()=> window.print());
-    el('resetBtn').addEventListener('click', () => {
-      el('price').value = 0;
-      el('deliveryCost').value = 0;
-      // Add other fields to reset if needed
-      el('packagingCost').value = 0;
-      el('cpa').value = 0;
-      calcAndRender();
-    });
-    el('calcBtn').addEventListener('click', calcAndRender);
     el('addCampaignBtn').addEventListener('click', () => { addCampaignRow(); updateCampaignPerformance(); renderPaginatedTable('campaignTable', 'campaign'); });
     el('addInventoryItemBtn').addEventListener('click', () => { addInventoryRow(); updateInventory(); renderPaginatedTable('inventoryTable', 'inventory'); });
     el('addCompetitorBtn').addEventListener('click', () => { addCompetitorRow(); renderCompetitorPage(); });
     el('prevCompetitorPage').addEventListener('click', () => changeCompetitorPage(-1));
     el('nextCompetitorPage').addEventListener('click', () => changeCompetitorPage(1));
+    el('addSalesOrderBtn').addEventListener('click', () => addSalesOrderRow());
+    el('addReturnBtn').addEventListener('click', () => addReturnRow());
     el('addProductionPhaseBtn').addEventListener('click', () => { addProductionPhaseRow(); renderPaginatedTable('productionPhaseTable', 'production'); });
     el('addProductBtn').addEventListener('click', () => { addPortfolioRow(); updatePortfolio(); renderPaginatedTable('productPortfolioTable', 'portfolio'); });
     el('addSupplierBtn').addEventListener('click', () => { addSupplierRow(); updateSuppliers(); renderPaginatedTable('supplierTable', 'supplier'); });
@@ -2217,13 +2669,76 @@
     el('passwordModal').addEventListener('click', (e) => { if (e.target === el('passwordModal')) hidePasswordModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && el('passwordModal').classList.contains('visible')) hidePasswordModal(); });
 
-    document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('input', calcAndRender);
+    // --- NEW: Manual Calculation and Reset Logic ---
+    el('calculateAllBtn').addEventListener('click', calcAndRender);
+    el('resetCoreInputsBtn').addEventListener('click', () => {
+        const defaultValues = {
+            price: '1190', prodCost: '550', packagingCost: '0',
+            deliveryCost: '0', fixedOffice: '9000', fixedStaff: '6000',
+            fixedOther: '0', cpa: '100'
+        };
+        for (const id in defaultValues) {
+            el(id).value = defaultValues[id];
+        }
+        // Optionally, you can trigger a calculation immediately after reset
+        // calcAndRender();
     });
 
-    document.querySelectorAll('select').forEach(select => {
-        select.addEventListener('change', calcAndRender);
+
+
+    // --- SELECTIVE PRINTING LOGIC ---
+    const printModal = el('printModal');
+    const printCheckboxesContainer = el('printSelectionCheckboxes');
+
+    function populatePrintModal() {
+        printCheckboxesContainer.innerHTML = '';
+        const printableCards = document.querySelectorAll('.card[data-printable-title]');
+        
+        printableCards.forEach((card, index) => {
+            const title = card.dataset.printableTitle;
+            const id = `print-check-${index}`;
+            const itemHTML = `
+                <div class="print-selection-item">
+                    <input type="checkbox" id="${id}" data-card-index="${index}" checked>
+                    <label for="${id}">${title}</label>
+                </div>
+            `;
+            printCheckboxesContainer.innerHTML += itemHTML;
+        });
+    }
+
+    el('printBtn').addEventListener('click', () => {
+        populatePrintModal();
+        printModal.classList.add('visible');
     });
+
+    el('cancelPrintBtn').addEventListener('click', () => printModal.classList.remove('visible'));
+    printModal.addEventListener('click', (e) => { if (e.target === printModal) printModal.classList.remove('visible'); });
+
+    el('printSelectAll').addEventListener('click', () => {
+        printCheckboxesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+    });
+
+    el('printDeselectAll').addEventListener('click', () => {
+        printCheckboxesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    });
+
+    el('confirmPrintBtn').addEventListener('click', () => {
+        const allCards = document.querySelectorAll('.card[data-printable-title]');
+        allCards.forEach(card => card.classList.remove('no-print-selection'));
+
+        const uncheckedBoxes = printCheckboxesContainer.querySelectorAll('input[type="checkbox"]:not(:checked)');
+        uncheckedBoxes.forEach(cb => {
+            const cardIndex = cb.dataset.cardIndex;
+            if (cardIndex !== null && allCards[cardIndex]) {
+                allCards[cardIndex].classList.add('no-print-selection');
+            }
+        });
+
+        printModal.classList.remove('visible');
+        window.print();
+    });
+    window.addEventListener('afterprint', () => document.querySelectorAll('.no-print-selection').forEach(el => el.classList.remove('no-print-selection')));
 
     // --- UTILITY FOR SAVING/LOADING DYNAMIC TABLES ---
     function getTableData(tableId, saveAll = false) {
@@ -2273,7 +2788,7 @@
         }
       });
 
-
+      // Individual listeners that should still trigger updates for their specific component
       el('portfolioTotalProfit').innerHTML = '৳&nbsp;' + fmt(Math.round(totalProfit));
 
       // Show/hide profit contribution chart
@@ -2310,7 +2825,11 @@
         <td style="width: 40px;"><button class="remove-row-btn">×</button></td>
       `;
       tbody.appendChild(tr);
-      tr.querySelectorAll('input').forEach(input => input.addEventListener('input', updatePortfolio));
+      tr.querySelectorAll('input').forEach(input => {
+          input.addEventListener('input', () => {
+              updatePortfolio(); // This updates the portfolio table specifically
+          });
+      });
       tr.querySelector('.remove-row-btn').addEventListener('click', () => {
         tr.remove(); 
         calcAndRender(); // Full recalculation
@@ -2419,7 +2938,11 @@
         <td><button class="remove-row-btn">×</button></td>
       `;
       tbody.appendChild(tr);
-      tr.querySelectorAll('input, select').forEach(input => input.addEventListener('input', updateInventory));
+      tr.querySelectorAll('input, select').forEach(input => {
+          input.addEventListener('input', () => {
+              updateInventory();
+          });
+      });
       tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateInventory(); renderPaginatedTable('inventoryTable', 'inventory'); });
       if (!skipRender) {
         renderPaginatedTable('inventoryTable', 'inventory');
@@ -2538,13 +3061,119 @@
 
         // Event listeners
         tr.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', updateProductionPhases);
+            input.addEventListener('input', () => {
+                updateProductionPhases();
+            });
         });
         tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateProductionPhases(); renderPaginatedTable('productionPhaseTable', 'production'); });
         updateProductionPhases(); // Initial calculation
         if (!skipRender) {
             renderPaginatedTable('productionPhaseTable', 'production');
         }
+    }
+
+    // --- SALES ORDER TRACKER LOGIC ---
+    function updateSalesOrders() {
+      const tbody = el('salesOrderTable').querySelector('tbody');
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const status = tr.querySelector('.order-status-select').value;
+        const statusCell = tr.querySelector('.order-status-cell');
+        statusCell.innerHTML = `<span class="order-status ${status.toLowerCase()}">${status}</span>`;
+      });
+    }
+
+    function addSalesOrderRow(date = '', customer = '', product = '', qty = '1', total = '', status = 'Pending') {
+      const tbody = el('salesOrderTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      const initialDate = date || new Date().toISOString().split('T')[0];
+      const productNames = getPortfolioProductNames();
+      const statuses = ["Pending", "Shipped", "Delivered", "Returned"];
+
+      tr.innerHTML = `
+        <td class="date-cell">
+          <span class="date-display">${formatDate(initialDate)}</span>
+          <input type="date" class="date-input" value="${initialDate}">
+        </td>
+        <td><input type="text" placeholder="Customer Name" value="${customer}"></td>
+        <td>
+          <select class="order-product-select" style="width: 100%;">
+            ${productNames.map(name => `<option value="${name}" ${name === product ? 'selected' : ''}>${name}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="number" class="order-qty" value="${qty}" style="max-width: 70px;"></td>
+        <td><input type="number" class="order-total" placeholder="e.g., 1190" value="${total}"></td>
+        <td class="order-status-cell">
+          <select class="order-status-select" style="display:none;">
+            ${statuses.map(s => `<option value="${s}" ${s === status ? 'selected' : ''}>${s}</option>`).join('')}
+          </select>
+        </td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+
+      // Date formatting logic
+      const dateInput = tr.querySelector('.date-input');
+      const dateDisplay = tr.querySelector('.date-display');
+      dateInput.addEventListener('input', () => { dateDisplay.textContent = formatDate(dateInput.value); });
+
+      // Status click to change
+      const statusCell = tr.querySelector('.order-status-cell');
+      const statusSelect = tr.querySelector('.order-status-select');
+      statusCell.addEventListener('click', () => {
+        statusSelect.style.display = 'block';
+        statusCell.style.display = 'none';
+        statusSelect.focus();
+      });
+      statusSelect.addEventListener('blur', () => {
+        statusSelect.style.display = 'none';
+        statusCell.style.display = 'block';
+        updateSalesOrders();
+      });
+      statusSelect.addEventListener('change', () => statusSelect.blur());
+
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateSalesOrders(); });
+      
+      // Add listeners to auto-update total when qty or product changes
+      tr.querySelector('.order-qty').addEventListener('input', updateSalesOrders);
+      tr.querySelector('.order-product-select').addEventListener('change', updateSalesOrders);
+
+
+      updateSalesOrders(); // Initial render
+    }
+
+    // --- RETURN & REFUND TRACKER LOGIC ---
+    function updateReturns() {
+      // Placeholder for any future calculations
+    }
+
+    function addReturnRow(date = '', product = '', reason = '', refund = '', action = 'Refunded') {
+      const tbody = el('returnTrackerTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      const initialDate = date || new Date().toISOString().split('T')[0];
+      const productNames = getPortfolioProductNames();
+      const actions = ["Refunded", "Exchanged", "Investigating", "Rejected"];
+
+      tr.innerHTML = `
+        <td class="date-cell">
+          <span class="date-display">${formatDate(initialDate)}</span>
+          <input type="date" class="date-input" value="${initialDate}">
+        </td>
+        <td>
+          <select class="return-product-select" style="width: 100%;">
+            ${productNames.map(name => `<option value="${name}" ${name === product ? 'selected' : ''}>${name}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="text" placeholder="e.g., Quality issue" value="${reason}"></td>
+        <td><input type="number" placeholder="e.g., 1190" value="${refund}"></td>
+        <td>
+          <select class="return-action-select" style="width: 100%;">
+            ${actions.map(a => `<option value="${a}" ${a === action ? 'selected' : ''}>${a}</option>`).join('')}
+          </select>
+        </td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => tr.remove());
     }
 
     // --- NEW CHART FUNCTIONS ---
@@ -2750,19 +3379,25 @@
 
     window.addEventListener('load', ()=>{
       // Set initial lock state on UI
-      const lockBtn = el('toggleLockBtn');
-      lockBtn.innerHTML = 'Unlock 🔓';
-      lockBtn.style.backgroundColor = '#fef2f2';
-      lockBtn.style.borderColor = '#fca5a5';
-      lockBtn.style.color = '#b91c1c';
-      
       updateLockButton(isLocked);
       loadData(); // Try to load saved data first
+      // Manually add event listeners that should trigger calcAndRender
+      document.querySelectorAll('#inputsCard input, #targetProfitInput, #whatIfUnits, #whatIfPrice, #whatIfProdCost, #whatIfDeliveryCost, #whatIfPackagingCost, #whatIfCpa, #strategyTargetUnits, #stratAPrice, #stratBPrice, #stratACPA, #stratBCPA, #scenarioUnitsInput, #startUnits, #growth, #cashOpening, #cashRevenue, #cashVariableCosts, #cashAdSpend, #cashOtherIn, #cashOtherOut, #invInitial, #invYears, #adSpent, #adSales, #matType, #matQtyPerUnit, #matPricePerUnit, #minsPerUnit, #hoursPerDay, #strategyGoalType, #strategyTargetAmount, #corpQty, #corpDisc, #corpCustom, #invMonthlySales, #invSellingPrice, #invVarCost, #invFixedCost').forEach(el => {
+          el.addEventListener('input', calcAndRender);
+      });
       updateMatLabels(); // Then update labels which also triggers a render
 
       // Apply the lock state after everything is rendered
       applyLockState(isLocked);
     });
+  </script>
+  <script>
+    // Helper function for date formatting used in new tables
+    const formatDate = (dateString) => {
+      if (!dateString) return 'Select Date';
+      const dateObj = new Date(dateString);
+      return dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    };
   </script>
 </html>
 </body>

@@ -7,464 +7,2763 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f5f5f6;
-      --black:#0b0b0b;
-      --dark-grey:#333333;
-      --mid-grey:#6b6b6b;
-      --muted:#9b9b9b;
-      --card:#ffffff;
-      --accent:#1f2937;
-      --radius:14px;
+      --bg-gradient-start: #fdfdff;
+      --bg-gradient-end: #f5f6fa;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+      --card-bg: #ffffff;
+      --accent: #111827; /* Changed to black for brand color */
+      --accent-dark: #374151; /* Dark grey for hover */
+      --border-color: #e5e7eb;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
     *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,#fbfbfb 0%,#f1f1f3 100%);margin:0;color:var(--dark-grey);padding:28px}
-    .wrap{max-width:1250px;margin:0 auto}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-    h1{margin:0;font-size:22px;color:var(--black)}
-    .tag{color:var(--mid-grey);font-size:13px}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);margin:0;color:var(--text-secondary);padding:28px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+    .wrap{max-width:1300px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);}
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-logo { width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    h1{margin:0;font-size:24px;color:var(--text-primary); font-weight: 700;}
+    .tag{color:var(--text-secondary);font-size:14px}
 
     .grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
     @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,11,11,0.06); margin-bottom: 20px;}
-    .card h2 { margin-top: 0; font-size: 16px; margin-bottom: 4px; color: var(--black); }
+    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow); margin-bottom: 20px; border: 1px solid var(--border-color);}
+    .card h2 { margin-top: 0; font-size: 18px; margin-bottom: 4px; color: var(--text-primary); font-weight: 600;}
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
     
     .input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .field{margin-top:10px}
-    label{font-size:13px;color:var(--mid-grey);display:block;margin-bottom:6px}
-    input[type=number], input[type=text], select{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;font-size:14px; background:#fff}
-    select{appearance:none; background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat:no-repeat; background-position:right .7em top 50%; background-size:.65em auto; padding-right:1.5em}
-    input:focus, select:focus { outline: none; border-color: var(--black); }
+    label{font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px; font-weight: 500;}
+    input[type=number], input[type=text], select{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border-color);font-size:14px; background:#fff; color: var(--text-primary); transition: border-color 0.2s ease;}
+    select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right .7em top 50%; background-size:1em auto; padding-right:2.5em}
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
 
-    .btn{background:var(--black);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
-    .btn.ghost{background:transparent;border:1px solid #ddd;color:var(--dark-grey)}
+    /* Special style for Selling Price input when empty/zero */
+    #price.price-highlight {
+      background-color: #fffbeb; /* Light yellow */
+      font-weight: 600;
+      border-color: #f59e0b; /* Amber color */
+    }
+    #price.price-highlight:focus {
+      border-color: #d97706;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    }
+
+    /* Input Validation Styles */
+    .field.has-error input {
+      border-color: #ef4444;
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* Hide number input arrows */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input:disabled, select:disabled, button:disabled {
+      cursor: not-allowed;
+      background-color: #f9fafb !important;
+    }
+
+    /* Modern Lock State Styles */
+    .dashboard-locked table input,
+    .dashboard-locked table select {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      cursor: default;
+      padding-left: 0;
+      padding-right: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: none !important;
+    }
+    .dashboard-locked tbody tr:nth-child(odd) {
+      background-color: #f9fafb;
+    }
+    .dashboard-locked tbody tr:hover {
+      background-color: #f3f4f6; /* A slightly darker hover for locked rows */
+    }
+    .dashboard-locked td {
+      border-bottom: none;
+    }
+    .dashboard-locked thead th {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:600; font-size: 14px; transition: background-color 0.2s ease;}
+    .btn:hover { background: var(--accent-dark); }
+    .btn.ghost{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary); font-weight: 500;}
+    .btn.ghost:hover { background: #f9fafb; border-color: #d1d5db; }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
     
     /* Highlight Box for Results */
-    .highlight-box { background: #f4f4f5; padding: 12px; border-radius: 10px; margin-top: 12px; border: 1px solid #eee; }
-    .highlight-val { font-size: 20px; font-weight: 700; color: var(--black); }
-    .highlight-label { font-size: 12px; color: var(--mid-grey); text-transform: uppercase; letter-spacing: 0.5px; }
+    .highlight-box { background: #f9fafb; padding: 16px; border-radius: 10px; margin-top: 12px; border: 1px solid var(--border-color); }
+    .highlight-val { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+    .highlight-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .goal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .goal-metric { background: #f9fafb; padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); }
+    .goal-metric .val-daily { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .investment-breakdown { border-left: 1px solid var(--border-color); padding-left: 16px; font-size: 13px; }
+    .investment-item { display: flex; justify-content: space-between; padding: 4px 0; }
+    .investment-item .label { color: var(--text-secondary); }
+    .investment-item .value { font-weight: 600; color: var(--text-primary); }
+
+    /* Improved Progress Bar */
+    .progress-container { 
+      position: relative; 
+      margin: 24px 0 16px 0; 
+      --progress-tooltip-opacity: 0; /* Custom property for opacity */
+    }
+    .progress-container:hover {
+      --progress-tooltip-opacity: 1; /* Show tooltip on hover */
+    }
+    #goalTooltip {
+      position: absolute; top: -40px; background: var(--accent); color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; transform: translateX(-50%); white-space: nowrap; transition: opacity 0.2s ease; pointer-events: none;
+      opacity: var(--progress-tooltip-opacity);
+    }
+
+    .progress-bar { 
+      background: #f3f4f6;
+      border-radius: 99px; 
+      height: 16px; /* Made it thicker */
+      overflow: hidden; 
+      border: 1px solid var(--border-color);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .progress-bar-inner { height: 100%; width: 0; border-radius: 99px; transition: width 0.5s ease, background 0.5s ease; }
+    .progress-bar-inner.green { background: linear-gradient(to right, #22c55e, #16a34a); }
+    .progress-bar-inner.red { background: linear-gradient(to right, #f87171, #ef4444); }
+    .progress-bar-inner.yellow { background: #facc15; }
+    .progress-marker {
+      position: absolute; top: -4px; bottom: -4px; width: 2px;
+      background-color: var(--text-muted); opacity: 0.6;
+    }
+    .progress-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--text-secondary);
+      margin-top: 6px; padding: 0 4px;
+    }
+    /* New styles for the numeric labels on the progress bar */
+    .progress-segment-label {
+      position: absolute;
+      top: -18px; /* Position labels above the bar */
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
 
     table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px}
-    th, td{padding:10px;text-align:left}
-    thead th{background:var(--black);color:white;font-weight:600;font-size:13px}
-    tbody td{background:linear-gradient(180deg, #fff, #fafafa);border-bottom:1px solid #f0f0f0}
-    tbody tr:last-child td{border-bottom:none}
-    .small{font-size:13px;color:var(--mid-grey)}
+    th, td{padding:12px;text-align:left; border-bottom: 1px solid var(--border-color);}
+    thead th{background:#f9fafb;color:var(--text-secondary);font-weight:600;font-size:12px; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid var(--border-color);}
+    tbody tr:last-child td{border-bottom:none;}
+    /* Styles for new tables */
+    .portfolio-table input, .inventory-table input, .supplier-table input { padding: 6px; font-size: 13px; max-width: 100px; }
+    .production-phase-table input, .production-phase-table select { padding: 6px; font-size: 13px; }
+    .campaign-table input { padding: 6px; font-size: 13px; max-width: 100px; }
+    .competitor-table input { padding: 6px; font-size: 13px; }
+    .portfolio-table .output-cell, .inventory-table .output-cell { font-weight: 600; color: var(--text-primary); }
+    .portfolio-table .profit-percent-cell { font-weight: 700; }
+    .remove-row-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 16px; padding: 0 4px; }
+    .add-row-btn { margin-top: 12px; }
+    /* Prevent margin-top when inside a card header for alignment */
+    .card-header .add-row-btn { margin-top: 0; }
+    .table-footer td {
+      padding: 14px 12px;
+      border-top: 1px solid var(--border-color);
+      background-color: #f9fafb;
+    }
+    .portfolio-table tbody tr {
+      /* For the color indicator */
+      border-left: 4px solid transparent;
+    }
+    /* In-table progress bar */
+    .table-progress-bar {
+      background: #f3f4f6; border-radius: 6px; height: 10px;
+      overflow: hidden; border: 1px solid var(--border-color); width: 100%;
+    }
+    .table-progress-bar-inner {
+      height: 100%; width: 0; border-radius: 6px; transition: width 0.4s ease;
+    }
+    .table-progress-bar-inner.green { background-color: #22c55e; }
+    .table-progress-bar-inner.yellow { background-color: #facc15; }
+    .table-progress-bar-inner.red { background-color: #ef4444; }
+
+    /* Custom Date Input */
+    .date-cell { position: relative; min-width: 120px; }
+    .date-input {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; cursor: pointer; border: none;
+    }
+    .date-display {
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px; border: 1px solid transparent; border-radius: 6px;
+      font-size: 13px; font-weight: 500;
+      background-color: #f9fafb;
+      transition: border-color 0.2s ease;
+    }
+    /* Styles for Inventory Status */
+    .inventory-status {
+      font-weight: 600; padding: 4px 8px; border-radius: 99px;
+      font-size: 11px; text-align: center; display: inline-block;
+      min-width: 80px;
+    }
+    .inventory-status.ok { background-color: #dcfce7; color: #166534; }
+    .inventory-status.low { background-color: #fef9c3; color: #854d0e; }
+    .inventory-status.out { background-color: #fee2e2; color: #991b1b; }
+
+
+    /* Styles for new cards */
+    .pnl-table td { padding: 8px 12px; font-size: 14px; }
+    .pnl-table .pnl-total { font-weight: 700; color: var(--text-primary); border-top: 2px solid var(--border-color); }
+    tbody td { font-size: 14px; }
+    .small{font-size:13px;color:var(--text-secondary)}
+    /* Ad Spend Scenario Table */
+    .ad-scenario-table { margin-top: 16px; }
+    .ad-scenario-table td, .ad-scenario-table th { padding: 8px; font-size: 13px; }
+    .ad-scenario-table .profit-positive { color: #10b981; font-weight: 600; }
 
     .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
-    .stat{background:#fafafa;padding:12px;border-radius:10px}
-    .stat .val{font-size:18px;font-weight:700;color:var(--black)}
-    .muted{color:var(--mid-grey);font-size:13px}
+    .stat{background:#f9fafb;padding:12px;border-radius:10px; border: 1px solid var(--border-color); position: relative;}
+    .stat .val{font-size:18px;font-weight:700;color:var(--text-primary)}
+    .muted{color:var(--text-secondary);font-size:13px}
+
+    /* Tooltip for explanations */
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent);
+      color: #f9fafb;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      width: 280px;
+      z-index: 10;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      pointer-events: none;
+    }
+    .has-tooltip:hover .tooltip { opacity: 1; visibility: visible; }
+    .card h2.has-tooltip { display: inline-block; position: relative; }
+    .card h2.has-tooltip .tooltip {
+        bottom: calc(100% + 6px);
+        width: 320px;
+    }
+    .tooltip p { margin: 4px 0 0 0; }
 
     .charts{margin-top:12px}
-    canvas{width:100% !important;height:260px !important}
+    canvas{width:100% !important;}
+    #projChart { height:260px !important; }
+    #costStructureChart { height: 200px !important; margin-top: 16px; }
+    #roasGaugeChart { height: 120px !important; margin-bottom: 12px; }
+    #profitContribChart { height: 220px !important; margin-top: 16px; }
+    #campaignChart { height: 250px !important; margin-top: 16px; }
 
-    footer{margin-top:16px;color:var(--muted);font-size:13px}
+    footer{margin-top:24px;color:var(--text-muted);font-size:13px; text-align: center;}
     .row{display:flex;gap:10px;align-items:center}
 
     /* List styles for decisions */
-    .decision-list { list-style: none; padding: 0; margin: 0; }
-    .decision-list li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 13px; line-height: 1.4; }
-    .decision-list li::before { content: "•"; position: absolute; left: 0; top: 0px; color: var(--black); font-weight: bold; font-size: 16px;}
-    .decision-list strong { color: var(--black); font-weight: 600; }
+    .decision-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .decision-list li {
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .decision-list li::before { font-size: 18px; line-height: 1.6; }
+    .decision-list strong { color: var(--text-primary); font-weight: 600; }
+    /* Dynamic Decision Helper Styles */
+    .decision-list .decision-critical { background-color: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; }
+    .decision-list .decision-critical::before { content: '🔴'; }
+    .decision-list .decision-warning { background-color: #fffbeb; border-left: 4px solid #f59e0b; color: #92400e; }
+    .decision-list .decision-warning::before { content: '⚠️'; }
+    .decision-list .decision-suggestion { background-color: #f3f4f6; border-left: 4px solid #6b7280; }
+    .decision-list .decision-suggestion::before { content: '💡'; }
+    .decision-list .decision-positive { background-color: #f0fdf4; border-left: 4px solid #22c55e; color: #14532d; }
+    .decision-list .decision-positive::before { content: '✅'; }
 
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      h1 { font-size: 22px; }
+      .input-row { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .highlight-box .row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .highlight-box .row > div {
+        text-align: left !important;
+      }
+      .field[style*="padding-top:28px"] { padding-top: 10px !important; }
+    }
+
+    /* New Strategy Assistant Design */
+    .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .strategy-card {
+      background-color: #f9fafb;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .strategy-card .icon { font-size: 24px; margin-bottom: 8px; }
+    .strategy-card .value { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .strategy-card .label { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+    .strategy-card strong { color: var(--accent); }
+    .strategy-card.full-width { grid-column: 1 / -1; } /* For single item to span full width */
+    @media (max-width: 768px) {
+      .strategy-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Sensitivity Table Styles */
+    .sensitivity-table { margin-top: 16px; }
+    .sensitivity-table th, .sensitivity-table td { font-size: 12px; text-align: center; padding: 8px 6px; }
+    .sensitivity-table td { font-weight: 600; }
+    .sensitivity-table .price-label { font-weight: 600; text-align: left; background-color: #f9fafb; }
+    .profit-positive { color: #10b981; }
+    .profit-negative { color: #ef4444; }
     /* Print Styles */
     @media print {
       body { background: white; padding: 0; }
       .btn, .no-print { display: none !important; }
-      .card { box-shadow: none; border: 1px solid #eee; margin-bottom: 20px; break-inside: avoid; page-break-inside: avoid; }
+      .card { box-shadow: none; border: 1px solid var(--border-color); margin-bottom: 20px; break-inside: avoid; page-break-inside: avoid; }
       header { margin-bottom: 10px; }
       h1 { font-size: 18px; }
       .tag { font-size: 11px; }
       .wrap { max-width: 100%; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <style>
+    /* Password Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(17, 24, 39, 0.4); /* --text-primary with opacity */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      width: 100%;
+      max-width: 400px;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.visible .modal-content {
+        transform: scale(1);
+    }
+    .modal-content h3 { margin-top: 0; margin-bottom: 8px; font-size: 18px; color: var(--text-primary); }
+    .modal-content p { margin-top: 0; margin-bottom: 16px; font-size: 14px; color: var(--text-secondary); }
+    .modal-content .field { margin-bottom: 20px; }
+    #passwordInput {
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .modal-actions .btn {
+      padding: 12px;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div>
-        <h1>Zillionary Business Center</h1>
-        <div class="tag">Business Intelligence for Leather Goods</div>
+      <div class="header-left">
+        <div class="header-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8.11 2.99"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+        </div>
+        <div>
+          <h1>Zillionary Business Center 2.0</h1>
+          <div class="tag">Business Intelligence for Leather Goods</div>
+        </div>
       </div>
       <div class="row">
         <button class="btn" id="printBtn">Print Report</button>
+        <button class="btn ghost" id="saveBtn">Save Data</button>
+        <button class="btn ghost" id="loadBtn">Load Data</button>
+        <button class="btn ghost" id="toggleLockBtn">Lock 🔒</button>
       </div>
     </header>
 
-    <div class="grid">
-      <!-- LEFT COLUMN -->
-      <div>
-        <!-- 1. INPUTS -->
-        <div class="card" id="inputsCard">
-          <h2>Inputs</h2>
-          <div class="input-row">
-            <div class="field"><label>Office + Utilities (৳/month)</label><input id="fixedOffice" type="number" value="9000"></div>
-            <div class="field"><label>Staff Salary (৳/month)</label><input id="fixedStaff" type="number" value="6000"></div>
+    <main>
+      <div class="grid">
+        <!-- LEFT COLUMN -->
+        <div>
+          <!-- 1. INPUTS -->
+          <div class="card" id="inputsCard">
+            <h2>Core Inputs</h2>
+            <div class="input-row">
+              <div class="field"><label>Office + Utilities (৳/month)</label><input id="fixedOffice" type="number" value="9000"><div class="error-message"></div></div>
+              <div class="field"><label>Staff Salary (৳/month)</label><input id="fixedStaff" type="number" value="6000"><div class="error-message"></div></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Other Fixed Cost (৳/month)</label><input id="fixedOther" type="number" value="0"><div class="error-message"></div></div>
+              <div class="field"><label>Selling Price (৳)</label><input id="price" type="number" value="1190"><div class="error-message"></div></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Production Cost (৳)</label><input id="prodCost" type="number" value="550"><div class="error-message"></div></div>
+              <div class="field"><label>Delivery Cost (৳)</label><input id="deliveryCost" type="number" value="0"><div class="error-message"></div></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Packaging Cost (৳)</label><input id="packagingCost" type="number" value="0"><div class="error-message"></div></div>
+              <div class="field"><label>Target Ad CPA (৳)</label><input id="cpa" type="number" value="100"><div class="error-message"></div></div>
+            </div>
+            
+            <div style="margin-top:16px;display:flex;gap:8px">
+              <button class="btn" id="calcBtn">Recalculate All</button>
+              <button class="btn ghost" id="resetBtn">Reset</button>
+            </div>
           </div>
-          <div class="input-row">
-            <div class="field"><label>Other Fixed Cost (৳/month)</label><input id="fixedOther" type="number" value="0"></div>
-            <div class="field"><label>Selling Price (৳)</label><input id="price" type="number" value="1190"></div>
-          </div>
-          <div class="input-row">
-            <div class="field"><label>Production Cost (৳)</label><input id="prodCost" type="number" value="550"></div>
-            <div class="field"><label>Target Ad CPA (৳)</label><input id="cpa" type="number" value="100"></div>
-          </div>
-          
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn" id="calcBtn">Recalculate All</button>
-            <button class="btn ghost" id="resetBtn">Reset</button>
-          </div>
-        </div>
 
-        <!-- 2. GOAL SEEKER -->
-        <div class="card" style="border-left: 4px solid var(--black);">
-          <h2>Goal Seeker 🎯</h2>
-          <div class="small">How much do I need to sell to hit my profit target?</div>
-          <div class="input-row">
-            <div class="field"><label>Target Monthly Profit (৳)</label><input id="targetProfitInput" type="number" value="50000" style="font-weight:bold"></div>
-            <div class="field"></div>
-          </div>
-          
-          <div class="highlight-box">
-            <div class="row" style="justify-content: space-between;">
-              <div>
-                <div class="highlight-label">Required Sales (Units)</div>
-                <div class="highlight-val" id="reqUnits">—</div>
+          <!-- 2. GOAL SEEKER -->
+          <div class="card">
+            <h2>Goal Seeker 🎯</h2>
+            <div class="small">How much do I need to sell to hit my profit target?</div>
+            <div class="input-row">
+              <div class="field"><label>Target Monthly Profit (৳)</label><input id="targetProfitInput" type="number" value="50000" style="font-weight:bold; color: var(--accent);"></div>
+              <div class="field"></div>
+            </div>
+            
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div id="goalTooltip"></div>
+                <div id="goalProgress" class="progress-bar-inner"></div>
+                <div id="progressBarSegments"></div>
+                <div id="breakEvenMarker" class="progress-marker" style="left: 50%;"></div>
               </div>
-              <div style="text-align:right">
-                <div class="highlight-label">Required Revenue</div>
-                <div class="highlight-val" id="reqRevenue">—</div>
+              <div class="progress-labels"><span style="position: absolute; left: 50%; transform: translateX(-50%);">Break-Even</span><span id="targetProfitLabel">Target</span></div>
+            </div>
+
+            <div class="goal-grid">
+              <!-- Left Column -->
+              <div class="goal-metric">
+                  <div class="highlight-label">Required Sales (Units)</div>
+                  <div class="highlight-val" id="reqUnits">—</div>
+                  <div class="val-daily" id="reqBreakEven">Break-Even: — units</div>
+                  <div class="val-daily" id="reqDaily">— units/day</div>
+              </div>
+              <div class="goal-metric">
+                  <div class="highlight-label">Required Revenue</div>
+                  <div class="highlight-val" id="reqRevenue">—</div>
+              </div>
+              <!-- Right Column -->
+              <div class="goal-metric" style="grid-column: 1 / -1;">
+                  <div class="highlight-label" style="margin-bottom: 8px;">Total Investment Required for Target</div>
+                  <div class="investment-item"><span class="label">Production Cost</span> <span class="value" id="invProd">৳ —</span></div>
+                  <div class="investment-item"><span class="label">Variable Costs (Pack, Delivery, CPA)</span> <span class="value" id="invVar">৳ —</span></div>
+                  <div class="investment-item" style="border-top: 1px solid var(--border-color); margin-top: 4px; padding-top: 4px; font-size: 15px;"><span class="label">Total Variable Investment</span> <span class="value" id="invTotal">৳ —</span></div>
               </div>
             </div>
-            <div class="small" style="margin-top:8px; color:var(--mid-grey)" id="reqDaily">— units/day</div>
+
+            <div style="border-top: 1px dashed var(--border-color); margin: 20px 0;"></div>
+            <div class="small" style="font-weight: 600; color: var(--text-primary);">"What-If" Scenario</div>
+            <div class="small">Override core inputs to see quick results. Leave fields blank to use core values.</div>
+            <div class="input-row" style="grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: flex-end; margin-top: 12px;">
+              <div class="field" style="margin-top:0;"><label>If I Sell (Units)</label><input id="whatIfUnits" type="number" placeholder="e.g., 120"></div>
+              <div class="field" style="margin-top:0;"><label>Selling Price</label><input id="whatIfPrice" type="number" placeholder="Use Core"></div>
+              <div class="field" style="margin-top:0;"><label>Production Cost</label><input id="whatIfProdCost" type="number" placeholder="Use Core"></div>
+            </div>
+            <div class="input-row" style="grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: flex-end; margin-top: 8px;">
+              <div class="field" style="margin-top:0;"><label>Delivery Cost</label><input id="whatIfDeliveryCost" type="number" placeholder="Use Core"></div>
+              <div class="field" style="margin-top:0;"><label>Packaging Cost</label><input id="whatIfPackagingCost" type="number" placeholder="Use Core"></div>
+              <div class="field" style="margin-top:0;"><label>Ad CPA</label><input id="whatIfCpa" type="number" placeholder="Use Core"></div>
+            </div>
+            <div class="summary-grid" style="margin-top: 8px; grid-template-columns: 1fr 1fr 1fr;">
+                <div class="stat">
+                    <div class="muted">Expected Profit</div>
+                    <div class="val" id="whatIfProfit">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Profit/Unit</div>
+                    <div class="val" id="whatIfProfitPerUnit">৳ —</div>
+                </div>
+                <div class="stat"><div class="muted">Status</div><div id="whatIfStatus" style="padding-top: 8px;">—</div></div>
+            </div>
+            <!-- What-If Decision Helper -->
+            <div id="whatIfDecision" style="margin-top: 16px;">
+                <div class="decision-list" style="margin:0;">
+                    <li class="decision-suggestion">Enter units to see a quick analysis.</li>
+                </div>
+            </div>
+          </div>
+
+          <!-- 3. SCENARIOS -->
+          <div class="card" id="scenariosCard">
+            <h2>Scenario Analysis</h2>
+            <div class="small" style="margin-bottom: 12px;">Profitability at different sales volumes. You can customize the unit steps below.</div>
+            <div class="input-row" style="max-width: 400px;">
+                <div class="field"><label>Scenario Unit Steps</label><input id="scenarioUnitsInput" type="text" value="20, 40, 60, 80, 100"></div>
+            </div>
+            <table id="scenarioTable">
+              <thead><tr><th>Units</th><th>Revenue</th><th>Total Cost</th><th>Profit</th><th>Profit/Unit</th><th>Margin %</th><th>ROI %</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <!-- 4. CHARTS -->
+          <div class="card">
+            <h2>Growth Projection (12 Months)</h2>
+            <div class="input-row" style="margin-bottom:12px">
+               <div class="field" style="margin-top:0"><label>Start Units</label><input id="startUnits" type="number" value="20"><div class="error-message"></div></div>
+               <div class="field" style="margin-top:0"><label>Monthly Growth %</label><input id="growth" type="number" value="15"><div class="error-message"></div></div>
+            </div>
+            <canvas id="projChart"></canvas>
+          </div>
+
+          <!-- PRODUCT PORTFOLIO ANALYSIS -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Product Portfolio Analysis</h2>
+              <div class="row">
+                <button id="exportPortfolioBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addProductBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Analyze profitability across multiple products.</div>
+            <table id="productPortfolioTable" class="portfolio-table">
+              <thead>
+                <tr><th>Product</th><th>Price</th><th>Var. Cost</th><th>Sales/Mo</th><th>Goal</th><th>Progress</th><th>Profit</th><th>Lead Time (Days)</th><th>P.Phase</th><th></th></tr>
+              </thead>
+              <tbody></tbody>
+              <tfoot>
+                <tr class="table-footer">
+                  <td colspan="7" style="text-align: right; font-weight: 600; color: var(--text-secondary);">Total Monthly Profit</td>
+                  <td id="portfolioTotalProfit" style="font-weight: 700; font-size: 16px;"></td>
+                  <td colspan="2"></td>
+                </tr>
+              </tfoot>
+            </table>
+            <div id="productPortfolioTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevProductPortfolioPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="productPortfolioPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextProductPortfolioPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+          <!-- PROFIT CONTRIBUTION CHART -->
+          <div class="card" id="profitContribCard" style="display: none;">
+            <h2>Product Profit Contribution</h2>
+            <div class="small">Which products are driving the most profit?</div>
+            <canvas id="profitContribChart"></canvas>
+          </div>
+
+          <!-- PRODUCTION PHASE TRACKER -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Production Phase 🏭</h2>
+              <div class="row">
+                <button id="exportProductionBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addProductionPhaseBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Track the progress of your production batches.</div>
+            <table id="productionPhaseTable" class="production-phase-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th style="width: 30%;">Product</th>
+                  <th>Phase</th>
+                  <th>Qty</th>
+                  <th>Unit Cost</th>
+                  <th>Total Cost</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div id="productionPhaseTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevProductionPhasePage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="productionPhasePageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextProductionPhasePage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+          <!-- INVENTORY & STOCK ALERT -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Inventory & Stock Alert 📦</h2>
+              <div class="row">
+                <button id="exportInventoryBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addInventoryItemBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small" style="margin-bottom:12px">Track stock levels and get alerts for products in your portfolio.</div>
+            <table id="inventoryTable" class="inventory-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Product</th>
+                  <th>Current Stock</th>
+                  <th>Stock Value (৳)</th>
+                  <th>Avg. Daily Sales</th>
+                  <th>Days Remaining</th>
+                  <th>Low Stock Level</th><th>Status</th><th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div id="inventoryTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevInventoryPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="inventoryPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextInventoryPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+
+          <!-- MONTHLY CASH FLOW PLANNER -->
+          <div class="card">
+            <h2>Monthly Cash Flow Planner</h2>
+            <div class="small">Plan your cash for the upcoming month.</div>
+            <div class="input-row" style="margin-top:12px;">
+              <div class="field"><label>Opening Cash Balance (৳)</label><input id="cashOpening" type="number" value="100000"></div>
+              <div class="field"><label>Expected Sales Revenue (৳)</label><input id="cashRevenue" type="number" value="120000"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Material & Variable Costs (৳)</label><input id="cashVariableCosts" type="number" value="60000"></div>
+              <div class="field"><label>Ad Spend (৳)</label><input id="cashAdSpend" type="number" value="10000"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Other Inflows (Loan, etc.)</label><input id="cashOtherIn" type="number" value="0"></div>
+              <div class="field"><label>Other Outflows (Repayment, etc.)</label><input id="cashOtherOut" type="number" value="0"></div>
+            </div>
+            <div class="summary-grid" style="margin-top:12px; grid-template-columns: 1fr 1fr 1fr;">
+                <div class="stat">
+                    <div class="muted">Net Cash Flow</div>
+                    <div class="val" id="cashNetFlow">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Closing Balance</div>
+                    <div class="val" id="cashClosingBalance">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Fixed Costs (from Core)</div>
+                    <div class="val" id="cashFixedCosts">৳ —</div>
+                </div>
+            </div>
+          </div>
+
+          <!-- SIMPLIFIED P&L STATEMENT -->
+          <div class="card">
+            <h2>Simplified P&L Statement</h2>
+            <div class="small">A summary of your business's profitability.</div>
+            <table style="margin-top:16px;" class="pnl-table">
+              <tbody>
+                <tr><td>Revenue</td><td style="text-align:right" id="pnlRevenue">৳ 0</td></tr>
+                <tr><td>Cost of Goods Sold (COGS)</td><td style="text-align:right" id="pnlCogs">৳ 0</td></tr>
+                <tr class="pnl-total"><td>Gross Profit</td><td style="text-align:right" id="pnlGrossProfit">৳ 0</td></tr>
+                <tr><td>Operating Expenses</td><td style="text-align:right" id="pnlOpEx">৳ 0</td></tr>
+                <tr class="pnl-total"><td>Net Profit</td><td style="text-align:right" id="pnlNetProfit">৳ 0</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <!-- 1. SUMMARY -->
+          <div class="card">
+            <h2>Business Health</h2>
+            <div class="summary-grid">
+              <div class="stat"><div class="muted">Total Fixed Cost</div><div class="val" id="totalFixed">—</div></div>
+              <div class="stat"><div class="muted">Margin / Unit</div><div class="val" id="contrib">—</div></div>
+              <div class="stat"><div class="muted">Break-Even Qty</div><div class="val" id="beUnits">—</div></div>
+              <div class="stat"><div class="muted">Break-Even Sales</div><div class="val" id="beRevenue">—</div></div>
+              <div class="stat"><div class="muted">Contribution Margin %</div><div class="val" id="contribRatio">— %</div></div>
+              <div class="stat">
+                <div class="muted">Operating Leverage</div><div class="val" id="opLeverage">—</div>
+                <div class="tooltip" style="width: 300px;">
+                  <p><strong style="color:#10b981;">Low Risk (&lt; 0.3):</strong> Stable business, less affected by sales changes.</p>
+                  <p><strong style="color:#facc15;">Medium Risk (0.3 - 0.6):</strong> Balanced risk and reward.</p>
+                  <p><strong style="color:#f87171;">High Risk (&gt; 0.6):</strong> High profit potential, but also high loss risk if sales drop.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COST STRUCTURE CHART -->
+          <div class="card">
+            <h2>Cost Structure</h2>
+            <div class="small">Breakdown of your monthly operational costs.</div>
+            <canvas id="costStructureChart"></canvas>
+          </div>
+
+          <!-- 2. MARKETING AUDIT -->
+          <div class="card">
+            <h2>Ads Efficiency Check</h2>
+            <div class="small">Input actual data from Facebook Ads Manager</div>
+            <canvas id="roasGaugeChart"></canvas>
+            <div class="input-row">
+              <div class="field"><label>Amount Spent (৳)</label><input id="adSpent" type="number" placeholder="e.g. 2000" /></div>
+              <div class="field"><label>Total Purchases</label><input id="adSales" type="number" placeholder="e.g. 15" /></div>
+            </div>
+            
+            <div class="summary-grid" style="margin-top:12px">
+              <div class="stat">
+                <div class="muted">Actual CPA</div>
+                <div class="val" id="actualCPA">—</div>
+              </div>
+              <div class="stat">
+                <div class="muted">Actual ROAS</div>
+                <div class="val" id="actualROAS">—x</div>
+              </div>
+              <div class="stat" style="background-color: #fefce8;">
+                <div class="muted">Break-Even ROAS</div>
+                <div class="val" id="breakEvenROAS" style="color: #ca8a04;">—</div>
+              </div>
+              <div class="stat" style="background-color: #f0fdf4;">
+                <div class="muted">Net Profit from Ads</div>
+                <div class="val" id="adProfit" style="color: #16a34a;">—</div>
+              </div>
+            </div>
+            <div class="small" style="margin-top:8px; font-style:italic; color:#e53e3e;" id="roasVerdict"></div>
+
+            <!-- Ad Spend Scenario Table -->
+            <table class="ad-scenario-table">
+              <thead>
+                <tr><th>Ad Spend (৳)</th><th>Est. Sales</th><th>Est. Profit (৳)</th></tr>
+              </thead>
+              <tbody id="adScenarioBody"></tbody>
+            </table>
+          </div>
+
+          <!-- 3. CORPORATE PRICING -->
+          <div class="card">
+            <h2>Corporate Pricing 💼</h2>
+            <div class="small" style="margin-bottom:12px">Estimate pricing for bulk orders.</div>
+            <div class="input-row">
+              <div class="field"><label>Order Qty</label><input id="corpQty" type="number" value="100"></div>
+              <div class="field"><label>Discount %</label><input id="corpDisc" type="number" value="10"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Customization (৳/unit)</label><input id="corpCustom" type="number" value="30"></div>
+              <div class="field" style="padding-top:28px; font-weight:bold; font-size:14px" id="corpTotalResult">Total: ৳ —</div>
+            </div>
+          </div>
+
+          <!-- 4. PRODUCTION ESTIMATOR -->
+          <div class="card">
+            <h2>Production Estimator 🛠️</h2>
+            <div class="small" style="margin-bottom:12px">Estimate material needed for an order.</div>
+            <div class="field" style="margin-bottom:10px">
+              <label>Material Type</label>
+              <select id="matType">
+                <option value="sqft">Full-Grain Leather (sq.ft)</option>
+                <option value="yard">Vegan Leather (Yard)</option>
+                <option value="meter">Vegan Leather (Meter)</option>
+              </select>
+            </div>
+            <div class="input-row">
+              <div class="field"><label id="matQtyLabel">Consumption (sqft/unit)</label><input id="matQtyPerUnit" type="number" value="2.5"></div>
+              <div class="field"><label id="matPriceLabel">Price (৳/sqft)</label><input id="matPricePerUnit" type="number" value="180"></div>
+            </div>
+            <div class="input-row" style="margin-top:10px; background:#f9fafb; padding:10px; border-radius:8px; border: 1px solid var(--border-color);">
+              <div><div class="muted" style="font-size:11px">Total Material Needed</div><div class="val" style="font-size:15px" id="totalMatResult">—</div></div>
+              <div style="text-align:right"><div class="muted" style="font-size:11px">Est. Material Cost</div><div class="val" style="font-size:15px" id="totalMatCostResult">৳ —</div></div>
+            </div>
+          </div>
+
+          <!-- 5. TIME ESTIMATOR -->
+          <div class="card">
+            <h2>Time Estimator ⏱️</h2>
+            <div class="small" style="margin-bottom:12px">Estimate time to complete an order.</div>
+            <div class="input-row" style="margin-top:12px">
+              <div class="field"><label>Mins to make 1 unit</label><input id="minsPerUnit" type="number" value="90"></div>
+              <div class="field"><label>Work Hours / Day</label><input id="hoursPerDay" type="number" value="6"></div>
+            </div>
+            <div class="row" style="margin-top:10px; padding:10px; background:#f9fafb; border:1px solid var(--border-color); border-radius:8px">
+              <div class="muted">Est. Delivery Time:</div>
+              <div class="val" style="font-size:16px" id="timeResult">— Days</div>
+            </div>
+          </div>
+
+          <!-- 6. STRATEGIC DECISION GUIDE -->
+          <div class="card" style="border-top: 4px solid var(--accent);">
+            <h2 class="has-tooltip">Dynamic Decision Helper 🧠
+                <div class="tooltip">
+                    <p>এই হেল্পারটি আপনার ডেটা বিশ্লেষণ করে নিচের বিষয়গুলোর উপর ভিত্তি করে পরামর্শ দেয়:</p>
+                    <p><strong>1. Contribution Margin:</strong> প্রতি ইউনিট লাভে আছে নাকি লোকসানে, তা পরীক্ষা করে।</p>
+                    <p><strong>2. Ad Performance:</strong> আপনার বিজ্ঞাপনের আসল ROAS (Return on Ad Spend) ব্রেক-ইভেন ROAS-এর সাথে তুলনা করে।</p>
+                    <p><strong>3. Operating Leverage:</strong> ফিক্সড খরচের কারণে ব্যবসায়িক ঝুঁকি মূল্যায়ন করে।</p>
+                    <p><strong>4. Cash Flow:</strong> মাসিক ক্যাশ ফ্লো পজিটিভ নাকি নেগেটিভ, তা নিরীক্ষণ করে।</p>
+                    <p><strong>5. Ad Profitability:</strong> আপনার বিজ্ঞাপন থেকে মোট লাভ হচ্ছে কিনা তা পরীক্ষা করে।</p>
+                </div>
+            </h2>
+            <div class="small" style="margin-bottom:12px">Automated insights based on your data.</div>
+            <ul id="decisionHelperList" class="decision-list"></ul>
+          </div>
+
+          <!-- 7. STRATEGIC PRICING ASSISTANT -->
+          <div class="card" style="border-top: 4px solid #3b82f6;">
+            <h2 class="has-tooltip">Strategic Pricing Assistant 🎯
+                <div class="tooltip" style="width: 340px;">
+                    <p>এই টুলটি আপনাকে নির্দিষ্ট ব্যবসায়িক লক্ষ্য অর্জনের জন্য কৌশলগত পরামর্শ দেবে।</p>
+                    <p><strong>উদাহরণ:</strong> "আমি যদি মাসে ৳৫০,০০০ লাভ করতে চাই এবং ১০০টি ইউনিট বিক্রি করতে পারি, তাহলে আমার সেলিং প্রাইস কত হওয়া উচিত?"</p>
+                </div>
+            </h2>
+            <div class="small" style="margin-bottom:12px">Get actionable advice to reach your goals.</div>
+            <div class="input-row">
+                <div class="field">
+                    <label>My Goal is to...</label>
+                    <select id="strategyGoalType">
+                        <option value="profit">Achieve a Target Profit</option>
+                        <option value="units">Sell a Target Number of Units</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Target Amount (৳ or Units)</label>
+                    <input id="strategyTargetAmount" type="number" value="50000">
+                </div>
+            </div>
+            <div id="strategyOutput"><div class="strategy-grid"><div class="strategy-card full-width"><div class="label">Enter your goal to see strategic advice.</div></div></div></div>
+          </div>
+
+          <!-- 8. PRICE & VOLUME SENSITIVITY -->
+          <div class="card" id="sensitivityAnalysisContainer" style="display: none;">
+            <h2>Price & Volume Sensitivity</h2>
+            <div class="small" style="margin-bottom:12px">How profit changes with price and sales volume adjustments. Based on "What-If" units.</div>
+            <table id="sensitivityTable" class="sensitivity-table"></table>
           </div>
         </div>
 
-        <!-- 3. SCENARIOS -->
-        <div class="card" id="scenariosCard">
-          <h2>Scenario Analysis</h2>
-          <div class="small">Profitability at different scales</div>
-          <table id="scenarioTable">
-            <thead><tr><th>Units</th><th>Revenue</th><th>Total Cost</th><th>Profit</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
-
-        <!-- 4. CHARTS -->
-        <div class="card">
-          <h2>Growth Projection (12 Months)</h2>
-          <div class="input-row" style="margin-bottom:10px">
-             <div class="field" style="margin:0"><label>Start Units</label><input id="startUnits" type="number" value="20"></div>
-             <div class="field" style="margin:0"><label>Monthly Growth %</label><input id="growth" type="number" value="15"></div>
+        <!-- LEFT COLUMN - CONTINUED -->
+        <div>
+          <!-- CAMPAIGN PERFORMANCE CHART -->
+          <div class="card" id="campaignChartCard" style="display: none;">
+            <h2>Campaign Performance Overview</h2>
+            <div class="small">Comparing key metrics across your campaigns.</div>
+            <canvas id="campaignChart"></canvas>
           </div>
-          <canvas id="projChart"></canvas>
+
+          <!-- MARKETING CAMPAIGN TRACKER -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Marketing Campaign Tracker 📊</h2>
+              <div class="row">
+                <button id="exportCampaignBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addCampaignBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Track performance across different marketing campaigns.</div>
+            <table id="campaignTable" class="campaign-table">
+              <thead><tr><th>Date</th><th>Camp</th><th>Channel</th><th>Spent (৳)</th><th>Clicks</th><th>Sales</th><th>CPC</th><th>CPA</th><th>ROAS</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="campaignTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="campaignPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+          <!-- COMPETITOR PRICE TRACKER -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Competitor Price Tracker 🕵️</h2>
+              <div class="row">
+                <button id="exportCompetitorBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addCompetitorBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Monitor competitor pricing to stay competitive.</div>
+            <table id="competitorTable" class="competitor-table" style="table-layout: fixed;">
+              <thead><tr><th style="width: 16%;">Competitor</th><th style="width: 16%;">Product</th><th style="width: 13%;">Their Price</th><th style="width: 13%;">Our Price</th><th style="width: 13%;">Difference</th><th style="width: 25%;">Link</th><th style="width: 4%;"></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="competitorTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="competitorPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+          <!-- SUPPLIER MANAGEMENT -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Supplier Management</h2>
+              <div class="row">
+                <button id="exportSupplierBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addSupplierBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Keep track of your material suppliers.</div>
+            <table id="supplierTable" class="supplier-table">
+              <thead><tr><th>Supplier</th><th>Material</th><th>Price (৳)</th><th>Contact</th><th>Rating</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="supplierTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="supplierPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextSupplierPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
         </div>
       </div>
+    </main>
+    <footer>
+      Developed by Zillionary Business Center
+    </footer>
+  </div>
 
-      <!-- RIGHT COLUMN -->
-      <div>
-        <!-- 1. SUMMARY -->
-        <div class="card">
-          <h2>Business Health</h2>
-          <div class="summary-grid">
-            <div class="stat"><div class="muted">Total Fixed Cost</div><div class="val" id="totalFixed">—</div></div>
-            <div class="stat"><div class="muted">Margin / Unit</div><div class="val" id="contrib">—</div></div>
-            <div class="stat"><div class="muted">Break-Even Qty</div><div class="val" id="beUnits">—</div></div>
-            <div class="stat"><div class="muted">Break-Even Sales</div><div class="val" id="beRevenue">—</div></div>
-          </div>
-        </div>
-
-        <!-- 2. MARKETING AUDIT -->
-        <div class="card">
-          <h2>Ads Efficiency Check</h2>
-          <div class="small">Input actual data from Facebook Ads Manager</div>
-          <div class="input-row">
-            <div class="field"><label>Amount Spent (৳)</label><input id="adSpent" type="number" placeholder="e.g. 2000"></div>
-            <div class="field"><label>Total Purchases</label><input id="adSales" type="number" placeholder="e.g. 15"></div>
-          </div>
-          
-          <div class="summary-grid" style="margin-top:12px">
-            <div class="stat">
-              <div class="muted">Actual CPA</div>
-              <div class="val" id="actualCPA">—</div>
-            </div>
-            <div class="stat">
-              <div class="muted">ROAS</div>
-              <div class="val" id="actualROAS">—</div>
-            </div>
-          </div>
-          <div class="small" style="margin-top:8px; font-style:italic; color:#e53e3e;" id="roasVerdict"></div>
-        </div>
-
-        <!-- 3. CORPORATE + PRODUCTION (UPDATED) -->
-        <div class="card">
-          <h2>Corporate & Production</h2>
-          
-          <div class="small" style="margin-bottom:10px; font-weight:600">1. Pricing Estimator</div>
-          <div class="input-row">
-            <div class="field"><label>Order Qty</label><input id="corpQty" type="number" value="100"></div>
-            <div class="field"><label>Discount %</label><input id="corpDisc" type="number" value="10"></div>
-          </div>
-          <div class="input-row">
-            <div class="field"><label>Customization (৳/unit)</label><input id="corpCustom" type="number" value="30"></div>
-            <div class="field" style="padding-top:28px; font-weight:bold; font-size:14px" id="corpTotalResult">Total: ৳ 0</div>
-          </div>
-
-          <hr style="margin:16px 0; border:0; border-top:1px solid #eee">
-
-          <div class="small" style="margin-bottom:10px; font-weight:600">2. Material & Time Estimator</div>
-          
-          <!-- Material Type Selector -->
-          <div class="field" style="margin-bottom:10px">
-            <label>Material Type</label>
-            <select id="matType">
-              <option value="sqft">Full-Grain Leather (sq.ft)</option>
-              <option value="yard">Vegan Leather (Yard)</option>
-              <option value="meter">Vegan Leather (Meter)</option>
-            </select>
-          </div>
-
-          <div class="input-row">
-            <div class="field"><label id="matQtyLabel">Consumption (sqft/unit)</label><input id="matQtyPerUnit" type="number" value="2.5"></div>
-            <div class="field"><label id="matPriceLabel">Price (৳/sqft)</label><input id="matPricePerUnit" type="number" value="180"></div>
-          </div>
-          
-          <div class="input-row" style="margin-top:10px; background:#f9fafb; padding:10px; border-radius:8px">
-             <div>
-               <div class="muted" style="font-size:11px">Total Material Needed</div>
-               <div class="val" style="font-size:15px" id="totalMatResult">—</div>
-             </div>
-             <div style="text-align:right">
-               <div class="muted" style="font-size:11px">Est. Material Cost</div>
-               <div class="val" style="font-size:15px" id="totalMatCostResult">৳ —</div>
-             </div>
-          </div>
-
-          <div class="input-row" style="margin-top:12px">
-            <div class="field"><label>Mins to make 1 unit</label><input id="minsPerUnit" type="number" value="90"></div>
-            <div class="field"><label>Work Hours / Day</label><input id="hoursPerDay" type="number" value="6"></div>
-          </div>
-          <div class="row" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #eee; border-radius:8px">
-               <div class="muted">Est. Delivery Time:</div>
-               <div class="val" style="font-size:16px" id="timeResult">— Days</div>
-          </div>
-        </div>
-
-        <!-- 4. STRATEGIC DECISION GUIDE (NEW) -->
-        <div class="card" style="border-top: 4px solid var(--accent);">
-          <h2>Strategic Decision Guide 🧠</h2>
-          <div class="small" style="margin-bottom:12px">5 key decisions you can make here:</div>
-          <ul class="decision-list">
-            <li><strong>Daily Target:</strong> Use 'Goal Seeker' to know exactly how many units to sell daily.</li>
-            <li><strong>Smart Pricing:</strong> Check 'Profit' after Discount before sending corporate quotes.</li>
-            <li><strong>Ad Budget:</strong> Monitor 'ROAS'. If it drops below 2.0, kill the ad.</li>
-            <li><strong>Sourcing:</strong> Use 'Material Estimator' to buy the exact amount of leather needed.</li>
-            <li><strong>Deadline:</strong> Use 'Time Estimator' to promise realistic delivery dates.</li>
-          </ul>
-        </div>
-
-        <footer></footer>
+  <!-- Password Modal -->
+  <div id="passwordModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Enter Password</h3>
+      <p>Enter the password to unlock editing.</p>
+      <div class="field">
+        <input type="password" id="passwordInput" placeholder="••••••••">
+        <div id="passwordError" class="error-message" style="display: none; text-align: center; margin-top: 8px;">Incorrect password. Please try again.</div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancelUnlockBtn" class="btn ghost">Cancel</button>
+        <button id="submitUnlockBtn" class="btn">Unlock</button>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-dragdata@2.2.5/dist/chartjs-plugin-dragdata.min.js"></script>
   <script>
-    // Utility
-    const fmt = n => (Number(n)||0).toLocaleString('en-US');
+    // Utility to format numbers with commas, ensuring English numerals.
+    const fmt = (n) => {
+      const num = Number(n) || 0;
+      // Using options to prevent any locale-based numeral system change.
+      // 'nu: 'latn'' forces Latin (0,1,2,3...) numerals.
+      return num.toLocaleString('en-US', { numberingSystem: 'latn' });
+    };
+    const el = id => document.getElementById(id);
+    const val = id => Number(el(id).value) || 0;
 
-    let projChart;
+    // --- STATE & CACHED ELEMENTS ---
+    let projChart, costStructureChart, roasGaugeChart, profitContribChart, campaignChart;
+    const coreInputs = {
+      // ... (coreInputs properties)
+      get price() { return val('price'); },
+      get prodCost() { return val('prodCost'); },
+      get cpa() { return val('cpa'); },
+      get totalFixed() { return val('fixedOffice') + val('fixedStaff') + val('fixedOther'); },
+      get contribution() { return this.price - this.prodCost - val('deliveryCost') - val('packagingCost') - this.cpa; }
+    };
+    const varCostPerUnit = {
+      get total() { return val('prodCost') + val('deliveryCost') + val('packagingCost') + val('cpa'); }
+    };
 
-    function updateMatLabels() {
-      const type = document.getElementById('matType').value;
-      const qtyLabel = document.getElementById('matQtyLabel');
-      const priceLabel = document.getElementById('matPriceLabel');
+    let isLocked = true; // Start in locked state by default
 
-      if(type === 'sqft') {
-        qtyLabel.innerText = 'Consumption (sqft/unit)';
-        priceLabel.innerText = 'Price (৳/sqft)';
-      } else if(type === 'yard') {
-        qtyLabel.innerText = 'Consumption (yard/unit)';
-        priceLabel.innerText = 'Price (৳/yard)';
-      } else if(type === 'meter') {
-        qtyLabel.innerText = 'Consumption (meter/unit)';
-        priceLabel.innerText = 'Price (৳/meter)';
-      }
-      calcAndRender(); // Recalculate when type changes
+    // --- SAVE & LOAD ---
+    const STORAGE_KEY = 'zillionaryBusinessCenterData';
+    const fieldsToSave = [
+      'fixedOffice', 'fixedStaff', 'fixedOther', 'price', 'prodCost', 
+      'scenarioUnitsInput',
+      'deliveryCost', 'packagingCost', 'cpa', 'targetProfitInput', 
+      'whatIfUnits',
+      // What-If override fields
+      'whatIfPrice', 'whatIfProdCost', 'whatIfDeliveryCost', 'whatIfPackagingCost', 'whatIfCpa',
+      'startUnits', 'growth', 'adSpent', 'adSales', 'corpQty', 'corpDisc', 
+      'corpCustom', 'matType', 'matQtyPerUnit', 'matPricePerUnit', 'minsPerUnit', 'hoursPerDay',
+      // New fields for save/load
+      'cashOpening', 'cashRevenue', 'cashVariableCosts', 'cashAdSpend', 'cashOtherIn', 'cashOtherOut',
+      'strategyGoalType', 'strategyTargetAmount'
+      
+      // Portfolio, Inventory, and Supplier data is handled separately
+    ];
+
+    function saveData() {
+      const data = {};
+      fieldsToSave.forEach(id => {
+        data[id] = el(id).value;
+      });
+      // Save dynamic tables
+      data.portfolio = getTableData('productPortfolioTable');
+      data.suppliers = getTableData('supplierTable');
+      data.competitors = getTableData('competitorTable');
+      data.campaigns = getTableData('campaignTable');
+      data.inventory = getTableData('inventoryTable');
+      data.production = getTableData('productionPhaseTable');
+      data.competitors = getTableData('competitorTable', true); // Save all rows
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      
+      const saveBtn = el('saveBtn');
+      saveBtn.innerText = 'Saved!';
+      setTimeout(() => { saveBtn.innerText = 'Save Data'; }, 1500);
     }
 
-    function calcAndRender(){
-      // --- 1. INPUTS ---
-      const fixedOffice = Number(document.getElementById('fixedOffice').value) || 0;
-      const fixedStaff = Number(document.getElementById('fixedStaff').value) || 0;
-      const fixedOther = Number(document.getElementById('fixedOther').value) || 0;
-      const price = Number(document.getElementById('price').value) || 0;
-      const prodCost = Number(document.getElementById('prodCost').value) || 0;
-      const cpa = Number(document.getElementById('cpa').value) || 0;
-      
-      const totalFixed = fixedOffice + fixedStaff + fixedOther;
-      const contribution = price - prodCost - cpa; 
-      const grossMargin = price - prodCost;
+    function loadData() {
+      const savedData = localStorage.getItem(STORAGE_KEY);
+      if (savedData) {
+        const data = JSON.parse(savedData);
 
-      // --- 2. SUMMARY ---
-      document.getElementById('totalFixed').innerText = '৳ ' + fmt(totalFixed);
-      document.getElementById('contrib').innerText = '৳ ' + fmt(contribution);
-      
-      // Break Even
-      const beUnits = contribution > 0 ? Math.ceil(totalFixed / contribution) : 'Infinity';
-      const beRevenue = beUnits === 'Infinity' ? '—' : beUnits * price;
-      document.getElementById('beUnits').innerText = beUnits;
-      document.getElementById('beRevenue').innerText = beRevenue === '—' ? '—' : '৳ ' + fmt(beRevenue);
+        // Clear existing dynamic table rows before loading new data
+        el('productPortfolioTable').querySelector('tbody').innerHTML = '';
+        el('supplierTable').querySelector('tbody').innerHTML = '';
+        // Competitor table is handled by its own logic
+        el('campaignTable').querySelector('tbody').innerHTML = '';
+        el('inventoryTable').querySelector('tbody').innerHTML = '';
+        el('productionPhaseTable').querySelector('tbody').innerHTML = '';
 
-      // --- 3. GOAL SEEKER ---
-      const targetProfit = Number(document.getElementById('targetProfitInput').value) || 0;
-      if(contribution > 0) {
-        const reqUnits = Math.ceil((totalFixed + targetProfit) / contribution);
-        const reqRev = reqUnits * price;
-        const daily = (reqUnits / 30).toFixed(1);
-        
-        document.getElementById('reqUnits').innerText = reqUnits;
-        document.getElementById('reqRevenue').innerText = '৳ ' + fmt(reqRev);
-        document.getElementById('reqDaily').innerText = `${daily} sales needed per day`;
-      } else {
-        document.getElementById('reqUnits').innerText = "Impossible";
-        document.getElementById('reqRevenue').innerText = "Check Pricing";
-        document.getElementById('reqDaily').innerText = "Loss per unit!";
+        fieldsToSave.forEach(id => {
+          if (data[id] !== undefined) {
+            el(id).value = data[id];
+          }
+        });
+        // Load dynamic tables
+        if (data.portfolio) {
+          data.portfolio.forEach(row => addPortfolioRow(...row));
+        }
+        if (data.suppliers) {
+          data.suppliers.forEach(row => addSupplierRow(...row));
+        }
+        if (data.competitors) {
+          // Clear first, then add all rows before rendering pagination
+          el('competitorTable').querySelector('tbody').innerHTML = '';
+          data.competitors.forEach(row => addCompetitorRow(...row, true)); // Pass true to skip render
+          renderCompetitorPage(); // Render the paginated view
+        }
+        if (data.campaigns) {
+          data.campaigns.forEach(row => addCampaignRow(...row));
+        }
+        if (data.inventory) {
+          data.inventory.forEach(row => addInventoryRow(...row));
+        }
+        if (data.production) {
+          data.production.forEach(row => addProductionPhaseRow(...row));
+        }
+        calcAndRender();
       }
+    }
 
-      // --- 4. SCENARIOS ---
-      const scenUnits = [20, 40, 60, 80, 100];
-      const tbody = document.querySelector('#scenarioTable tbody'); tbody.innerHTML = '';
-      scenUnits.forEach(units =>{
-        const revenue = units * price;
-        const totalVariable = units * (prodCost + cpa);
-        const totalCost = totalFixed + totalVariable;
-        const profit = revenue - totalCost;
-        
-        const tr = document.createElement('tr');
-        const color = profit > 0 ? '#10b981' : (profit < 0 ? '#ef4444' : '#333');
-        tr.innerHTML = `<td>${units}</td><td>৳ ${fmt(revenue)}</td><td>৳ ${fmt(totalCost)}</td><td style="color:${color}; font-weight:bold">৳ ${fmt(profit)}</td>`;
-        tbody.appendChild(tr);
+    // --- VALIDATION ---
+    function validateInputs() {
+      let isValid = true;
+      const fieldsToValidate = [
+        'fixedOffice', 'fixedStaff', 'fixedOther', 'price', 
+        'prodCost', 'deliveryCost', 'packagingCost', 'cpa',
+        'startUnits', 'growth'
+      ];
+
+      fieldsToValidate.forEach(id => {
+        const inputEl = el(id);
+        const fieldDiv = inputEl.parentElement;
+        const errorDiv = fieldDiv.querySelector('.error-message');
+        const value = Number(inputEl.value);
+
+        if (value < 0) {
+          isValid = false;
+          fieldDiv.classList.add('has-error');
+          if(errorDiv) errorDiv.innerText = "Value cannot be negative.";
+        } else {
+          fieldDiv.classList.remove('has-error');
+          if(errorDiv) errorDiv.innerText = "";
+        }
       });
 
-      // --- 5. PROJECTION CHART ---
-      const startUnits = Number(document.getElementById('startUnits').value) || 10;
-      const growth = Number(document.getElementById('growth').value) || 0;
+      return isValid;
+    }
+
+    // --- CALCULATION & RENDER FUNCTIONS ---
+
+    function updateSummary() {
+      const { totalFixed, contribution, price } = coreInputs;
+      el('totalFixed').innerText = '৳ ' + fmt(totalFixed);
+      el('contrib').innerText = '৳ ' + fmt(contribution);
+      
+      const beUnitsRaw = contribution > 0 ? totalFixed / contribution : Infinity;
+      const beUnits = isFinite(beUnitsRaw) ? Math.ceil(beUnitsRaw) : 'Infinity';
+      const beRevenue = isFinite(beUnitsRaw) ? Math.ceil(beUnitsRaw) * price : '—';
+      el('beUnits').innerText = fmt(beUnits);
+      el('beRevenue').innerText = beRevenue === '—' ? '—' : '৳ ' + fmt(beRevenue);
+
+      // New Metrics
+      const contribRatio = price > 0 ? (contribution / price * 100).toFixed(1) : 0;
+      el('contribRatio').innerText = `${contribRatio} %`;
+
+      // Calculate Operating Leverage at Break-even point
+      const totalVariableCostAtBE = isFinite(beUnitsRaw) ? beUnits * (val('prodCost') + val('deliveryCost') + val('packagingCost') + val('cpa')) : 0;
+      const totalCostAtBE = totalFixed + totalVariableCostAtBE;
+      const opLeverage = totalCostAtBE > 0 ? (totalFixed / totalCostAtBE).toFixed(2) : '0.00';
+      const opLeverageEl = el('opLeverage');
+      opLeverageEl.innerText = opLeverage;
+
+      if (opLeverage !== '—') {
+        const opLeverageValue = parseFloat(opLeverage);
+        if (opLeverageValue > 0.6) { // High Risk
+            opLeverageEl.style.color = '#ef4444';
+        } else if (opLeverageValue > 0.3) { // Moderate Risk
+            opLeverageEl.style.color = '#d97706';
+        } else { // Low Risk
+            opLeverageEl.style.color = '#10b981';
+        }
+      } else {
+        opLeverageEl.style.color = 'var(--text-primary)';
+      }
+
+      // Add has-tooltip class to the parent stat div
+      opLeverageEl.closest('.stat').classList.add('has-tooltip');
+    }
+
+    function updateGoalSeeker() {
+      const { totalFixed, contribution, price } = coreInputs;
+      const targetProfit = val('targetProfitInput');
+      const beUnits = contribution > 0 ? Math.ceil(totalFixed / contribution) : 'N/A';
+      const breakEvenMarkerEl = el('breakEvenMarker');
+
+      // --- New Progress Bar Logic ---
+      const MAX_PROFIT_DISPLAY = 100000; // Max profit to show on the bar is 100,000
+      const breakEvenPointPercent = totalFixed > 0 ? Math.min(100, (totalFixed / (totalFixed + MAX_PROFIT_DISPLAY)) * 100) : 0;
+      
+      breakEvenMarkerEl.style.left = `${breakEvenPointPercent}%`;
+
+      const progressPercent = (totalFixed + targetProfit) / (totalFixed + MAX_PROFIT_DISPLAY) * 100;
+      
+      // --- New: Get progress bar container and clear old labels ---
+      const progressBarContainer = el('goalProgress').parentElement;
+      progressBarContainer.querySelectorAll('.progress-segment-label').forEach(l => l.remove());
+      const progressEl = el('goalProgress');
+      progressEl.style.width = `${Math.max(0, progressPercent)}%`;
+
+      progressEl.classList.remove('green', 'red', 'yellow');
+      progressEl.style.background = ''; // Clear any inline style
+
+      if (targetProfit < 0) {
+        progressEl.classList.add('red');
+      } else if (targetProfit === 0) {
+        progressEl.classList.add('yellow');
+      } else {
+        // Create a gradient for profits above break-even
+        const profitColors = ['#a3e635', '#4ade80', '#34d399', '#2dd4bf', '#22d3ee', '#38bdf8', '#60a5fa', '#818cf8', '#a78bfa', '#c084fc'];
+        const totalRange = totalFixed + MAX_PROFIT_DISPLAY;
+        
+        let gradientStops = [];
+        for (let i = 0; i < profitColors.length; i++) {
+            const profitStart = i * 10000;
+            const profitEnd = (i + 1) * 10000 - 1;
+
+            const startPercent = (totalFixed + profitStart) / totalRange * 100;
+            const endPercent = (totalFixed + profitEnd) / totalRange * 100;
+            gradientStops.push(`${profitColors[i]} ${startPercent}%`, `${profitColors[i]} ${endPercent}%`);
+
+            // --- New: Add segment labels above the bar ---
+            if (endPercent < 100) { // Don't draw label at the very end
+              const label = document.createElement('div');
+              label.className = 'progress-segment-label';
+              label.style.left = `${endPercent}%`;
+              label.innerText = `${Math.round(profitEnd / 1000)}k`;
+              progressBarContainer.appendChild(label);
+            }
+        }
+        progressEl.style.background = `linear-gradient(to right, #f87171 0% ${breakEvenPointPercent}%, ${gradientStops.join(', ')})`;
+      }
+
+      // --- New: Tooltip on hover ---
+      const tooltip = el('goalTooltip');
+      progressBarContainer.onmousemove = function(e) {
+        const rect = progressBarContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+        
+        const profitAtCursor = ((percent / 100) * (totalFixed + MAX_PROFIT_DISPLAY)) - totalFixed;
+
+        tooltip.style.left = `${x}px`;
+        if (profitAtCursor < 0) {
+          tooltip.innerText = `Loss: ৳${fmt(Math.abs(Math.round(profitAtCursor)))}`;
+        } else {
+          tooltip.innerText = `Profit: ৳${fmt(Math.round(profitAtCursor))}`;
+        }
+      };
+      progressBarContainer.onmouseleave = function() {
+        // The opacity is handled by CSS, so no JS needed here for hiding
+      }
+
+      // Update target profit label
+      el('targetProfitLabel').innerText = `Target: ৳${fmt(targetProfit)}`;
+
+      if(contribution > 0) {
+        const requiredUnits = Math.ceil((totalFixed + targetProfit) / contribution);
+        const requiredRevenue = requiredUnits * price;
+        const daily = (requiredUnits / 30).toFixed(1);
+
+        // Updated Investment Breakdown
+        const invProd = requiredUnits * val('prodCost');
+        const invVar = requiredUnits * (val('packagingCost') + val('deliveryCost') + val('cpa'));
+        const invTotal = invProd + invVar;
+        
+        el('reqUnits').innerText = fmt(requiredUnits);
+        el('reqRevenue').innerText = '৳ ' + fmt(requiredRevenue);
+        el('reqDaily').innerText = `approx. ${daily} sales needed per day`;
+        el('reqBreakEven').innerText = `Break-Even: ${fmt(beUnits)} units`;
+
+        el('invProd').innerText = '৳ ' + fmt(invProd);
+        el('invVar').innerText = '৳ ' + fmt(invVar);
+        el('invTotal').innerText = '৳ ' + fmt(invTotal);
+      } else {
+        el('reqUnits').innerText = "Impossible";
+        el('reqRevenue').innerText = "Check Pricing";
+        el('reqDaily').innerText = "Loss per unit!";
+        el('reqBreakEven').innerText = `Break-Even: ${beUnits} units`;
+        ['invProd', 'invVar', 'invTotal'].forEach(id => el(id).innerText = '৳ —');
+      }
+
+      // What-If Calculator
+      const whatIfUnits = val('whatIfUnits');
+      if (whatIfUnits > 0) {
+        // Use "What-If" values if provided, otherwise fall back to core inputs
+        const whatIfPrice = el('whatIfPrice').value !== '' ? val('whatIfPrice') : price;
+        const whatIfProdCost = el('whatIfProdCost').value !== '' ? val('whatIfProdCost') : val('prodCost');
+        const whatIfDeliveryCost = el('whatIfDeliveryCost').value !== '' ? val('whatIfDeliveryCost') : val('deliveryCost');
+        const whatIfPackagingCost = el('whatIfPackagingCost').value !== '' ? val('whatIfPackagingCost') : val('packagingCost');
+        const whatIfCpa = el('whatIfCpa').value !== '' ? val('whatIfCpa') : val('cpa');
+
+        const expectedRevenue = whatIfUnits * whatIfPrice;
+        const totalVariableCost = whatIfUnits * (whatIfProdCost + whatIfDeliveryCost + whatIfPackagingCost + whatIfCpa);
+        const expectedProfit = expectedRevenue - totalVariableCost;
+        const profitPerUnit = whatIfUnits > 0 ? (expectedProfit / whatIfUnits) : 0;
+
+        el('whatIfProfit').innerText = '৳ ' + fmt(Math.round(expectedProfit));
+        el('whatIfProfit').style.color = expectedProfit >= 0 ? '#10b981' : '#ef4444';
+        
+        el('whatIfProfitPerUnit').innerText = '৳ ' + fmt(profitPerUnit.toFixed(2));
+        el('whatIfProfitPerUnit').style.color = profitPerUnit >= 0 ? '#10b981' : '#ef4444';
+
+        let statusHtml = '';
+        if (expectedProfit < 0) {
+            statusHtml = `<span class="inventory-status out">Loss</span>`;
+        } else if (expectedProfit > 0) {
+            statusHtml = `<span class="inventory-status ok">Profit</span>`;
+        } else {
+            statusHtml = `<span class="inventory-status low">Break-Even</span>`;
+        }
+        el('whatIfStatus').innerHTML = statusHtml;
+
+        // Update What-If Decision Helper
+        const decisionEl = el('whatIfDecision');
+        if (expectedProfit > 0) {
+            decisionEl.innerHTML = `<div class="decision-list" style="margin:0;"><li class="decision-positive"><strong>লাভজনক:</strong> এই অর্ডারে আপনার মোট লাভ হবে <strong>৳${fmt(Math.round(expectedProfit))}</strong>। প্রতি ইউনিটে লাভ ৳${fmt(profitPerUnit.toFixed(2))}।</li></div>`;
+        } else if (expectedProfit < 0) {
+            decisionEl.innerHTML = `<div class="decision-list" style="margin:0;"><li class="decision-critical"><strong>ক্ষতিকর:</strong> এই অর্ডারে আপনার মোট ক্ষতি হবে <strong>৳${fmt(Math.abs(Math.round(expectedProfit)))}</strong>। লাভ করতে সেলিং প্রাইস বাড়ান অথবা খরচ কমান।</li></div>`;
+        } else {
+            decisionEl.innerHTML = `<div class="decision-list" style="margin:0;"><li class="decision-warning"><strong>ব্রেক-ইভেন:</strong> এই অর্ডারে আপনার লাভ বা ক্ষতি কিছুই হবে না। লাভ করতে হলে আপনাকে সেলিং প্রাইস বাড়াতে হবে।</li></div>`;
+        }
+      } else {
+        el('whatIfProfit').innerText = '৳ —';
+        el('whatIfProfit').style.color = 'var(--text-primary)';
+        el('whatIfProfitPerUnit').innerText = '৳ —';
+        el('whatIfProfitPerUnit').style.color = 'var(--text-primary)';
+        el('whatIfStatus').innerHTML = '—';
+        el('whatIfDecision').innerHTML = `<div class="decision-list" style="margin:0;"><li class="decision-suggestion">Enter units to see a quick analysis.</li></div>`;
+        // Also clear the what-if inputs when units are cleared
+        ['whatIfPrice', 'whatIfProdCost', 'whatIfDeliveryCost', 'whatIfPackagingCost', 'whatIfCpa'].forEach(id => {
+            el(id).value = '';
+        });
+      }
+    }
+
+    function updateScenarios() {
+      const { totalFixed, price, prodCost, cpa, contribution } = coreInputs;
+      const scenarioUnitsInput = el('scenarioUnitsInput').value;
+      const scenUnits = scenarioUnitsInput.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n) && n > 0);
+
+      const tbody = document.querySelector('#scenarioTable tbody'); tbody.innerHTML = '';
+
+      const beUnits = contribution > 0 ? totalFixed / contribution : Infinity;
+
+      scenUnits.forEach(units =>{
+        const revenue = units * price;
+        const totalVariable = units * (prodCost + val('deliveryCost') + val('packagingCost') + cpa);
+        const totalCost = totalFixed + totalVariable;
+        const profit = revenue - totalCost;
+        const profitPerUnit = units > 0 ? (profit / units) : 0;
+        const profitMargin = revenue > 0 ? ((profit / revenue) * 100).toFixed(1) : 0;
+        const roi = totalCost > 0 ? ((profit / totalCost) * 100).toFixed(1) : 0;
+        
+        const tr = document.createElement('tr');
+        const color = profit > 0 ? '#10b981' : (profit < 0 ? '#ef4444' : 'var(--text-primary)');
+        const roiColor = roi > 0 ? '#10b981' : (roi < 0 ? '#ef4444' : 'var(--text-primary)');
+
+        let statusHtml = '';
+        if (units < beUnits) {
+            statusHtml = `<span class="inventory-status out" style="min-width: 60px;">Loss</span>`;
+        } else if (units > beUnits) {
+            statusHtml = `<span class="inventory-status ok" style="min-width: 60px;">Profit</span>`;
+        } else {
+            statusHtml = `<span class="inventory-status low" style="min-width: 60px;">Break-Even</span>`;
+        }
+        
+        tr.innerHTML = `<td>${units}</td><td>৳ ${fmt(revenue)}</td><td>৳ ${fmt(totalCost)}</td><td style="color:${color}; font-weight:bold">৳ ${fmt(profit)}</td><td>৳ ${fmt(profitPerUnit.toFixed(2))}</td><td>${profitMargin}%</td><td style="color:${roiColor}; font-weight:600">${roi}%</td><td style="text-align:center;">${statusHtml}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateProjectionChart() {
+      const { price, prodCost, cpa, totalFixed, contribution } = coreInputs;
+      const startUnits = val('startUnits');
+      const growth = val('growth');
       
       const months = Array.from({length:12},(_,i)=>'M'+(i+1));
       let u = startUnits;
       const profitArr = [];
+      const revenueArr = [];
+      const costArr = [];
       
       for(let i=0; i<12; i++){
-        u = i===0 ? u : Math.round(u * (1 + growth/100));
-        const p = (u * contribution) - totalFixed;
-        profitArr.push(p);
+        u = i === 0 ? u : Math.round(u * (1 + growth/100));
+        const revenue = u * price;
+        const totalVariableCost = u * (prodCost + val('deliveryCost') + val('packagingCost') + cpa);
+        const totalCost = totalVariableCost + totalFixed;
+        const profit = revenue - totalCost;
+
+        profitArr.push(profit);
+        revenueArr.push(revenue);
+        costArr.push(totalCost);
       }
 
       if(projChart) projChart.destroy();
-      projChart = new Chart(document.getElementById('projChart'), {
+      projChart = new Chart(el('projChart'), {
         type:'line', 
         data:{
           labels:months,
-          datasets:[{
-            label:'Net Profit',
-            data:profitArr,
-            tension:0.4,
-            borderColor: '#0b0b0b',
-            backgroundColor: 'rgba(0,0,0,0.05)',
-            fill: true,
-            pointRadius: 3
-          }]
+          datasets:[
+            {
+              label:'Revenue',
+              data: revenueArr,
+              borderColor: '#10b981', // Green
+              tension: 0.4,
+              pointRadius: 2,
+              borderDash: [5, 5], // Make it dashed
+              dragData: false, // Make this line not draggable
+            },
+            {
+              label:'Cost',
+              data: costArr,
+              borderColor: '#ef4444', // Red
+              tension: 0.4,
+              pointRadius: 2,
+              borderDash: [5, 5], // Make it dashed
+              dragData: false, // Make this line not draggable
+            },
+            {
+              label:'Net Profit',
+              data:profitArr,
+              tension: 0.4,
+              fill: true,
+              pointRadius: 3,
+              pointBackgroundColor: 'var(--accent)',
+              // --- VISUAL IMPROVEMENT: Segmented coloring for profit/loss ---
+              segment: {
+                borderColor: ctx => {
+                  const p0 = ctx.p0.parsed.y;
+                  const p1 = ctx.p1.parsed.y;
+                  return p0 >= 0 && p1 >= 0 ? '#10b981' : (p0 < 0 && p1 < 0 ? '#ef4444' : '#d1d5db');
+                },
+                backgroundColor: ctx => {
+                  const p0 = ctx.p0.parsed.y;
+                  const p1 = ctx.p1.parsed.y;
+                  return p0 >= 0 && p1 >= 0 ? 'rgba(16, 185, 129, 0.1)' : (p0 < 0 && p1 < 0 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(209, 213, 219, 0.1)');
+                }
+              }
+            }
+          ]
         }, 
         options:{
           responsive:true,
           maintainAspectRatio:false,
-          plugins:{legend:{display:false}},
-          scales:{y:{grid:{display:false}}}
+          interaction: { mode: 'index', intersect: false },
+          plugins:{
+            dragData: {
+              round: 0,
+              showTooltip: true,
+              onDragEnd: function(e, datasetIndex, index, value) {
+                // This function runs after dragging a point
+                if (datasetIndex !== 2) return; // Only react to dragging the 'Net Profit' line
+
+                const newProfit = value;
+                const monthIndex = index; // 0-based month index
+                const startUnits = val('startUnits');
+                const { price, prodCost, cpa, totalFixed } = coreInputs;
+                const contributionPerUnit = price - (prodCost + val('deliveryCost') + val('packagingCost') + cpa);
+
+                if (contributionPerUnit <= 0 || startUnits <= 0) return;
+
+                // Reverse calculate the growth rate
+                // newProfit = (startUnits * (1+g)^i * contribution) - totalFixed
+                // (newProfit + totalFixed) / (startUnits * contribution) = (1+g)^i
+                // ((newProfit + totalFixed) / (startUnits * contribution))^(1/i) = 1+g
+                // g = [ ... ]^(1/i) - 1
+                
+                const base = (newProfit + totalFixed) / (startUnits * contributionPerUnit);
+                
+                if (base <= 0 || monthIndex === 0) { // Cannot calculate for negative base or first month
+                    // For the first month, we can adjust startUnits instead, but for now we'll just recalculate growth
+                    // which will be infinity. Let's just return.
+                    return;
+                }
+
+                const onePlusG = Math.pow(base, 1 / (monthIndex + 1));
+                const newGrowth = (onePlusG - 1) * 100;
+
+                if (isFinite(newGrowth)) {
+                    el('growth').value = newGrowth.toFixed(1);
+                    calcAndRender(); // Recalculate everything with the new growth rate
+                }
+              },
+            },
+            legend:{ position: 'top', labels: { usePointStyle: true, boxWidth: 8, padding: 20 } },
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ৳ ${fmt(ctx.raw)}` } }
+          },
+          // --- VISUAL IMPROVEMENT: Highlight zero line ---
+          scales:{ 
+            y:{ 
+              grid:{ 
+                drawBorder: false,
+                color: context => {
+                  if (context.tick.value === 0) {
+                    return 'rgba(239, 68, 68, 0.4)'; // Reddish color for zero line
+                  }
+                  return 'rgba(0, 0, 0, 0.05)'; // Default grid line color
+                },
+              } 
+            }, 
+            x: { grid: { display: false } } }
         }
       });
+    }
 
-      // --- 6. CORPORATE & MATERIAL & TIME ---
-      const corpQty = Number(document.getElementById('corpQty').value)||0;
-      const corpDisc = Number(document.getElementById('corpDisc').value)||0;
-      const corpCustom = Number(document.getElementById('corpCustom').value)||0;
+    function updateCorporate() {
+      const { price } = coreInputs;
+      const corpQty = val('corpQty');
+      const corpDisc = val('corpDisc');
+      const corpCustom = val('corpCustom');
       
-      // Pricing
       const netPricePerUnit = (price * (1 - corpDisc/100)) + corpCustom;
       const totalCorpRev = Math.round(netPricePerUnit * corpQty);
-      document.getElementById('corpTotalResult').innerText = 'Total: ৳ ' + fmt(totalCorpRev);
+      el('corpTotalResult').innerText = corpQty > 0 ? 'Total: ৳ ' + fmt(totalCorpRev) : 'Total: ৳ —';
 
-      // Material (UPDATED Logic)
-      const matType = document.getElementById('matType').value;
-      const matQtyPerUnit = Number(document.getElementById('matQtyPerUnit').value)||0;
-      const matPricePerUnit = Number(document.getElementById('matPricePerUnit').value)||0;
+      const matType = el('matType').value;
+      const matQtyPerUnit = val('matQtyPerUnit');
+      const matPricePerUnit = val('matPricePerUnit');
       
       if(corpQty > 0 && matQtyPerUnit > 0){
           const totalMat = (corpQty * matQtyPerUnit).toFixed(1);
           const totalMatCost = Math.round(totalMat * matPricePerUnit);
           
           let unitText = 'sqft';
-          if(matType === 'yard') unitText = 'yards';
-          if(matType === 'meter') unitText = 'meters';
+          if (matType === 'yard') unitText = 'yards';
+          if (matType === 'meter') unitText = 'meters';
 
-          document.getElementById('totalMatResult').innerText = totalMat + " " + unitText;
-          document.getElementById('totalMatCostResult').innerText = "৳ " + fmt(totalMatCost);
+          el('totalMatResult').innerText = totalMat + " " + unitText;
+          el('totalMatCostResult').innerText = "৳ " + fmt(totalMatCost);
       } else {
-          document.getElementById('totalMatResult').innerText = "—";
-          document.getElementById('totalMatCostResult').innerText = "৳ —";
+          el('totalMatResult').innerText = "—";
+          el('totalMatCostResult').innerText = "৳ —";
       }
 
-      // Time
-      const minsPerUnit = Number(document.getElementById('minsPerUnit').value)||0;
-      const hoursPerDay = Number(document.getElementById('hoursPerDay').value)||0;
+      const minsPerUnit = val('minsPerUnit');
+      const hoursPerDay = val('hoursPerDay');
       
       if(minsPerUnit > 0 && hoursPerDay > 0 && corpQty > 0){
         const totalHours = (corpQty * minsPerUnit) / 60;
         const days = Math.ceil(totalHours / hoursPerDay);
-        document.getElementById('timeResult').innerText = days + " Days";
+        el('timeResult').innerText = days + " Days";
       } else {
-        document.getElementById('timeResult').innerText = "— Days";
+        el('timeResult').innerText = "— Days";
       }
-
-      // --- 7. MARKETING AUDIT ---
-      calcMarketing(); 
     }
 
-    function calcMarketing(){
-        const spent = Number(document.getElementById('adSpent').value);
-        const sales = Number(document.getElementById('adSales').value);
-        const price = Number(document.getElementById('price').value) || 0;
+    // --- NEW FEATURES LOGIC ---
+    function updateCashFlow() {
+      const opening = val('cashOpening');
+      const revenue = val('cashRevenue');
+      const varCosts = val('cashVariableCosts');
+      const adSpend = val('cashAdSpend');
+      const otherIn = val('cashOtherIn');
+      const otherOut = val('cashOtherOut');
+      const fixedCosts = coreInputs.totalFixed;
+
+      const totalIn = revenue + otherIn;
+      const totalOut = fixedCosts + varCosts + adSpend + otherOut;
+      const netFlow = totalIn - totalOut;
+      const closingBalance = opening + netFlow;
+
+      el('cashFixedCosts').innerText = '৳ ' + fmt(fixedCosts);
+      el('cashNetFlow').innerText = '৳ ' + fmt(netFlow);
+      el('cashClosingBalance').innerText = '৳ ' + fmt(closingBalance);
+      el('cashNetFlow').style.color = netFlow >= 0 ? '#10b981' : '#ef4444';
+    }
+
+    function updatePnl() {
+      // Using data from Cash Flow planner for this example
+      const revenue = val('cashRevenue');
+      const cogs = val('cashVariableCosts'); // Simplified: variable costs = COGS
+      const grossProfit = revenue - cogs;
+      const opEx = coreInputs.totalFixed + val('cashAdSpend'); // Simplified: Fixed + Ads
+      const netProfit = grossProfit - opEx;
+
+      el('pnlRevenue').innerText = '৳ ' + fmt(revenue);
+      el('pnlCogs').innerText = '৳ ' + fmt(cogs);
+      el('pnlGrossProfit').innerText = '৳ ' + fmt(grossProfit);
+      el('pnlOpEx').innerText = '৳ ' + fmt(opEx);
+      el('pnlNetProfit').innerText = '৳ ' + fmt(netProfit);
+      el('pnlNetProfit').style.color = netProfit >= 0 ? '#10b981' : '#ef4444';
+    }
+
+    function updateMarketingAudit(){
+        const spent = val('adSpent');
+        const sales = val('adSales');
+        const price = coreInputs.price;
+        const variableCostPerUnit = val('prodCost') + val('deliveryCost') + val('packagingCost');
+        const profitPerUnit = price - variableCostPerUnit;
+        const targetCPA = coreInputs.cpa;
 
         if(spent && sales){
             const actualCPA = Math.round(spent / sales);
             const revenue = sales * price;
             const roas = (revenue / spent).toFixed(2);
+            const adProfit = (profitPerUnit * sales) - spent;
             
-            document.getElementById('actualCPA').innerText = '৳ ' + actualCPA;
-            document.getElementById('actualROAS').innerText = roas + 'x';
+            el('actualCPA').innerText = '৳ ' + fmt(actualCPA);
+            el('actualROAS').innerText = roas + 'x';
+            el('adProfit').innerText = '৳ ' + fmt(Math.round(adProfit));
+            el('adProfit').style.color = adProfit >= 0 ? '#16a34a' : '#ef4444';
 
-            const el = document.getElementById('roasVerdict');
-            if(roas > 3) { el.innerText = "Excellent! Scale up."; el.style.color="#10b981"; }
-            else if(roas > 2) { el.innerText = "Good. Keep optimizing."; el.style.color="#d97706"; }
-            else { el.innerText = "Warning: Low return."; el.style.color="#ef4444"; }
+            const verdictEl = el('roasVerdict');
+            if(roas > 3) { verdictEl.innerText = "Excellent! Scale up."; verdictEl.style.color="#10b981"; }
+            const breakEvenROAS = profitPerUnit > 0 ? (price / profitPerUnit).toFixed(2) : 'N/A';
+            el('breakEvenROAS').innerText = breakEvenROAS !== 'N/A' ? breakEvenROAS + 'x' : 'N/A';
+
+            if (breakEvenROAS !== 'N/A' && parseFloat(roas) < parseFloat(breakEvenROAS)) {
+              verdictEl.innerText = "Warning: Ad campaign is losing money!";
+              verdictEl.style.color="#ef4444";
+            }
+            else if(roas > 3) { verdictEl.innerText = "Excellent! Scale up."; verdictEl.style.color="#10b981"; }
+            else if(roas > 2) { verdictEl.innerText = "Good. Keep optimizing."; verdictEl.style.color="#d97706"; }
+            else { verdictEl.innerText = "Warning: Low return."; verdictEl.style.color="#ef4444"; }
+        } else {
+            el('actualCPA').innerText = '—';
+            el('actualROAS').innerText = '—';
+            el('roasVerdict').innerText = '';
+            el('adScenarioBody').innerHTML = `<tr><td colspan="3" style="text-align:center; padding: 12px;">Enter spend & sales data.</td></tr>`;
         }
     }
 
+    function updateDecisionHelper() {
+      const listEl = el('decisionHelperList');
+      listEl.innerHTML = '';
+      const suggestions = [];
+
+      // Helper to add suggestions
+      const addSuggestion = (type, html) => {
+        suggestions.push({ type, html });
+      };
+
+      // 1. Contribution Margin Check
+      if (coreInputs.contribution <= 0 && coreInputs.price > 0) {
+        addSuggestion('critical', `<strong>Pricing Alert:</strong> You are losing ৳${fmt(Math.abs(coreInputs.contribution))} on every sale. Increase your price or reduce costs immediately.`);
+      }
+
+      // 2. Ad Performance Check
+      const actualROAS = parseFloat(el('actualROAS').innerText);
+      const breakEvenROAS = parseFloat(el('breakEvenROAS').innerText);
+      if (!isNaN(actualROAS) && !isNaN(breakEvenROAS)) {
+        if (actualROAS < breakEvenROAS) {
+          addSuggestion('critical', `<strong>Ad Loss:</strong> Your ad campaign is losing money. Actual ROAS (${actualROAS}x) is below break-even (${breakEvenROAS}x). Consider stopping it.`);
+        } else if (actualROAS > 3) {
+          addSuggestion('positive', `<strong>Ad Profit:</strong> Your ads are highly profitable (ROAS: ${actualROAS}x). Consider scaling your ad spend.`);
+        }
+      }
+
+      // 3. Operating Leverage Check
+      const opLeverage = parseFloat(el('opLeverage').innerText);
+      if (opLeverage > 0.6) {
+        addSuggestion('warning', `<strong>High Risk:</strong> Your Operating Leverage is high (${opLeverage}). A small drop in sales could lead to significant losses. Focus on increasing sales volume or reducing fixed costs.`);
+      }
+
+      // 4. Cash Flow Check
+      const netFlow = parseFloat(el('cashNetFlow').innerText.replace(/[^0-9.-]+/g,""));
+      if (netFlow < 0) {
+        addSuggestion('warning', `<strong>Cash Burn:</strong> Your business is projected to have a negative cash flow of ৳${fmt(Math.abs(netFlow))} this month. Monitor your expenses closely.`);
+      }
+
+      if (suggestions.length === 0) {
+        listEl.innerHTML = `<li class="decision-suggestion">Enter your business data to see automated suggestions here.</li>`;
+      } else {
+        suggestions.forEach(s => listEl.innerHTML += `<li class="decision-${s.type}">${s.html}</li>`);
+      }
+    }
+
+    function updateStrategyAssistant() {
+        const goalType = el('strategyGoalType').value;
+        const targetAmount = val('strategyTargetAmount');
+        const outputEl = el('strategyOutput');
+        const { totalFixed } = coreInputs;
+        const currentVarCost = varCostPerUnit.total;
+
+        outputEl.innerHTML = ''; // Clear previous content
+
+        if (targetAmount <= 0) {
+            outputEl.innerHTML = '<div class="strategy-grid"><div class="strategy-card full-width"><div class="label">Please enter a positive target amount.</div></div></div>';
+            return;
+        }
+
+        let adviceHTML = '';
+        if (goalType === 'profit') {
+            const targetProfit = targetAmount;
+            // Scenario 1: Calculate required price for 100 units
+            const units = 100;
+            const requiredRevenue = totalFixed + targetProfit + (currentVarCost * units);
+            const requiredPrice = requiredRevenue / units;
+            adviceHTML += `
+              <div class="strategy-card">
+                <div class="icon">💰</div>
+                <div class="value">৳${fmt(Math.ceil(requiredPrice))}</div>
+                <div class="label">Required price to make <strong>৳${fmt(targetProfit)}</strong> profit from <strong>${units} units</strong>.</div>
+              </div>`;
+
+            // Scenario 2: Calculate required units for current price
+            const currentContribution = coreInputs.contribution;
+            if (currentContribution > 0) {
+                const requiredUnits = (totalFixed + targetProfit) / currentContribution;
+                adviceHTML += `
+                  <div class="strategy-card">
+                    <div class="icon">📦</div>
+                    <div class="value">${fmt(Math.ceil(requiredUnits))}</div>
+                    <div class="label">Required units to sell at current price to achieve the profit target.</div>
+                  </div>`;
+            }
+        } else if (goalType === 'units') {
+            const targetUnits = targetAmount;
+            const { price, contribution } = coreInputs;
+            const totalRevenue = targetUnits * price;
+            const totalProfit = (targetUnits * contribution) - totalFixed;
+
+            adviceHTML = `<div class="strategy-card full-width"><div class="icon">📈</div><div class="value">৳${fmt(Math.round(totalProfit))}</div><div class="label">Estimated net profit by selling <strong>${fmt(targetUnits)} units</strong> at your current price.</div></div>`;
+        }
+        outputEl.innerHTML = `<div class="strategy-grid">${adviceHTML}</div>`;
+    }
+
+    function updateSensitivityAnalysis() {
+        const container = el('sensitivityAnalysisContainer');
+        const table = el('sensitivityTable');
+        table.innerHTML = ''; // Clear table
+
+        const baseUnits = val('whatIfUnits');
+        const basePrice = coreInputs.price;
+
+        if (baseUnits <= 0 || basePrice <= 0) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'block';
+
+        const { totalFixed } = coreInputs;
+        const varCostPerUnitNoCpa = val('prodCost') + val('deliveryCost') + val('packagingCost');
+        const cpa = coreInputs.cpa;
+
+        const priceTiers = [basePrice * 0.9, basePrice, basePrice * 1.1];
+        const unitTiers = [baseUnits * 0.8, baseUnits, baseUnits * 1.2];
+
+        // Header Row
+        const thead = table.createTHead();
+        const headerRow = thead.insertRow();
+        headerRow.innerHTML = '<th>Price / Units</th>' + unitTiers.map(u => `<th>${fmt(Math.round(u))} Units</th>`).join('');
+
+        // Body Rows
+        const tbody = table.createTBody();
+        priceTiers.forEach(price => {
+            const row = tbody.insertRow();
+            const priceCell = row.insertCell();
+            priceCell.className = 'price-label';
+            priceCell.innerHTML = `৳${fmt(Math.round(price))}`;
+
+            unitTiers.forEach(units => {
+                const profitCell = row.insertCell();
+                const revenue = price * units;
+                const totalVarCost = (varCostPerUnitNoCpa + cpa) * units;
+                const profit = revenue - totalVarCost - totalFixed;
+                
+                profitCell.innerText = `৳${fmt(Math.round(profit))}`;
+                profitCell.className = profit >= 0 ? 'profit-positive' : 'profit-negative';
+            });
+        });
+    }
+
+    // --- GENERIC PAGINATION LOGIC ---
+    const paginationState = {
+        competitor: { currentPage: 0, rowsPerPage: 5 },
+        portfolio: { currentPage: 0, rowsPerPage: 5 },
+        production: { currentPage: 0, rowsPerPage: 5 },
+        inventory: { currentPage: 0, rowsPerPage: 5 },
+        campaign: { currentPage: 0, rowsPerPage: 5 },
+        supplier: { currentPage: 0, rowsPerPage: 5 },
+    };
+
+    function renderPaginatedTable(tableId, stateKey) {
+        const state = paginationState[stateKey];
+        const tbody = el(tableId).querySelector('tbody');
+        const rows = tbody.querySelectorAll('tr');
+        const totalRows = rows.length;
+        const totalPages = Math.ceil(totalRows / state.rowsPerPage);
+        const paginationControls = el(`${tableId}Pagination`);
+
+        if (totalRows <= state.rowsPerPage) {
+            paginationControls.style.display = 'none';
+            rows.forEach(row => row.style.display = '');
+            return;
+        }
+
+        paginationControls.style.display = 'block';
+        
+        // Adjust current page if it's out of bounds (e.g., after deleting rows)
+        if (state.currentPage >= totalPages) {
+            state.currentPage = Math.max(0, totalPages - 1);
+        }
+
+        const start = state.currentPage * state.rowsPerPage;
+        const end = start + state.rowsPerPage;
+
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? '' : 'none';
+        });
+
+        const prefix = tableId.replace('Table', '');
+        el(`prev${prefix.charAt(0).toUpperCase() + prefix.slice(1)}Page`).disabled = (state.currentPage === 0);
+        el(`next${prefix.charAt(0).toUpperCase() + prefix.slice(1)}Page`).disabled = (state.currentPage >= totalPages - 1);
+        el(`${prefix}PageInfo`).innerText = `Page ${state.currentPage + 1} of ${totalPages}`;
+    }
+
+    function changePaginatedTablePage(tableId, stateKey, direction) {
+        const state = paginationState[stateKey];
+        state.currentPage += direction;
+        renderPaginatedTable(tableId, stateKey);
+    }
+
+    // --- Specific render functions for convenience ---
+    const renderCompetitorPage = () => renderPaginatedTable('competitorTable', 'competitor');
+    const changeCompetitorPage = (dir) => changePaginatedTablePage('competitorTable', 'competitor', dir);
+
+    function updateCompetitorAnalysis() {
+      const tbody = el('competitorTable').querySelector('tbody');
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const theirPrice = Number(tr.querySelector('.comp-their-price').value) || 0;
+        const ourPrice = Number(tr.querySelector('.comp-our-price').value) || 0;
+        const diffCell = tr.querySelector('.comp-diff');
+
+        // Update difference
+        if (theirPrice > 0 && ourPrice > 0) {
+          const difference = ((ourPrice - theirPrice) / theirPrice) * 100;
+          diffCell.innerText = `${difference.toFixed(1)}%`;
+          if (difference > 5) { // More than 5% expensive
+            diffCell.style.color = '#ef4444'; // Red
+          } else if (difference < -5) { // More than 5% cheaper
+            diffCell.style.color = '#10b981'; // Green
+          } else {
+            diffCell.style.color = '#6b7280'; // Grey
+          }
+        } else {
+          diffCell.innerText = '—';
+          diffCell.style.color = 'var(--text-secondary)';
+        }
+
+        // Update link button visibility
+        const linkInput = tr.querySelector('.comp-link');
+        const linkDisplay = tr.querySelector('.comp-link-display');
+        const linkVisitBtn = tr.querySelector('.comp-link-visit-btn');
+
+        if (linkInput.value && linkInput.value.trim() !== '') {
+          linkVisitBtn.href = linkInput.value.trim();
+          linkDisplay.style.display = 'flex';
+        } else {
+          linkDisplay.style.display = 'none';
+        }
+      });
+    }
+
+    function addCompetitorRow(name = '', product = '', theirPrice = '', link = '', skipRender = false) {
+      const tbody = el('competitorTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" class="comp-name" placeholder="e.g., Brand X" value="${name}"></td>
+        <td><input type="text" class="comp-product" placeholder="e.g., Wallet" value="${product}"></td>
+        <td><input type="number" class="comp-their-price" value="${theirPrice}" style="max-width: 100px;"></td>
+        <td><input type="number" class="comp-our-price" value="${coreInputs.price}" style="max-width: 100px;"></td>
+        <td class="comp-diff" style="font-weight: 700;">—</td>
+        <td class="comp-link-cell">
+          <input type="text" class="comp-link" placeholder="Paste link here..." value="${link}" style="width: 100%;">
+          <div class="comp-link-display" style="display: none; align-items: center; gap: 8px;">
+            <a href="#" target="_blank" class="btn ghost comp-link-visit-btn" style="padding: 6px 10px; font-size: 12px;">Visit Link</a>
+            <button class="btn ghost comp-link-edit-btn" style="padding: 6px 10px; font-size: 12px;">Edit</button>
+          </div>
+        </td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+
+      // Event listeners for the new link functionality
+      const linkInput = tr.querySelector('.comp-link');
+      const linkDisplay = tr.querySelector('.comp-link-display');
+      const editBtn = tr.querySelector('.comp-link-edit-btn');
+
+      linkInput.addEventListener('blur', () => { if (linkInput.value) { linkInput.style.display = 'none'; linkDisplay.style.display = 'flex'; } });
+      editBtn.addEventListener('click', () => { linkInput.style.display = 'block'; linkDisplay.style.display = 'none'; linkInput.focus(); });
+      
+      // Initial state
+      if (link) { linkInput.style.display = 'none'; linkDisplay.style.display = 'flex'; }
+
+      tr.querySelectorAll('input:not(.comp-link)').forEach(input => input.addEventListener('input', updateCompetitorAnalysis));
+      linkInput.addEventListener('input', updateCompetitorAnalysis); // Also update on link input
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => { 
+        tr.remove(); 
+        updateCompetitorAnalysis(); 
+        renderCompetitorPage();
+      });
+      if (!skipRender) {
+        renderCompetitorPage();
+      }
+    }
+
+    // --- MARKETING CAMPAIGN TRACKER LOGIC ---
+    function updateCampaignPerformance() {
+      const tbody = el('campaignTable').querySelector('tbody');
+      const price = coreInputs.price;
+
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const spent = Number(tr.querySelector('.camp-spent').value) || 0;
+        const clicks = Number(tr.querySelector('.camp-clicks').value) || 0;
+        const sales = Number(tr.querySelector('.camp-sales').value) || 0;
+
+        const cpc = clicks > 0 ? (spent / clicks).toFixed(1) : '—';
+        const cpa = sales > 0 ? (spent / sales).toFixed(1) : '—';
+        const revenue = sales * price;
+        const roas = spent > 0 ? (revenue / spent).toFixed(2) : '—';
+
+        tr.querySelector('.camp-cpc').innerHTML = cpc !== '—' ? '৳&nbsp;' + cpc : '—';
+        tr.querySelector('.camp-cpa').innerHTML = cpa !== '—' ? '৳&nbsp;' + cpa : '—';
+        tr.querySelector('.camp-roas').innerText = roas !== '—' ? `${roas}x` : '—';
+      });
+
+      // Show/hide chart card
+      const chartCard = el('campaignChartCard');
+      chartCard.style.display = tbody.children.length > 0 ? 'block' : 'none';
+
+      renderPaginatedTable('campaignTable', 'campaign');
+    }
+
+    function addCampaignRow(date = '', name = '', channel = '', spent = '', clicks = '', sales = '', skipRender = false) {
+      const tbody = el('campaignTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      const initialDate = date || new Date().toISOString().split('T')[0];
+
+      tr.innerHTML = `
+        <td class="date-cell">
+          <span class="date-display">Select Date</span>
+          <input type="date" class="date-input" value="${initialDate}">
+        </td>
+        <td><input type="text" class="camp-name" placeholder="e.g., Eid" value="${name}" style="max-width:60px;"></td>
+        <td><input type="text" class="camp-channel" placeholder="e.g., Facebook" value="${channel}" style="max-width:100px;"></td>
+        <td><input type="number" class="camp-spent" value="${spent}"></td>
+        <td><input type="number" class="camp-clicks" value="${clicks}"></td>
+        <td><input type="number" class="camp-sales" value="${sales}"></td>
+        <td class="camp-cpc" style="font-weight: 600; white-space: nowrap;">—</td>
+        <td class="camp-cpa" style="font-weight: 600; white-space: nowrap;">—</td>
+        <td class="camp-roas" style="font-weight: 700;">—</td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+
+      // --- Date Formatting Logic ---
+      const dateInput = tr.querySelector('.date-input');
+      const dateDisplay = tr.querySelector('.date-display');
+      
+      const formatDate = (dateString) => {
+        if (!dateString) return 'Select Date';
+        const dateObj = new Date(dateString);
+        return dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      };
+
+      dateDisplay.textContent = formatDate(dateInput.value);
+      dateInput.addEventListener('input', () => {
+        dateDisplay.textContent = formatDate(dateInput.value);
+      });
+
+      // Attach other event listeners
+      tr.querySelectorAll('input[type="number"], input[type="text"]').forEach(input => input.addEventListener('input', updateCampaignPerformance));
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateCampaignPerformance(); renderPaginatedTable('campaignTable', 'campaign'); });
+      if (!skipRender) {
+        renderPaginatedTable('campaignTable', 'campaign');
+      }
+    }
+
+    function updateMatLabels() {
+      const type = el('matType').value;
+      const unitMap = {
+        sqft: { qty: 'Consumption (sqft/unit)', price: 'Price (৳/sqft)' },
+        yard: { qty: 'Consumption (yard/unit)', price: 'Price (৳/yard)' },
+        meter: { qty: 'Consumption (meter/unit)', price: 'Price (৳/meter)' }
+      };
+      el('matQtyLabel').innerText = unitMap[type].qty;
+      el('matPriceLabel').innerText = unitMap[type].price;
+      calcAndRender();
+    }
+
+    // --- PASSWORD MODAL LOGIC ---
+    function showPasswordModal() {
+        const modal = el('passwordModal');
+        modal.classList.add('visible');
+        el('passwordInput').focus();
+        el('passwordError').style.display = 'none';
+    }
+    el('passwordInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            el('submitUnlockBtn').click();
+        }
+    });
+
+    function hidePasswordModal() {
+        const modal = el('passwordModal');
+        modal.classList.remove('visible');
+        el('passwordInput').value = '';
+    }
+
+    // --- LOCK/UNLOCK FEATURE ---
+    function toggleLock() {
+      const lockBtn = el('toggleLockBtn');
+      const password = '24434';
+
+      // If it's currently locked, we want to unlock it
+      if (isLocked) {
+        showPasswordModal();
+        // The rest of the logic is now handled by the modal's event listeners
+        el('submitUnlockBtn').onclick = () => {
+            const enteredPassword = el('passwordInput').value;
+            if (enteredPassword === password) {
+                isLocked = false;
+                hidePasswordModal();
+                updateLockButton(isLocked);
+                applyLockState(isLocked);
+            } else {
+                el('passwordError').style.display = 'block';
+            }
+        };
+      } else {
+        // If it's currently unlocked, we want to lock it
+        isLocked = true;
+        // Apply lock state and update button when locking
+        applyLockState(isLocked);
+        updateLockButton(isLocked);
+      }
+    }
+
+    function updateLockButton(locked) {
+        const lockBtn = el('toggleLockBtn');
+        if (locked) {
+            lockBtn.innerHTML = 'Unlock 🔓';
+            lockBtn.classList.add('ghost-danger');
+        } else {
+            lockBtn.innerHTML = 'Lock 🔒';
+            lockBtn.classList.remove('ghost-danger');
+        }
+    }
+
+
+    function applyLockState(locked) {
+        // Toggle a class on the body for CSS-based styling of the locked state
+        document.body.classList.toggle('dashboard-locked', locked);
+
+        const elementsToLock = document.querySelectorAll(
+            'input, select, .add-row-btn, .remove-row-btn, #resetBtn, #calcBtn, .comp-link-edit-btn, .date-input, ' +
+            '#exportPortfolioBtn, #exportProductionBtn, #exportInventoryBtn, #exportCampaignBtn, #exportCompetitorBtn, #exportSupplierBtn'
+        );
+
+        elementsToLock.forEach(element => {
+            if (element.id !== 'toggleLockBtn' && element.id !== 'passwordInput') {
+                // Make date inputs readonly instead of disabled so picker is still viewable
+                // When unlocked, both readonly and disabled should be false.
+                if (element.classList.contains('date-input')) {
+                    element.readOnly = locked;
+                    element.disabled = locked; // Also set disabled for consistency
+                } else {
+                    element.disabled = locked;
+                }
+                if (element.classList.contains('remove-row-btn') || element.classList.contains('comp-link-edit-btn')) {
+                    element.style.display = locked ? 'none' : '';
+                }
+            }
+        });
+
+        if (projChart) {
+            projChart.options.plugins.dragData.dragData = !locked;
+            projChart.update();
+        }
+    }
+
+    // --- CSV EXPORT LOGIC ---
+    function exportTableToCSV(tableId, filename) {
+      const table = el(tableId);
+      const headers = Array.from(table.querySelectorAll('thead th'))
+        .map(th => th.innerText.trim())
+        .filter(text => text); // Filter out empty headers (like for the remove button)
+
+      const rows = Array.from(table.querySelectorAll('tbody tr')).map(tr => {
+        const cells = Array.from(tr.children);
+        const rowData = [];
+        cells.forEach(cell => {
+          const input = cell.querySelector('input, select');
+          if (input) {
+            // For date inputs, format the date
+            if (input.type === 'date') {
+                const dateValue = input.value;
+                if (dateValue) {
+                    const dateObj = new Date(dateValue);
+                    // Format as YYYY-MM-DD
+                    rowData.push(dateObj.toISOString().split('T')[0]);
+                } else {
+                    rowData.push('');
+                }
+            } else {
+                rowData.push(input.value);
+            }
+          } else if (cell.innerText.trim() !== '×') { // Exclude remove button cell
+            rowData.push(cell.innerText.trim());
+          }
+        });
+        return rowData;
+      });
+
+      const csvContent = [
+        headers.join(','),
+        ...rows.map(row => 
+          row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+        )
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+
+    // --- MAIN RENDER & EVENT LISTENERS ---
+    function calcAndRender() {
+      // Toggle special style for price input based on its value
+      const priceInput = el('price');
+      if (val('price') > 0) {
+        priceInput.classList.remove('price-highlight');
+      } else {
+        priceInput.classList.add('price-highlight');
+      }
+
+      if (!validateInputs()) return; // Stop calculation if validation fails
+
+      updateSummary();
+      updateGoalSeeker();
+      updateScenarios();
+      updateProjectionChart();
+      updateCorporate(); // This also calls calcAndRender, which is redundant. Let's keep it for now.
+      updatePortfolio();
+      updateInventory();
+      updateSuppliers();
+      updateProductionPhases();
+      updateCompetitorAnalysis();
+      updateCampaignPerformance();
+      updateMarketingAudit();
+      updateCashFlow();
+      updatePnl();
+      updateDecisionHelper();
+      updateCostStructureChart();
+      updateRoasGauge();
+      updateProfitContribChart();
+
+      updateCampaignChart(); // Add this call
+      updateStrategyAssistant(); // Add this call
+      updateSensitivityAnalysis(); // Add this call
+      // Update Ad Spend Scenario Table
+      const adScenarioBody = el('adScenarioBody');
+      adScenarioBody.innerHTML = '';
+      const spent = val('adSpent');
+      const sales = val('adSales');
+      const variableCostPerUnit = val('prodCost') + val('deliveryCost') + val('packagingCost');
+      const profitPerUnitExcludingAd = coreInputs.price - variableCostPerUnit;
+
+      if (spent > 0 && sales > 0) {
+        const actualCPA = spent / sales;
+        const spendScenarios = [spent * 0.5, spent, spent * 1.5, spent * 2];
+
+        spendScenarios.forEach(spendAmount => {
+          const estimatedSales = Math.floor(spendAmount / actualCPA);
+          const estimatedProfit = (profitPerUnitExcludingAd * estimatedSales) - spendAmount;
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${fmt(Math.round(spendAmount))}</td><td>${fmt(estimatedSales)}</td><td class="${estimatedProfit >= 0 ? 'profit-positive' : ''}">${fmt(Math.round(estimatedProfit))}</td>`;
+          adScenarioBody.appendChild(tr);
+        });
+      } else {
+        adScenarioBody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding: 12px;">Enter spend & sales data.</td></tr>`;
+      }
+    }
+
     // --- EVENTS ---
-    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
-    document.getElementById('resetBtn').addEventListener('click', ()=> location.reload());
-    document.getElementById('calcBtn').addEventListener('click', calcAndRender);
-    document.getElementById('matType').addEventListener('change', updateMatLabels);
+    el('saveBtn').addEventListener('click', saveData);
+    el('loadBtn').addEventListener('click', loadData);
+    el('printBtn').addEventListener('click', ()=> window.print());
+    el('resetBtn').addEventListener('click', () => {
+      el('price').value = 0;
+      el('deliveryCost').value = 0;
+      // Add other fields to reset if needed
+      el('packagingCost').value = 0;
+      el('cpa').value = 0;
+      calcAndRender();
+    });
+    el('calcBtn').addEventListener('click', calcAndRender);
+    el('addCampaignBtn').addEventListener('click', () => { addCampaignRow(); updateCampaignPerformance(); renderPaginatedTable('campaignTable', 'campaign'); });
+    el('addInventoryItemBtn').addEventListener('click', () => { addInventoryRow(); updateInventory(); renderPaginatedTable('inventoryTable', 'inventory'); });
+    el('addCompetitorBtn').addEventListener('click', () => { addCompetitorRow(); renderCompetitorPage(); });
+    el('prevCompetitorPage').addEventListener('click', () => changeCompetitorPage(-1));
+    el('nextCompetitorPage').addEventListener('click', () => changeCompetitorPage(1));
+    el('addProductionPhaseBtn').addEventListener('click', () => { addProductionPhaseRow(); renderPaginatedTable('productionPhaseTable', 'production'); });
+    el('addProductBtn').addEventListener('click', () => { addPortfolioRow(); updatePortfolio(); renderPaginatedTable('productPortfolioTable', 'portfolio'); });
+    el('addSupplierBtn').addEventListener('click', () => { addSupplierRow(); updateSuppliers(); renderPaginatedTable('supplierTable', 'supplier'); });
+
+    // Pagination button event listeners
+    el('prevProductPortfolioPage').addEventListener('click', () => changePaginatedTablePage('productPortfolioTable', 'portfolio', -1));
+    el('nextProductPortfolioPage').addEventListener('click', () => changePaginatedTablePage('productPortfolioTable', 'portfolio', 1));
+    el('prevProductionPhasePage').addEventListener('click', () => changePaginatedTablePage('productionPhaseTable', 'production', -1));
+    el('nextProductionPhasePage').addEventListener('click', () => changePaginatedTablePage('productionPhaseTable', 'production', 1));
+    el('prevInventoryPage').addEventListener('click', () => changePaginatedTablePage('inventoryTable', 'inventory', -1));
+    el('nextInventoryPage').addEventListener('click', () => changePaginatedTablePage('inventoryTable', 'inventory', 1));
+    el('prevCampaignPage').addEventListener('click', () => changePaginatedTablePage('campaignTable', 'campaign', -1));
+    el('nextCampaignPage').addEventListener('click', () => changePaginatedTablePage('campaignTable', 'campaign', 1));
+    el('prevSupplierPage').addEventListener('click', () => changePaginatedTablePage('supplierTable', 'supplier', -1));
+    el('nextSupplierPage').addEventListener('click', () => changePaginatedTablePage('supplierTable', 'supplier', 1));
+    el('toggleLockBtn').addEventListener('click', toggleLock);
+    // Password modal events
+    // CSV Export button event listeners
+    el('exportPortfolioBtn').addEventListener('click', () => exportTableToCSV('productPortfolioTable', 'product-portfolio.csv'));
+    el('exportProductionBtn').addEventListener('click', () => exportTableToCSV('productionPhaseTable', 'production-phases.csv'));
+    el('exportInventoryBtn').addEventListener('click', () => exportTableToCSV('inventoryTable', 'inventory-stock.csv'));
+    el('exportCampaignBtn').addEventListener('click', () => exportTableToCSV('campaignTable', 'marketing-campaigns.csv'));
+    el('exportCompetitorBtn').addEventListener('click', () => exportTableToCSV('competitorTable', 'competitor-prices.csv'));
+    el('exportSupplierBtn').addEventListener('click', () => exportTableToCSV('supplierTable', 'suppliers.csv'));
+
+    el('cancelUnlockBtn').addEventListener('click', hidePasswordModal);
+    el('passwordModal').addEventListener('click', (e) => { if (e.target === el('passwordModal')) hidePasswordModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && el('passwordModal').classList.contains('visible')) hidePasswordModal(); });
 
     document.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', calcAndRender);
     });
 
+    document.querySelectorAll('select').forEach(select => {
+        select.addEventListener('change', calcAndRender);
+    });
+
+    // --- UTILITY FOR SAVING/LOADING DYNAMIC TABLES ---
+    function getTableData(tableId, saveAll = false) {
+      const data = [];
+      el(tableId).querySelectorAll('tbody tr').forEach(tr => {
+        if (saveAll || tr.style.display !== 'none') {
+            const rowData = [];
+            tr.querySelectorAll('input, select').forEach(input => {
+              rowData.push(input.value);
+            });
+            data.push(rowData);
+        }
+      });
+      return data;
+    }
+    // --- COLORS FOR DYNAMIC TABLES ---
+    const portfolioColors = ['#3b82f6', '#10b981', '#f97316', '#8b5cf6', '#ec4899', '#6366f1', '#f59e0b'];
+    // --- PRODUCT PORTFOLIO LOGIC ---
+    function updatePortfolio() {
+      const tbody = el('productPortfolioTable').querySelector('tbody');
+      let totalProfit = 0;
+      const productProfits = [];
+
+      // First pass: calculate individual profits and total profit
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const price = Number(tr.querySelector('.prod-price').value) || 0;
+        const cost = Number(tr.querySelector('.prod-cost').value) || 0;
+        const sales = Number(tr.querySelector('.prod-sales').value) || 0;
+        const goal = Number(tr.querySelector('.prod-goal').value) || 0;
+        const margin = price - cost;
+        const profit = margin * sales;
+        productProfits.push({ tr, profit });
+        totalProfit += profit;
+        tr.querySelector('.output-cell.profit').innerText = fmt(Math.round(profit));
+
+        // Update progress bar
+        const progressInner = tr.querySelector('.table-progress-bar-inner');
+        const progressPercent = goal > 0 ? Math.min((sales / goal) * 100, 100) : 0;
+        progressInner.style.width = `${progressPercent}%`;
+        progressInner.classList.remove('green', 'yellow', 'red');
+        if (progressPercent >= 100) {
+          progressInner.classList.add('green');
+        } else if (progressPercent >= 50) {
+          progressInner.classList.add('yellow');
+        } else {
+          progressInner.classList.add('red');
+        }
+      });
+
+
+      el('portfolioTotalProfit').innerHTML = '৳&nbsp;' + fmt(Math.round(totalProfit));
+
+      // Show/hide profit contribution chart
+      const chartCard = el('profitContribCard');
+      chartCard.style.display = tbody.children.length > 1 ? 'block' : 'none';
+
+      // When portfolio changes, update inventory dropdowns
+      updateInventoryProductDropdowns();
+      updateProductionPhaseProductDropdowns();
+
+      renderPaginatedTable('productPortfolioTable', 'portfolio');
+    }
+
+    function addPortfolioRow(name = '', price = 0, cost = 0, sales = 0, goal = 0, leadTime = '', phase = '', skipRender = false) {
+      const tbody = el('productPortfolioTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      
+      // Assign a color to the row
+      const colorIndex = tbody.children.length % portfolioColors.length;
+      tr.style.borderLeftColor = portfolioColors[colorIndex];
+
+      tr.innerHTML = `
+        <td><input type="text" class="prod-name" placeholder="Product Name" value="${name}"></td>
+        <td><input type="number" class="prod-price" value="${price}"></td>
+        <td><input type="number" class="prod-cost" value="${cost}"></td>
+        <td><input type="number" class="prod-sales" value="${sales}"></td>
+        <td><input type="number" class="prod-goal" value="${goal}"></td>
+        <td>
+          <div class="table-progress-bar"><div class="table-progress-bar-inner"></div></div>
+        </td>
+        <td class="output-cell profit">0</td>
+        <td><input type="number" class="prod-lead-time" placeholder="e.g., 20" value="${leadTime}" style="max-width: 80px;"></td>
+        <td><input type="text" class="prod-phase" placeholder="e.g., QC" value="${phase}" style="max-width: 80px;"></td>
+        <td style="width: 40px;"><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+      tr.querySelectorAll('input').forEach(input => input.addEventListener('input', updatePortfolio));
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => {
+        tr.remove(); 
+        calcAndRender(); // Full recalculation
+        renderPaginatedTable('productPortfolioTable', 'portfolio');
+      });
+      if (!skipRender) {
+        renderPaginatedTable('productPortfolioTable', 'portfolio');
+      }
+    }
+
+    // --- INVENTORY LOGIC ---
+    function updateInventory() {
+      const portfolioData = getPortfolioDataMap();
+      const tbody = el('inventoryTable').querySelector('tbody');
+      tbody.querySelectorAll('tr').forEach(tr => {
+        const selectedProduct = tr.querySelector('.inv-product-select').value;
+        const currentStock = Number(tr.querySelector('.inv-stock').value) || 0;
+        const dailySales = Number(tr.querySelector('.inv-daily-sales').value) || 0;
+        const statusCell = tr.querySelector('.inv-status-cell');
+        const stockValueCell = tr.querySelector('.inv-stock-value');
+        const daysRemainingCell = tr.querySelector('.inv-days-remaining');
+        const lowStockCell = tr.querySelector('.inv-low-level');
+
+        // Auto-calculate Low Stock Level (Reorder Point)
+        const productInfo = portfolioData.get(selectedProduct);
+        const leadTime = productInfo ? productInfo.leadTime : 0;
+        const leadTimeDemand = leadTime * dailySales;
+        const safetyStock = leadTimeDemand * 0.25; // 25% safety stock
+        const lowStockLevel = Math.ceil(leadTimeDemand + safetyStock);
+        lowStockCell.innerText = lowStockLevel > 0 ? fmt(lowStockLevel) : '—';
+        
+        // Update Stock Value
+        const varCost = productInfo ? productInfo.cost : 0;
+        const stockValue = currentStock * varCost;
+        stockValueCell.innerText = stockValue > 0 ? fmt(Math.round(stockValue)) : '—';
+
+        // Update Days Remaining
+        if (currentStock > 0 && dailySales > 0) {
+            const daysRemaining = Math.floor(currentStock / dailySales);
+            daysRemainingCell.innerText = `${daysRemaining} Days`;
+        } else {
+            daysRemainingCell.innerText = '—';
+        }
+
+        // Update Status
+        let statusClass = 'ok';
+        let statusText = 'In Stock';
+        if (currentStock <= 0) {
+          statusClass = 'out';
+          statusText = 'Out of Stock';
+        } else if (lowStockLevel > 0 && currentStock <= lowStockLevel) {
+          statusClass = 'low';
+          statusText = 'Low Stock';
+        }
+        statusCell.innerHTML = `<span class="inventory-status ${statusClass}">${statusText}</span>`;
+      });
+
+      renderPaginatedTable('inventoryTable', 'inventory');
+    }
+
+    function getPortfolioProductNames() {
+      const names = [];
+      el('productPortfolioTable').querySelector('tbody').querySelectorAll('tr').forEach(tr => {
+        const name = tr.querySelector('.prod-name').value;
+        if (name) names.push(name);
+      });
+      return names.length > 0 ? names : ['Default Product'];
+    }
+
+    function updateInventoryProductDropdowns() {
+      const productNames = getPortfolioProductNames();
+      el('inventoryTable').querySelector('tbody').querySelectorAll('tr').forEach(tr => {
+        const select = tr.querySelector('.inv-product-select');
+        const currentVal = select.value;
+        select.innerHTML = productNames.map(name => `<option value="${name}" ${name === currentVal ? 'selected' : ''}>${name}</option>`).join('');
+      });
+    }
+
+    function updateProductionPhaseProductDropdowns() {
+      const productNames = getPortfolioProductNames();
+      const portfolioData = getPortfolioDataMap();
+      el('productionPhaseTable').querySelector('tbody').querySelectorAll('tr').forEach(tr => {
+        const select = tr.querySelector('.prod-phase-product-select');
+        const currentVal = select.value;
+        select.innerHTML = productNames.map(name => `<option value="${name}" ${name === currentVal ? 'selected' : ''}>${name}</option>`).join('');
+      });
+    }
+
+    function addInventoryRow(product = '', stock = '', dailySales = '', skipRender = false) {
+      const tbody = el('inventoryTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      const productNames = getPortfolioProductNames();
+
+      tr.innerHTML = `
+        <td>
+          <select class="inv-product-select" style="padding: 6px; font-size: 13px; width: 100%;">
+            ${productNames.map(name => `<option value="${name}" ${name === product ? 'selected' : ''}>${name}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="number" class="inv-stock" value="${stock}"></td>
+        <td class="inv-stock-value output-cell">—</td>
+        <td><input type="number" class="inv-daily-sales" value="${dailySales}" placeholder="e.g., 5"></td>
+        <td class="inv-days-remaining output-cell">—</td>
+        <td class="inv-low-level output-cell">—</td>
+        <td class="inv-status-cell" style="text-align: center;">—</td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+      tr.querySelectorAll('input, select').forEach(input => input.addEventListener('input', updateInventory));
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateInventory(); renderPaginatedTable('inventoryTable', 'inventory'); });
+      if (!skipRender) {
+        renderPaginatedTable('inventoryTable', 'inventory');
+      }
+    }
+
+    // --- Helper to get portfolio data ---
+    function getPortfolioDataMap() {
+        const map = new Map();
+        el('productPortfolioTable').querySelector('tbody').querySelectorAll('tr').forEach(tr => {
+            const name = tr.querySelector('.prod-name').value;
+            const cost = Number(tr.querySelector('.prod-cost').value) || 0;
+            const leadTime = Number(tr.querySelector('.prod-lead-time').value) || 0;
+            if (name) {
+                map.set(name, { cost, leadTime });
+            }
+        });
+        return map;
+    }
+
+    // --- SUPPLIER LOGIC ---
+    function updateSuppliers() {
+      // This function is a placeholder for any future calculations.
+      // Currently, the supplier table is for data entry only.
+      renderPaginatedTable('supplierTable', 'supplier');
+    }
+
+    function addSupplierRow(name = '', material = '', price = '', contact = '', rating = '3', skipRender = false) {
+      const tbody = el('supplierTable').querySelector('tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" placeholder="Supplier Name" value="${name}"></td>
+        <td><input type="text" placeholder="e.g., Leather" value="${material}"></td>
+        <td><input type="number" placeholder="e.g., 180" value="${price}"></td>
+        <td><input type="text" placeholder="Phone/Email" value="${contact}"></td>
+        <td>
+          <select style="padding: 6px; font-size: 13px; width: 80px;">
+            <option value="5" ${rating === '5' ? 'selected' : ''}>★★★★★</option>
+            <option value="4" ${rating === '4' ? 'selected' : ''}>★★★★☆</option>
+            <option value="3" ${rating === '3' ? 'selected' : ''}>★★★☆☆</option>
+            <option value="2" ${rating === '2' ? 'selected' : ''}>★★☆☆☆</option>
+            <option value="1" ${rating === '1' ? 'selected' : ''}>★☆☆☆☆</option>
+          </select>
+        </td>
+        <td><button class="remove-row-btn">×</button></td>
+      `;
+      tbody.appendChild(tr);
+      tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); renderPaginatedTable('supplierTable', 'supplier'); });
+      if (!skipRender) {
+        renderPaginatedTable('supplierTable', 'supplier');
+      }
+    }
+
+    // --- PRODUCTION PHASE LOGIC ---
+    function updateProductionPhases() {
+        const portfolioData = getPortfolioDataMap();
+        el('productionPhaseTable').querySelector('tbody').querySelectorAll('tr').forEach(tr => {
+            const selectedProduct = tr.querySelector('.prod-phase-product-select').value;
+            const unitCostInput = tr.querySelector('.prod-phase-unit-cost');
+            const qty = Number(tr.querySelector('.prod-phase-qty').value) || 0;
+            
+            // Auto-fill unit cost if product exists in portfolio
+            if (portfolioData.has(selectedProduct)) {
+                unitCostInput.value = portfolioData.get(selectedProduct).cost;
+            }
+
+            const unitCost = Number(unitCostInput.value) || 0;
+            const totalCost = qty * unitCost;
+
+            tr.querySelector('.prod-phase-total-cost').innerText = '৳ ' + fmt(Math.round(totalCost));
+        });        
+        renderPaginatedTable('productionPhaseTable', 'production');
+    }
+
+    function addProductionPhaseRow(date = '', product = '', phase = 'Planning', qty = '', unitCost = '', skipRender = false) {
+        const tbody = el('productionPhaseTable').querySelector('tbody');
+        const tr = document.createElement('tr');
+        const initialDate = date || new Date().toISOString().split('T')[0];
+        const productNames = getPortfolioProductNames();
+        const phases = ["Planning", "Cutting", "Stitching", "Finishing", "QC", "Completed"];
+
+        tr.innerHTML = `
+            <td class="date-cell">
+                <span class="date-display">Select Date</span>
+                <input type="date" class="date-input" value="${initialDate}">
+            </td>
+            <td>
+                <select class="prod-phase-product-select" style="width: 100%;">
+                    ${productNames.map(name => `<option value="${name}" ${name === product ? 'selected' : ''}>${name}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <select class="prod-phase-phase" style="width: 100%;">
+                    ${phases.map(p => `<option value="${p}" ${p === phase ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+            </td>
+            <td><input type="number" class="prod-phase-qty" placeholder="e.g., 50" value="${qty}" style="max-width: 80px;"></td>
+            <td><input type="number" class="prod-phase-unit-cost" value="${unitCost}" style="max-width: 100px;"></td>
+            <td class="prod-phase-total-cost" style="font-weight: 600;">—</td>
+            <td><button class="remove-row-btn">×</button></td>
+        `;
+        tbody.appendChild(tr);
+
+        // Date formatting
+        const dateInput = tr.querySelector('.date-input');
+        const dateDisplay = tr.querySelector('.date-display');
+        const formatDate = (dateString) => {
+            if (!dateString) return 'Select Date';
+            const dateObj = new Date(dateString);
+            return dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+        };
+        dateDisplay.textContent = formatDate(dateInput.value);
+        dateInput.addEventListener('input', () => {
+            dateDisplay.textContent = formatDate(dateInput.value);
+        });
+
+        // Event listeners
+        tr.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', updateProductionPhases);
+        });
+        tr.querySelector('.remove-row-btn').addEventListener('click', () => { tr.remove(); updateProductionPhases(); renderPaginatedTable('productionPhaseTable', 'production'); });
+        updateProductionPhases(); // Initial calculation
+        if (!skipRender) {
+            renderPaginatedTable('productionPhaseTable', 'production');
+        }
+    }
+
+    // --- NEW CHART FUNCTIONS ---
+    function updateCostStructureChart() {
+        const varCost = val('cashVariableCosts');
+        const adCost = val('cashAdSpend');
+        const fixedCost = coreInputs.totalFixed;
+        const totalCost = varCost + adCost + fixedCost;
+
+        const data = {
+            labels: ['Material & Variable', 'Ad Spend', 'Fixed Costs'],
+            datasets: [{
+                data: totalCost > 0 ? [varCost, adCost, fixedCost] : [1, 1, 1],
+                backgroundColor: ['#3b82f6', '#f97316', '#6b7280'],
+                borderColor: 'var(--card-bg)', // White border between segments
+                borderWidth: 4,
+                hoverBorderWidth: 6,
+                hoverOffset: 8
+            }]
+        };
+
+        if (costStructureChart) costStructureChart.destroy();
+        costStructureChart = new Chart(el('costStructureChart'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { 
+                        position: 'bottom', 
+                        labels: { 
+                            usePointStyle: true, 
+                            boxWidth: 8, 
+                            padding: 20, // Padding between legend items
+                            boxPadding: 10 // Padding between the color box and the text
+                        } 
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => {
+                                const label = ctx.label || '';
+                                const value = ctx.raw || 0;
+                                const percentage = totalCost > 0 ? ((value / totalCost) * 100).toFixed(1) : 0;
+                                return `${label}: ৳ ${fmt(value)} (${percentage}%)`;
+                            }
+                        }
+                    },
+                    // Custom plugin to draw text in the center
+                    beforeDraw: (chart) => {
+                        const { ctx, chartArea } = chart;
+                        const { top, bottom, left, right, width, height } = chartArea;
+                        ctx.save();
+                        ctx.fillStyle = 'var(--text-secondary)';
+                        ctx.font = '12px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Total Cost', width / 2 + left, height / 2 + top - 5);
+
+                        ctx.fillStyle = 'var(--text-primary)';
+                        ctx.font = 'bold 22px Inter';
+                        ctx.fillText('৳' + fmt(Math.round(totalCost)), width / 2 + left, height / 2 + top + 18);
+                        ctx.restore();
+                    }
+                }
+            }
+        });
+    }
+
+    function updateRoasGauge() {
+        const actualROAS = parseFloat(el('actualROAS').innerText) || 0;
+        const breakEvenROAS = parseFloat(el('breakEvenROAS').innerText) || 1.5;
+        const maxGauge = Math.max(5, breakEvenROAS * 2, actualROAS + 1);
+
+        const data = {
+            labels: ['Loss', 'Break-even', 'Profit', 'Excellent'],
+            datasets: [{
+                data: [breakEvenROAS, 1, maxGauge - breakEvenROAS - 1],
+                backgroundColor: ['#fecaca', '#fef08a', '#bbf7d0'],
+                borderWidth: 0,
+            }]
+        };
+
+        if (roasGaugeChart) roasGaugeChart.destroy();
+        roasGaugeChart = new Chart(el('roasGaugeChart'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                rotation: -90, circumference: 180,
+                cutout: '60%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    // Custom plugin to draw the needle and text
+                    beforeDraw: (chart) => {
+                        const { ctx, chartArea } = chart;
+                        const { top, bottom, left, right } = chartArea;
+                        const x = (left + right) / 2;
+                        const y = (top + bottom) / 2 + (bottom - top) * 0.35;
+                        ctx.save();
+                        
+                        // Text
+                        ctx.fillStyle = 'var(--text-primary)';
+                        ctx.font = 'bold 20px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(actualROAS.toFixed(2) + 'x', x, y - 5);
+                        
+                        ctx.fillStyle = 'var(--text-secondary)';
+                        ctx.font = '12px Inter';
+                        ctx.fillText('Actual ROAS', x, y + 15);
+                        ctx.restore();
+                    }
+                }
+            }
+        });
+    }
+
+    function updateProfitContribChart() {
+        const tbody = el('productPortfolioTable').querySelector('tbody');
+        const labels = [];
+        const data = [];
+        const colors = [];
+
+        tbody.querySelectorAll('tr').forEach((tr, index) => {
+            const name = tr.querySelector('.prod-name').value || `Product ${index + 1}`;
+            const profit = parseFloat(tr.querySelector('.output-cell.profit').innerText.replace(/[^0-9.-]+/g, '')) || 0;
+            labels.push(name);
+            data.push(profit);
+            colors.push(portfolioColors[index % portfolioColors.length]);
+        });
+
+        if (profitContribChart) profitContribChart.destroy();
+        profitContribChart = new Chart(el('profitContribChart'), {
+            type: 'bar',
+            data: { labels, datasets: [{ label: 'Profit', data, backgroundColor: colors }] },
+            options: {
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                plugins: { legend: { display: false } },
+                scales: { x: { grid: { drawBorder: false }, ticks: { callback: (v) => `৳${fmt(v)}` } }, y: { grid: { display: false } } }
+            }
+        });
+    }
+
+    function updateCampaignChart() {
+        const tbody = el('campaignTable').querySelector('tbody');
+        const labels = [];
+        const spentData = [];
+        const cpaData = [];
+        const roasData = [];
+
+        tbody.querySelectorAll('tr').forEach((tr, index) => {
+            const name = tr.querySelector('.camp-name').value || `Campaign ${index + 1}`;
+            const spent = parseFloat(tr.querySelector('.camp-spent').value) || 0;
+            const cpa = parseFloat(tr.querySelector('.camp-cpa').innerText) || 0;
+            const roas = parseFloat(tr.querySelector('.camp-roas').innerText) || 0;
+            
+            labels.push(name);
+            spentData.push(spent);
+            cpaData.push(cpa);
+            roasData.push(roas);
+        });
+
+        if (campaignChart) campaignChart.destroy();
+        campaignChart = new Chart(el('campaignChart'), {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [
+                    {
+                        label: 'Ad Spend (৳)',
+                        data: spentData,
+                        backgroundColor: '#6b7280', // Grey
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: 'CPA (৳)',
+                        data: cpaData,
+                        backgroundColor: '#f97316', // Orange
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: 'ROAS (x)',
+                        data: roasData,
+                        backgroundColor: '#10b981', // Green
+                        type: 'line',
+                        borderColor: '#10b981',
+                        yAxisID: 'y1',
+                        tension: 0.2
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { type: 'linear', display: true, position: 'left', grid: { drawOnChartArea: false }, ticks: { callback: (v) => `৳${fmt(v)}` } },
+                    y1: { type: 'linear', display: true, position: 'right', ticks: { callback: (v) => `${v}x` } }
+                }
+            }
+        });
+    }
+
     window.addEventListener('load', ()=>{
-      updateMatLabels(); // Set initial labels based on default select
-      calcAndRender();
+      // Set initial lock state on UI
+      const lockBtn = el('toggleLockBtn');
+      lockBtn.innerHTML = 'Unlock 🔓';
+      lockBtn.style.backgroundColor = '#fef2f2';
+      lockBtn.style.borderColor = '#fca5a5';
+      lockBtn.style.color = '#b91c1c';
+      
+      updateLockButton(isLocked);
+      loadData(); // Try to load saved data first
+      updateMatLabels(); // Then update labels which also triggers a render
+
+      // Apply the lock state after everything is rendered
+      applyLockState(isLocked);
     });
   </script>
+</html>
 </body>
 </html>

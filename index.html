@@ -44,7 +44,7 @@
     .grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
     @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow); margin-bottom: 20px; border: 1px solid var(--border-color);}
+    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow); margin-bottom: 16px; border: 1px solid var(--border-color);}
     .card h2 { margin-top: 0; font-size: 18px; margin-bottom: 4px; color: var(--text-primary); font-weight: 600;}
     .card-header {
       display: flex;
@@ -993,6 +993,63 @@
             </table>
           </div>
 
+          <!-- =================================================================== -->
+          <!-- 05. MARKETING & ADVERTISING -->
+          <!-- =================================================================== -->
+          <h2 class="department-header dept-marketing">05. Marketing & Advertising</h2>
+
+          <!-- CAMPAIGN PERFORMANCE CHART -->
+          <div class="card" id="campaignChartCard" style="display: none;" data-printable-title="Campaign Performance Overview">
+            <h2>Campaign Performance Overview</h2>
+            <div class="small">Comparing key metrics across your campaigns.</div>
+            <canvas id="campaignChart"></canvas>
+          </div>
+
+          <!-- MARKETING CAMPAIGN TRACKER -->
+          <div class="card" data-printable-title="Marketing Campaign Tracker">
+            <div class="card-header">
+              <h2>Marketing Campaign Tracker 📊</h2>
+              <div class="row">
+                <button id="exportCampaignBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addCampaignBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Track performance across different marketing campaigns.</div>
+            <table id="campaignTable" class="campaign-table">
+              <thead><tr><th>Date</th><th>Camp</th><th>Channel</th><th>Spent (৳)</th><th>Clicks</th><th>Sales</th><th>CPC</th><th>CPA</th><th>ROAS</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="campaignTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="campaignPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
+
+          <!-- COMPETITOR PRICE TRACKER -->
+          <div class="card" data-printable-title="Competitor Price Tracker">
+            <div class="card-header">
+              <h2>Competitor Price Tracker 🕵️</h2>
+              <div class="row">
+                <button id="exportCompetitorBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+                <button id="addCompetitorBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
+              </div>
+            </div>
+            <div class="small">Monitor competitor pricing to stay competitive.</div>
+            <table id="competitorTable" class="competitor-table" style="table-layout: fixed;">
+              <thead><tr><th style="width: 16%;">Competitor</th><th style="width: 16%;">Product</th><th style="width: 13%;">Their Price</th><th style="width: 13%;">Our Price</th><th style="width: 13%;">Difference</th><th style="width: 25%;">Link</th><th style="width: 4%;"></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div id="competitorTablePagination" style="margin-top: 12px; text-align: right; display: none;">
+              <button id="prevCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
+              <span id="competitorPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
+              <button id="nextCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
+            </div>
+          </div>
         </div>
 
         <!-- RIGHT COLUMN -->
@@ -1000,7 +1057,7 @@
           <!-- =================================================================== -->
           <!-- 04. FINANCE & ACCOUNTING -->
           <!-- =================================================================== -->
-          <h2 class="department-header dept-finance">04. Finance & Accounting</h2>
+          <h2 class="department-header dept-finance" style="margin-top: 0;">04. Finance & Accounting</h2>
           <!-- 1. SUMMARY -->
           <div class="card" data-printable-title="Business Health Summary">
             <h2>Business Health</h2>
@@ -1200,67 +1257,72 @@
             </div>
           </div>
 
+          <!-- QUICK PROFIT CALCULATOR -->
+          <div class="card" data-printable-title="Quick Profit Calculator" id="quickProfitCalculatorCard">
+            <div class="card-header">
+              <h2>Quick Profit Calculator 🧮</h2>
+              <button id="qpcDownloadPdfBtn" class="btn ghost icon-btn no-print" title="Download as PDF">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </button>
+            </div>
+
+            <div class="small" style="margin-bottom:12px">Quickly calculate the profit of Zillionary business.</div>
+            <div class="input-row">
+              <div class="field"><label>Sales Quantity (Units)</label><input id="qpcQty" type="number" placeholder="e.g., 100"></div>
+              <div class="field"><label>Selling Price (৳/unit)</label><input id="qpcPrice" type="number" placeholder="e.g., 1200"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Production Cost (৳/unit)</label><input id="qpcProdCost" type="number" placeholder="e.g., 550"></div>
+              <div class="field"><label>Packaging Cost (৳/unit)</label><input id="qpcPackCost" type="number" placeholder="e.g., 20"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Delivery Cost (৳/unit)</label><input id="qpcDelivCost" type="number" placeholder="e.g., 50"></div>
+              <div class="field"><label>Target Ad CPA (৳)</label><input id="qpcCpa" type="number" placeholder="e.g., 100"></div>
+            </div>
+            <div class="input-row">
+              <div class="field"><label>Ads Making Cost (Total ৳)</label><input id="qpcAdsMakingCost" type="number" placeholder="e.g., 5000"></div>
+              <div class="field"><label>Others Marketing Total Cost (৳)</label><input id="qpcOtherMarketingCost" type="number" placeholder="e.g., 2000"></div>
+            </div>
+            <div class="field">
+              <label>Other Fixed Costs (Total ৳)</label>
+              <input id="qpcFixedCost" type="number" placeholder="e.g., 15000">
+            </div>
+            <button id="qpcResetBtn" class="btn ghost" style="width: 100%; margin-top: 16px;">Reset</button>
+
+            <div class="summary-grid" style="margin-top:12px; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                <div class="stat">
+                    <div class="muted">Production Investment</div>
+                    <div class="val" id="qpcProductionInvestment">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Marketing Investment</div>
+                    <div class="val" id="qpcMarketingInvestment">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Total Sales</div>
+                    <div class="val" id="qpcSales">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Total Investment</div>
+                    <div class="val" id="qpcTotalInvestment">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Total Profit</div>
+                    <div class="val" id="qpcProfit">৳ —</div>
+                </div>
+                <div class="stat">
+                    <div class="muted">Net Profit Margin</div>
+                    <div class="val" id="qpcNetProfitMargin">— %</div>
+                </div>
+            </div>
+            <!-- Quick Profit Calculator Decision Helper -->
+            <div id="qpcDecisionHelper" style="margin-top: 16px;">
+                <ul class="decision-list" style="margin:0;"><li class="decision-suggestion">Enter your data to see a quick analysis.</li></ul>
+            </div>
+          </div>
+
         </div>
 
-        <!-- LEFT COLUMN - CONTINUED -->
-        <div>
-          <!-- =================================================================== -->
-          <!-- 05. MARKETING & ADVERTISING -->
-          <!-- =================================================================== -->
-          <!-- CAMPAIGN PERFORMANCE CHART -->
-          <div class="card" id="campaignChartCard" style="display: none;" data-printable-title="Campaign Performance Overview">
-            <h2>Campaign Performance Overview</h2>
-            <div class="small">Comparing key metrics across your campaigns.</div>
-            <canvas id="campaignChart"></canvas>
-          </div>
-
-          <!-- MARKETING CAMPAIGN TRACKER -->
-          <div class="card" data-printable-title="Marketing Campaign Tracker">
-            <div class="card-header">
-              <h2>Marketing Campaign Tracker 📊</h2>
-              <div class="row">
-                <button id="exportCampaignBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </button>
-                <button id="addCampaignBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
-              </div>
-            </div>
-            <div class="small">Track performance across different marketing campaigns.</div>
-            <table id="campaignTable" class="campaign-table">
-              <thead><tr><th>Date</th><th>Camp</th><th>Channel</th><th>Spent (৳)</th><th>Clicks</th><th>Sales</th><th>CPC</th><th>CPA</th><th>ROAS</th><th></th></tr></thead>
-              <tbody></tbody>
-            </table>
-            <div id="campaignTablePagination" style="margin-top: 12px; text-align: right; display: none;">
-              <button id="prevCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
-              <span id="campaignPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
-              <button id="nextCampaignPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
-            </div>
-          </div>
-
-          <!-- COMPETITOR PRICE TRACKER -->
-          <div class="card" data-printable-title="Competitor Price Tracker">
-            <div class="card-header">
-              <h2>Competitor Price Tracker 🕵️</h2>
-              <div class="row">
-                <button id="exportCompetitorBtn" class="btn ghost" style="padding: 4px 10px; font-size: 14px;" title="Export CSV">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </button>
-                <button id="addCompetitorBtn" class="btn ghost add-row-btn" style="padding: 4px 10px; font-size: 14px;">+ Add</button>
-              </div>
-            </div>
-            <div class="small">Monitor competitor pricing to stay competitive.</div>
-            <table id="competitorTable" class="competitor-table" style="table-layout: fixed;">
-              <thead><tr><th style="width: 16%;">Competitor</th><th style="width: 16%;">Product</th><th style="width: 13%;">Their Price</th><th style="width: 13%;">Our Price</th><th style="width: 13%;">Difference</th><th style="width: 25%;">Link</th><th style="width: 4%;"></th></tr></thead>
-              <tbody></tbody>
-            </table>
-            <div id="competitorTablePagination" style="margin-top: 12px; text-align: right; display: none;">
-              <button id="prevCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">&lt; Previous</button>
-              <span id="competitorPageInfo" style="font-size: 13px; margin: 0 10px; color: var(--text-secondary);"></span>
-              <button id="nextCompetitorPage" class="btn ghost" style="padding: 4px 10px; font-size: 13px;">Next &gt;</button>
-            </div>
-          </div>
-
-        </div>
       </div>
     </main>
     <footer>
@@ -2630,6 +2692,116 @@
       }
     }
 
+    // --- QUICK PROFIT CALCULATOR LOGIC ---
+    function calculateQuickProfit() {
+      const qty = Number(el('qpcQty').value) || 0;
+      const price = Number(el('qpcPrice').value) || 0;
+      const prodCost = Number(el('qpcProdCost').value) || 0;
+      const packCost = Number(el('qpcPackCost').value) || 0;
+      const delivCost = Number(el('qpcDelivCost').value) || 0;
+      const cpa = Number(el('qpcCpa').value) || 0;
+      const adsMakingCost = Number(el('qpcAdsMakingCost').value) || 0;
+      const otherMarketingCost = Number(el('qpcOtherMarketingCost').value) || 0;
+      const fixedCost = Number(el('qpcFixedCost').value) || 0;
+
+      const totalSales = qty * price;
+      const productionInvestment = qty * (prodCost + packCost + delivCost);
+      const marketingInvestment = (qty * cpa) + adsMakingCost + otherMarketingCost;
+      const totalInvestment = productionInvestment + marketingInvestment + fixedCost;
+      const totalProfit = totalSales - totalInvestment;
+      const netProfitMargin = totalSales > 0 ? (totalProfit / totalSales) * 100 : 0;
+
+      el('qpcProductionInvestment').innerText = '৳ ' + fmt(Math.round(productionInvestment));
+      el('qpcMarketingInvestment').innerText = '৳ ' + fmt(Math.round(marketingInvestment));
+      el('qpcTotalInvestment').innerText = '৳ ' + fmt(Math.round(totalInvestment));
+      el('qpcSales').innerText = '৳ ' + fmt(Math.round(totalSales));
+      el('qpcProfit').innerText = '৳ ' + fmt(Math.round(totalProfit));
+      el('qpcProfit').style.color = totalProfit >= 0 ? '#10b981' : '#ef4444';
+      el('qpcNetProfitMargin').innerText = netProfitMargin.toFixed(1) + ' %';
+      el('qpcNetProfitMargin').style.color = netProfitMargin >= 0 ? '#10b981' : '#ef4444';
+    }
+    function calculateQuickProfit() {
+      const qty = val('qpcQty');
+      const price = val('qpcPrice');
+      const prodCost = val('qpcProdCost');
+      const packCost = val('qpcPackCost');
+      const delivCost = val('qpcDelivCost');
+      const cpa = val('qpcCpa');
+      const adsMakingCost = val('qpcAdsMakingCost');
+      const otherMarketingCost = val('qpcOtherMarketingCost');
+      const fixedCost = val('qpcFixedCost');
+
+      const totalSales = qty * price;
+      const productionInvestment = qty * (prodCost + packCost + delivCost);
+      const marketingInvestment = (qty * cpa) + adsMakingCost + otherMarketingCost;
+      const totalInvestment = productionInvestment + marketingInvestment + fixedCost;
+      const totalProfit = totalSales - totalInvestment;
+      const netProfitMargin = totalSales > 0 ? (totalProfit / totalSales) * 100 : 0;
+
+      renderQuickProfitResults(totalSales, productionInvestment, marketingInvestment, totalInvestment, totalProfit, netProfitMargin);
+      updateQuickProfitDecisionHelper(totalProfit, netProfitMargin, qty);
+    }
+
+    function downloadQuickProfitPdf() {
+      const cardId = 'quickProfitCalculatorCard';
+      const style = document.createElement('style');
+      style.id = 'print-style-qpc';
+      style.innerHTML = `
+        @media print {
+          body * {
+            visibility: hidden !important;
+          }
+          #${cardId}, #${cardId} * {
+            visibility: visible !important;
+          }
+          #${cardId} {
+            position: absolute !important; top: 40px !important; left: 40px !important; right: 40px !important; width: auto !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+      window.print();
+    }
+
+    function renderQuickProfitResults(totalSales, productionInvestment, marketingInvestment, totalInvestment, totalProfit, netProfitMargin) {
+        el('qpcProductionInvestment').innerText = '৳ ' + fmt(Math.round(productionInvestment));
+        el('qpcMarketingInvestment').innerText = '৳ ' + fmt(Math.round(marketingInvestment));
+        el('qpcTotalInvestment').innerText = '৳ ' + fmt(Math.round(totalInvestment));
+        el('qpcSales').innerText = '৳ ' + fmt(Math.round(totalSales));
+        el('qpcProfit').innerText = '৳ ' + fmt(Math.round(totalProfit));
+        el('qpcProfit').style.color = totalProfit >= 0 ? '#10b981' : '#ef4444';
+        el('qpcNetProfitMargin').innerText = netProfitMargin.toFixed(1) + ' %';
+        el('qpcNetProfitMargin').style.color = netProfitMargin >= 0 ? '#10b981' : '#ef4444';
+    }
+
+    function updateQuickProfitDecisionHelper(profit, margin, qty) {
+        const decisionEl = el('qpcDecisionHelper');
+        let html = '';
+        if (qty === 0) {
+            html = `<li class="decision-suggestion">Enter your data to see a quick analysis.</li>`;
+        } else if (profit > 0 && margin > 20) {
+            html = `<li class="decision-positive"><strong>Excellent Profit!</strong> This is a highly profitable scenario with a healthy margin of ${margin.toFixed(1)}%. Consider scaling up.</li>`;
+        } else if (profit > 0) {
+            html = `<li class="decision-suggestion"><strong>Profitable, but Margin is Tight.</strong> Your net margin is ${margin.toFixed(1)}%. Look for ways to reduce costs or slightly increase the price to improve profitability.</li>`;
+        } else if (profit === 0) {
+            html = `<li class="decision-warning"><strong>Break-Even.</strong> You are not making a profit or a loss. To become profitable, you need to increase sales, raise the price, or lower costs.</li>`;
+        } else {
+            html = `<li class="decision-critical"><strong>Loss Warning!</strong> You are losing ৳${fmt(Math.abs(Math.round(profit)))} in this scenario. You must increase your selling price or significantly reduce costs.</li>`;
+        }
+        decisionEl.innerHTML = `<ul class="decision-list" style="margin:0;">${html}</ul>`;
+    }
+
+    function resetQuickProfitCalculator() {
+        const inputIds = ['qpcQty', 'qpcPrice', 'qpcProdCost', 'qpcPackCost', 'qpcDelivCost', 'qpcCpa', 'qpcAdsMakingCost', 'qpcOtherMarketingCost', 'qpcFixedCost'];
+        inputIds.forEach(id => el(id).value = '');
+
+        // Reset results
+        renderQuickProfitResults(0, 0, 0, 0, 0, 0);
+        // Reset decision helper
+        updateQuickProfitDecisionHelper(0, 0, 0);
+    }
+
+
     // --- EVENTS ---
     el('saveBtn').addEventListener('click', saveData);
     el('loadBtn').addEventListener('click', loadData);
@@ -2664,6 +2836,20 @@
     el('exportCampaignBtn').addEventListener('click', () => exportTableToCSV('campaignTable', 'marketing-campaigns.csv'));
     el('exportCompetitorBtn').addEventListener('click', () => exportTableToCSV('competitorTable', 'competitor-prices.csv'));
     el('exportSupplierBtn').addEventListener('click', () => exportTableToCSV('supplierTable', 'suppliers.csv'));
+
+    // Quick Profit Calculator event
+    el('qpcDownloadPdfBtn').addEventListener('click', downloadQuickProfitPdf);
+    el('qpcResetBtn').addEventListener('click', resetQuickProfitCalculator);
+    // Auto-calculate on input
+    ['qpcQty', 'qpcPrice', 'qpcProdCost', 'qpcPackCost', 'qpcDelivCost', 'qpcCpa', 'qpcAdsMakingCost', 'qpcOtherMarketingCost', 'qpcFixedCost'].forEach(id => {
+        el(id).addEventListener('input', calculateQuickProfit);
+    });
+
+    // Remove the temporary print style after printing is done or cancelled
+    window.addEventListener('afterprint', () => {
+      const printStyle = document.getElementById('print-style-qpc');
+      if (printStyle) printStyle.remove();
+    });
 
     el('cancelUnlockBtn').addEventListener('click', hidePasswordModal);
     el('passwordModal').addEventListener('click', (e) => { if (e.target === el('passwordModal')) hidePasswordModal(); });

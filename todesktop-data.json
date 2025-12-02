@@ -1,0 +1,425 @@
+{
+  "appModelId": "com.todesktop.2511196lo1xmrez",
+  "appProtocol": {
+    "enabled": false,
+    "value": ""
+  },
+  "autoUpdates": {
+    "autoCheckIntervalMins": 0,
+    "autoUpdater": true,
+    "shouldAutoCheckInterval": false,
+    "shouldAutoCheckOnLaunch": true,
+    "updateReadyAction": {
+      "showInstallAndRestartPrompt": {
+        "mode": "never",
+        "options": {
+          "detail": "",
+          "installOnNextLaunchButton": "",
+          "message": "",
+          "restartAndInstallButton": ""
+        }
+      },
+      "showNotification": {
+        "mode": "always",
+        "options": {
+          "body": "",
+          "title": ""
+        }
+      }
+    }
+  },
+  "disableDevTools": false,
+  "fileAssetDetailsList": [],
+  "googleOAuthIsExternal": false,
+  "icon": "https://firebasestorage.googleapis.com/v0/b/todesktop-prod1.appspot.com/o/2511196lo1xmrez%2FiconZillionary%20Logo.png?alt=media&token=d54e09aa-5d48-4c2c-a324-c631142668c3",
+  "iconAssetDetails": {
+    "relativeLocalPath": "./icons/iconZillionary Logo.png",
+    "type": "appIcon",
+    "url": "https://firebasestorage.googleapis.com/v0/b/todesktop-prod1.appspot.com/o/2511196lo1xmrez%2FiconZillionary%20Logo.png?alt=media&token=d54e09aa-5d48-4c2c-a324-c631142668c3"
+  },
+  "id": "2511196lo1xmrez",
+  "insecure": false,
+  "internalUrls": {
+    "enabled": false,
+    "value": ""
+  },
+  "lastUsedDesktopifyVersion": "6.22.0",
+  "menus": [
+    {
+      "id": "eqjNyzQJ7PNwWJOVr3w41",
+      "label": "ToDesktop",
+      "platforms": [
+        "linux",
+        "darwin"
+      ],
+      "submenu": [
+        {
+          "id": "vF7ZagKqhac2O7p59wp_A",
+          "label": "About",
+          "role": "about",
+          "useSystemLabel": true
+        },
+        {
+          "id": "5rWu7VY4MHTl1ncIbVJ9l",
+          "label": "Check for updates",
+          "role": "todesktop:check-for-updates"
+        },
+        {
+          "id": "JohxRsSc_vMTCuEswT0O3",
+          "label": "Services",
+          "role": "services",
+          "submenu": [],
+          "useSystemLabel": true
+        },
+        {
+          "id": "V9ftJroZwirIDtl6qB7hK",
+          "type": "separator"
+        },
+        {
+          "accelerator": "Command+H",
+          "id": "pZdX6JA3PMbCgteqXlEGM",
+          "label": "Hide App",
+          "role": "hide",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "Command+Option+H",
+          "id": "YT6l9INVJ3xufZrAP41nl",
+          "label": "Hide Others",
+          "role": "hideOthers",
+          "useSystemLabel": true
+        },
+        {
+          "id": "9CuL0iwfpF4WYMRLJdthW",
+          "label": "Show All",
+          "role": "unhide",
+          "useSystemLabel": true
+        },
+        {
+          "id": "XI4cnAEl0t3q0WpVM_bsq",
+          "type": "separator"
+        },
+        {
+          "id": "6MFcqo-mKtDsfpmYS4pCO",
+          "label": "Launch at startup",
+          "role": "todesktop:launch-at-startup"
+        },
+        {
+          "id": "XWwcceqP52Z4ctT9fBMpY",
+          "type": "separator"
+        },
+        {
+          "id": "w74dA4p6SgtPNXRU0bTUZ",
+          "label": "Quit",
+          "role": "todesktop:quit"
+        }
+      ]
+    },
+    {
+      "id": "J3dTHr6tTm5OBMwiYNbBu",
+      "label": "File",
+      "submenu": [
+        {
+          "id": "RjQI6EwSY6qUkxeBv4Z6I",
+          "label": "New Tab",
+          "role": "todesktop:new-tab"
+        },
+        {
+          "id": "-YfeBgaDnBNxa25YJalQV",
+          "label": "New Window",
+          "role": "todesktop:new-window"
+        },
+        {
+          "id": "kowjbyRyQfnTwXJVaKBh6",
+          "platforms": [
+            "win32",
+            "linux"
+          ],
+          "type": "separator"
+        },
+        {
+          "id": "qz9_8Q5yV1tXMF30BbUOA",
+          "label": "Check for Updates",
+          "platforms": [
+            "win32",
+            "linux"
+          ],
+          "role": "todesktop:check-for-updates"
+        },
+        {
+          "id": "B3Xrd5cay51Uf1SiWMmgl",
+          "label": "About",
+          "platforms": [
+            "win32",
+            "linux"
+          ],
+          "role": "about",
+          "useSystemLabel": true
+        }
+      ]
+    },
+    {
+      "id": "_teYajMi-aLmov9tGnGgx",
+      "label": "Edit",
+      "submenu": [
+        {
+          "accelerator": "CmdOrCtrl+Z",
+          "id": "I-ADft2fvEmZGhb4Z5xqg",
+          "label": "Undo",
+          "role": "undo",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "Shift+CmdOrCtrl+Z",
+          "id": "RuyMav-aSJxJVCIhIwugV",
+          "label": "Redo",
+          "role": "redo",
+          "useSystemLabel": true
+        },
+        {
+          "id": "X1XdFQKImxXmLaVPBf-hZ",
+          "type": "separator"
+        },
+        {
+          "accelerator": "CmdOrCtrl+X",
+          "id": "O9tuxvpPd4nAwf7ut3F-V",
+          "label": "Cut",
+          "role": "cut",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "CmdOrCtrl+C",
+          "id": "2a7ZhVUCVcm1p1C5u6MS3",
+          "label": "Copy",
+          "role": "copy",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "CmdOrCtrl+V",
+          "id": "NQd_67oD5SbRxBBk5vRIx",
+          "label": "Paste",
+          "role": "paste",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "CmdOrCtrl+Shift+V",
+          "id": "q_lY7GMyGj7bOLUtc_RWc",
+          "label": "Paste and Match Style",
+          "role": "pasteAndMatchStyle",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "CmdOrCtrl+A",
+          "id": "iJdTQyPm5NBI0Mdm7dlFf",
+          "label": "Select All",
+          "role": "selectAll",
+          "useSystemLabel": true
+        }
+      ]
+    },
+    {
+      "id": "Vl3i5uO3xFEvc0KbDxGgy",
+      "label": "View",
+      "submenu": [
+        {
+          "id": "ZOLpXo8q9qI3hre-gv1oO",
+          "label": "Reload",
+          "role": "reload",
+          "useSystemLabel": true
+        },
+        {
+          "id": "vVqvdPillTgH_56RT4zuR",
+          "type": "separator"
+        },
+        {
+          "id": "8ivH5R4jIcFNtY-rKk0Zb",
+          "label": "Full screen",
+          "role": "togglefullscreen",
+          "useSystemLabel": true
+        },
+        {
+          "id": "_hdgnYQTNUKm0EEJuPwK_",
+          "label": "Zoom in",
+          "role": "zoomIn",
+          "useSystemLabel": true
+        },
+        {
+          "id": "OaczwjoRfpvGGY_uHYWto",
+          "label": "Zoom out",
+          "role": "zoomOut",
+          "useSystemLabel": true
+        },
+        {
+          "id": "aGxRk5yNWOwEQV7NwKzDw",
+          "label": "Reset zoom",
+          "role": "resetZoom",
+          "useSystemLabel": true
+        }
+      ]
+    },
+    {
+      "id": "LYgKrK_DUsGs3y12COBfg",
+      "label": "Tab",
+      "platforms": [
+        "darwin"
+      ],
+      "submenu": [
+        {
+          "accelerator": "Control+Tab",
+          "id": "UXR8jggbUBMbd-RlnJxCT",
+          "label": "Select Next tab",
+          "role": "selectNextTab"
+        },
+        {
+          "accelerator": "Control+Shift+Tab",
+          "id": "FUijWp0sSQ5tA1C7MY25n",
+          "label": "Select Previous tab",
+          "role": "selectPreviousTab"
+        }
+      ]
+    },
+    {
+      "id": "T-Ouoehhaf5V64HO0uAoh",
+      "label": "History",
+      "submenu": [
+        {
+          "id": "DaF1fmz3geAEoXNnrJkjC",
+          "label": "Home",
+          "role": "todesktop:history-home"
+        },
+        {
+          "id": "nocMTSR3f_Mpp6rgmPB42",
+          "label": "Back",
+          "role": "todesktop:history-back"
+        },
+        {
+          "id": "qa1BRAPqLKyMYF0MFTjz-",
+          "label": "Forward",
+          "role": "todesktop:history-forward"
+        }
+      ]
+    },
+    {
+      "id": "vWmHGLyvF0aNLakckYKiD",
+      "label": "Window",
+      "role": "window",
+      "submenu": [
+        {
+          "accelerator": "CmdOrCtrl+M",
+          "id": "B8OdzYtKZDmFT-PI-7e_K",
+          "label": "Minimize",
+          "role": "minimize",
+          "useSystemLabel": true
+        },
+        {
+          "accelerator": "CmdOrCtrl+W",
+          "id": "d6Is_LEh9DeMUeMBpB6rA",
+          "label": "Close",
+          "role": "close",
+          "useSystemLabel": true
+        },
+        {
+          "id": "3Gyyx9Gd0Y3G2Lgigrhuo",
+          "platforms": [
+            "darwin"
+          ],
+          "type": "separator"
+        },
+        {
+          "id": "EUY4fsCUWEVHdp6Mp7kZP",
+          "label": "Bring All to Front",
+          "platforms": [
+            "darwin"
+          ],
+          "role": "front",
+          "useSystemLabel": true
+        }
+      ]
+    },
+    {
+      "id": "yVLaLn8Ix9P5BciJYDWNV",
+      "label": "Settings",
+      "platforms": [
+        "win32"
+      ],
+      "submenu": [
+        {
+          "id": "W-lYkpsOkhGPMJbPzN4Pd",
+          "label": "Launch at startup",
+          "role": "todesktop:launch-at-startup"
+        }
+      ]
+    }
+  ],
+  "name": "Zillionary Business Center",
+  "offlineScreen": {
+    "buttonBackgroundColor": "#FAFAFA",
+    "buttonTextColor": "#111827",
+    "enabled": true
+  },
+  "plugins": [],
+  "shouldAlwaysDisplayDockIcon": false,
+  "shouldLaunchAtStartupByDefault": true,
+  "shouldMinimizeToTray": true,
+  "shouldOnlyAllowVerifiedProtocols": true,
+  "singleInstance": false,
+  "trays": [],
+  "useSeparateIcons": false,
+  "userAgent": {
+    "enabled": false,
+    "value": ""
+  },
+  "windows": [
+    {
+      "disableContextMenu": true,
+      "disableContextMenuOpenInWindow": false,
+      "disableTabs": true,
+      "hasMaxHeight": false,
+      "hasMaxWidth": false,
+      "hasMinHeight": false,
+      "hasMinWidth": false,
+      "id": "a9xLCc0KWxytBandYy2W7",
+      "isFindInPageEnabled": false,
+      "isMain": true,
+      "name": "Zillionary Business Center",
+      "objectId": "e4PyUOdEDGn6ccQFfJHXm",
+      "options": {
+        "alwaysOnTop": false,
+        "autoHideMenuBar": false,
+        "frame": true,
+        "fullscreen": false,
+        "height": 480,
+        "kiosk": false,
+        "maxHeight": 0,
+        "maxWidth": 0,
+        "maximizable": true,
+        "minHeight": 0,
+        "minWidth": 0,
+        "minimizable": true,
+        "resizable": true,
+        "skipTaskbar": false,
+        "titleBarOverlay": {
+          "color": "#fafafa",
+          "symbolColor": "#000000"
+        },
+        "webPreferences": {
+          "backgroundThrottling": true,
+          "spellcheck": false
+        },
+        "width": 600
+      },
+      "shouldResetDimensions": false,
+      "toggleVisibilityKeyboardShortcut": "",
+      "type": "app",
+      "url": "https://zillionary.github.io/ZBC/",
+      "visibility": "show-when-contents-loaded",
+      "visibleOnAllWorkspaces": false
+    }
+  ],
+  "windowsIcon": "https://firebasestorage.googleapis.com/v0/b/todesktop-prod1.appspot.com/o/2511196lo1xmrez%2FwindowsIconsoftware%20logo.png?alt=media&token=ef6e35a6-ac9a-4a0e-935f-ce962a18ca18",
+  "windowsIconAssetDetails": {
+    "relativeLocalPath": "./icons/windowsIconsoftware logo.png",
+    "type": "appIcon",
+    "url": "https://firebasestorage.googleapis.com/v0/b/todesktop-prod1.appspot.com/o/2511196lo1xmrez%2FwindowsIconsoftware%20logo.png?alt=media&token=ef6e35a6-ac9a-4a0e-935f-ce962a18ca18"
+  }
+}
